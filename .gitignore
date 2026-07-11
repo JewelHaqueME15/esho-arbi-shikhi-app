@@ -1,0 +1,2 @@
+# Keep the source PDF out of the public repo/deployment
+*.pdf
