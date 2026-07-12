@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>এসো আরবি শিখি — গেম</title>
+<title>এসো আরবি শিখি — মজায় মজায়</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -745,7 +745,7 @@ function checkAnswer(){
     $("#btn-check").textContent="বুঝেছি";$("#btn-check").onclick=()=>next(false);
   }
 }
-function praise(){return shuffle(["মাশাআল্লাহ! 🎉","মারহাবা!🎉","চমৎকার!","দারুণ! ⭐","একদম ঠিক!","বাহ্‌!"])[0]}
+function praise(){return shuffle(["মাশাআল্লাহ! 🎉","মারহাবা!🎉","সুবহানাল্লাহ!","আল্লাহু আকবার!","চমৎকার!","দারুণ! ⭐","একদম ঠিক!","বাহ্‌!"])[0]}
 function feedback(ok,txt){
   if(ok)sndOk();else sndBad();
   $("#check-bar").className=ok?"ok":"bad";
@@ -857,7 +857,7 @@ if(localStorage.getItem("eas_welcome")&&!localStorage.getItem("eas_v2")){
 if(!localStorage.getItem("eas_welcome")){
   localStorage.setItem("eas_welcome","1");localStorage.setItem("eas_v2","1");
   modal(`<div class="emo">📕</div><h2>এসো আরবি শিখি!</h2>
-  <p>মাওলানা আবু তাহের মিসবাহ্‌র প্রিয় কিতাবটি এবার খেলার ছলে!<br><br>
+  <p>মাওলানা আবু তাহের মিসবাহ হুজুরের মুফিদ কিতাবটি এবার খেলার ছলে!<br><br>
   ✅ প্রতিদিন খেলে <b>🔥 ধারা</b> ধরে রাখো<br>
   ✅ সঠিক উত্তরে <b>⚡XP</b> ও <b>💎 রত্ন</b> জেতো<br>
   ✅ ভুল হলে <b>❤️ হৃদয়</b> কমবে — সাবধান!<br>
