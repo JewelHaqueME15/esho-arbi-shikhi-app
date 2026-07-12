@@ -14,7 +14,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;background:var(--bg);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh;position:relative;user-select:none}
-.ar{font-family:'Noto Naskh Arabic','Traditional Arabic',serif;direction:rtl}
+.ar{font-family:'Noto Naskh Arabic','Traditional Arabic',serif;direction:rtl;font-weight:600}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 .screen{display:none;padding-bottom:90px}
 .screen.active{display:block}
@@ -42,7 +42,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* tabbar */
 #tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:2px solid var(--line);display:flex;z-index:30}
 #tabbar button{flex:1;padding:10px 0 12px;font-size:24px;opacity:.45;display:flex;flex-direction:column;align-items:center;gap:2px}
-#tabbar button span{font-size:11px;font-weight:700}
+#tabbar button span{font-size:9.5px;font-weight:800;white-space:nowrap}
 #tabbar button.on{opacity:1}
 /* lesson */
 #lesson-top{display:flex;align-items:center;gap:12px;padding:14px 16px}
@@ -63,7 +63,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .opt .ar{font-size:26px}
 .opt.sel{border-color:var(--blue);background:#e7f6ff;color:var(--blue-d)}
 .opt.ok{border-color:var(--green);background:#e9ffd9;color:var(--green-d)}
-.opt.bad{border-color:var(--red);background:#ffe5e5;color:var(--red)}
+.opt.bad{border-color:var(--red);background:#ffe5e5;color:var(--red);animation:shake .45s}
+@keyframes shake{15%,85%{transform:translateX(-3px)}30%,70%{transform:translateX(5px)}45%,55%{transform:translateX(-7px)}}
 .opt.faded{opacity:.35;pointer-events:none}
 /* match */
 .match-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -79,6 +80,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 #fb-text{font-weight:800;font-size:17px;margin-bottom:10px;display:none}
 #check-bar.ok #fb-text{display:block;color:var(--green-d)}
 #check-bar.bad #fb-text{display:block;color:var(--red)}
+#story-check-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:16px 20px 22px;background:#fff;border-top:2px solid var(--line);z-index:40}
 .btn{display:block;width:100%;padding:14px;border-radius:14px;font-size:17px;font-weight:800;letter-spacing:.5px;color:#fff;background:var(--green);box-shadow:0 4px 0 var(--green-d);text-align:center}
 .btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--green-d)}
 .btn:disabled{background:var(--line);box-shadow:0 4px 0 #d5d5d5;color:var(--gray)}
@@ -109,8 +111,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .word-row .ar{font-size:26px;min-width:110px}
 .word-row .bn{color:var(--gray);font-weight:600}
 .word-row button{margin-left:auto;font-size:22px}
-.tipbox{background:var(--soft);border:2px solid var(--line);border-radius:14px;padding:14px;margin:12px 0;font-size:15px;line-height:1.7}
-.tipbox .ar{font-size:22px}
+.tipbox{background:var(--soft);border:2px solid var(--line);border-radius:16px;padding:18px 18px;margin:14px 0;font-size:16.5px;line-height:2.15;direction:rtl;text-align:right}
+.tipbox b{color:var(--green-d);font-weight:800}
+.tipbox .ar{display:inline-block;font-size:30px;font-weight:700;color:var(--ink);margin:3px 4px;line-height:1.9}
 .profile-head{text-align:center;padding:26px 0 8px}
 .profile-head .av{font-size:64px}
 .profile-head h1{font-size:22px;font-weight:800}
@@ -123,23 +126,79 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* modal */
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:24px}
 #modal.show{display:flex}
-#modal .box{background:#fff;border-radius:20px;padding:26px 22px;max-width:380px;width:100%;text-align:center}
-#modal .box .emo{font-size:64px}
-#modal .box h2{font-size:20px;font-weight:800;margin:10px 0 6px}
-#modal .box p{color:var(--gray);font-weight:600;font-size:14.5px;margin-bottom:16px;line-height:1.6}
+#modal .box{background:#fff;border-radius:22px;padding:28px 24px;max-width:400px;width:100%;text-align:center;max-height:88vh;overflow-y:auto}
+#modal .box .emo{font-size:68px}
+#modal .box h2{font-size:21px;font-weight:800;margin:10px 0 6px}
+#modal .box p{color:var(--gray);font-weight:600;font-size:15px;margin-bottom:16px;line-height:1.75}
 .xp-float{position:fixed;left:50%;top:40%;transform:translateX(-50%);font-size:28px;font-weight:800;color:var(--gold);z-index:70;pointer-events:none;animation:rise 1.1s forwards}
 @keyframes rise{0%{opacity:0;translate:0 20px}25%{opacity:1}100%{opacity:0;translate:0 -60px}}
+/* ═══ লগইন স্ক্রীন ═══ */
+#scr-login{padding:44px 24px;min-height:100vh}
+.login-card{max-width:380px;margin:0 auto;text-align:center}
+.login-card .mascot{font-size:76px;line-height:1}
+.login-card h1{font-size:23px;font-weight:800;margin:12px 0 4px}
+.login-card p.sub{color:var(--gray);font-weight:600;font-size:14px;margin-bottom:22px;line-height:1.6}
+.field{margin-bottom:14px;text-align:right}
+.field label{display:block;font-size:13px;font-weight:800;color:var(--gray);margin-bottom:5px}
+.field input[type=text],.field input[type=password]{width:100%;padding:13px 15px;border:2px solid var(--line);border-radius:12px;font-size:16.5px;font-family:inherit;font-weight:600;text-align:right;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--blue)}
+.chk-row{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:14px 0 4px;font-size:14px;font-weight:700;color:var(--gray)}
+.chk-row input{width:18px;height:18px}
+#li-admin-wrap{display:none;margin-top:10px}
+#li-err{color:var(--red);font-weight:700;font-size:13.5px;margin:8px 0;display:none}
+/* ═══ কাহিনী কার্ড ও স্ক্রীন ═══ */
+.story-card{margin:14px 16px;border-radius:16px;padding:15px 16px;background:linear-gradient(135deg,#fff6d9,#ffe6a0);border:2px solid #f0c352;display:flex;align-items:center;gap:12px;box-shadow:0 4px 0 #dba930}
+.story-card:active{transform:translateY(3px);box-shadow:0 1px 0 #dba930}
+.story-card .emo{font-size:36px}
+.story-card .txt{flex:1;text-align:left}
+.story-card .txt .t{font-weight:800;font-size:15.5px;color:#5a4008}
+.story-card .txt .s{font-size:12px;color:#8a6d1f;font-weight:700;margin-top:2px}
+.story-card.locked{opacity:.55;filter:grayscale(.5)}
+#scr-story{padding-bottom:110px}
+#story-top{display:flex;align-items:center;gap:12px;padding:14px 16px;position:sticky;top:0;background:#fff;border-bottom:2px solid var(--line);z-index:20}
+#story-top .quit{font-size:22px;color:var(--gray);font-weight:800}
+#story-top .ttl{font-weight:800;font-size:16px;flex:1}
+.story-head{text-align:center;padding:22px 20px 6px}
+.story-head .emo{font-size:58px}
+.story-head h1{font-size:21px;font-weight:800;margin-top:8px}
+.story-line{background:var(--soft);border:2px solid var(--line);border-radius:16px;padding:16px 18px;margin:0 16px 14px;direction:rtl;text-align:right}
+.story-line .ar{font-size:26px;font-weight:700;line-height:1.95;display:block}
+.story-line .bn{display:block;direction:ltr;text-align:left;color:#5c5c5c;font-weight:600;font-size:14.5px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+.story-line .sp{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;width:34px;height:34px;border-radius:10px;font-size:16px;margin-left:8px;vertical-align:middle}
+/* ═══ এডমিন প্যানেল ═══ */
+.admin-tag{display:inline-block;background:var(--purple);color:#fff;font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:10px;margin-left:8px;vertical-align:middle}
+.admin-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 4px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:700}
+.admin-row .an{flex:1}
+.admin-row button{background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:7px 13px;border-radius:10px;white-space:nowrap}
+.admin-row button.gold{background:var(--gold);color:#5a4008}
+details.admin-acc summary{cursor:pointer;font-weight:800;font-size:15px;padding:6px 0;color:var(--purple)}
 </style>
 </head>
 <body>
+<!-- ═══ লগইন ═══ -->
+<div id="scr-login" class="screen active">
+  <div class="login-card">
+    <div class="mascot">🦉📖</div>
+    <h1>এসো আরবি শিখি</h1>
+    <p class="sub">তোমার নাম লিখে প্রোফাইলে প্রবেশ করো। প্রতিটি নামের জন্য আলাদা অগ্রগতি সংরক্ষিত হবে।</p>
+    <div class="field"><label>তোমার নাম</label><input type="text" id="li-name" placeholder="যেমনঃ রাশেদ" maxlength="24"></div>
+    <div class="field"><label>পাসওয়ার্ড (ঐচ্ছিক)</label><input type="password" id="li-pass" placeholder="না দিলেও চলবে" maxlength="24"></div>
+    <div class="chk-row"><input type="checkbox" id="li-admin-chk" onchange="document.getElementById('li-admin-wrap').style.display=this.checked?'block':'none'"><label for="li-admin-chk">আমি একজন এডমিন / শিক্ষক</label></div>
+    <div id="li-admin-wrap" class="field"><label>এডমিন কোড</label><input type="password" id="li-admin-code" placeholder="এডমিন কোড দাও"></div>
+    <div id="li-err"></div>
+    <button class="btn" onclick="doLogin()">প্রবেশ করো →</button>
+    <p style="color:var(--gray);font-weight:600;font-size:12.5px;margin-top:14px">নতুন নাম দিলে নতুন প্রোফাইল তৈরি হয়ে যাবে</p>
+  </div>
+</div>
+
 <!-- ═══ HOME ═══ -->
-<div id="topbar">
+<div id="topbar" style="display:none">
   <div class="stat streak"><span class="ico">🔥</span><span id="st-streak">0</span></div>
   <div class="stat gems"><span class="ico">💎</span><span id="st-gems">0</span></div>
   <div class="stat hearts"><span class="ico">❤️</span><span id="st-hearts">5</span></div>
 </div>
 
-<div id="scr-home" class="screen active"><div id="path"></div></div>
+<div id="scr-home" class="screen"><div id="path"></div></div>
 
 <!-- ═══ LESSON ═══ -->
 <div id="scr-lesson" class="screen">
@@ -158,6 +217,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <!-- ═══ RESULT ═══ -->
 <div id="scr-result" class="screen"></div>
 
+<!-- ═══ STORY ═══ -->
+<div id="scr-story" class="screen">
+  <div id="story-top"><button class="quit" onclick="showTab('home')">✕</button><div class="ttl">📖 গল্প</div></div>
+  <div id="story-body"></div>
+  <div id="story-check-bar"><button class="btn" id="story-finish-btn" onclick="finishStory()">শেষ করলাম ✅</button></div>
+</div>
+
 <!-- ═══ WORDS ═══ -->
 <div id="scr-words" class="screen">
   <div class="section"><h2>📖 শব্দভাণ্ডার</h2>
@@ -167,8 +233,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 <!-- ═══ LEAGUE ═══ -->
 <div id="scr-league" class="screen">
-  <div class="section"><h2>🏆 সাপ্তাহিক লিগ</h2>
-  <p style="color:var(--gray);font-weight:600;font-size:14px;margin-bottom:10px">XP অর্জন করে তালিকার শীর্ষে ওঠো!</p>
+  <div class="section"><h2>🏆 Leaderboard</h2>
+  <p style="color:var(--gray);font-weight:600;font-size:14px;margin-bottom:10px">এই সপ্তাহে XP অর্জন করে তালিকার শীর্ষে ওঠো!</p>
   <div id="lb-list"></div></div>
 </div>
 
@@ -188,13 +254,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     </div>
   </div>
   <div class="section"><h2>🎖️ অর্জনসমূহ</h2><div class="badge-grid" id="badge-grid"></div></div>
+  <div class="section" id="admin-panel-wrap"></div>
+  <div class="section"><button class="btn ghost" onclick="doLogout()">🔁 প্রোফাইল পরিবর্তন করো</button></div>
   <div class="section"><button class="btn red" onclick="resetAll()">সব প্রগ্রেস মুছে ফেলো</button></div>
 </div>
 
-<div id="tabbar">
+<div id="tabbar" style="display:none">
   <button id="tab-home" class="on" onclick="showTab('home')">🏠<span>শেখা</span></button>
-  <button id="tab-words" onclick="showTab('words')">📖<span>শব্দ</span></button>
-  <button id="tab-league" onclick="showTab('league')">🏆<span>লিগ</span></button>
+  <button id="tab-words" onclick="showTab('words')">📖<span>শব্দভাণ্ডার</span></button>
+  <button id="tab-league" onclick="showTab('league')">🏆<span>Leaderboard</span></button>
   <button id="tab-profile" onclick="showTab('profile')">👤<span>প্রোফাইল</span></button>
 </div>
 
@@ -423,6 +491,45 @@ const SECTIONS=[
  {t:"অধ্যায় ৪ · উচ্চতর সোপান",s:"৩য় খণ্ড — বহুবচন-সংখ্যা-কুরআন-হাদীস",ic:"🕌",from:30,to:35}
 ];
 function allDone(s,a,b){for(let i=a;i<=b;i++){if(!((s.crowns[i]||0)>0))return false}return true}
+/* ════════ গল্প — বই থেকে সরাসরি নেওয়া কাহিনী ════════ */
+const STORIES=[
+ {id:"s1",afterId:3,icon:"🧒",title:"বিলাল নিজের পরিচয় দিচ্ছে",sub:"শিখে যাওয়া ৪টি পাঠের অনুশীলন",
+  lines:[
+   {a:"أَنا بِلالٌ",b:"আমি বিলাল"},
+   {a:"أَنا تِلْمِيذٌ",b:"আমি একজন ছাত্র"},
+   {a:"أَنا تِلْمِيذٌ جَدِيدٌ",b:"আমি একজন নতুন ছাত্র"},
+   {a:"أَنا وَلَدٌ مُؤَدَّبٌ",b:"আমি একটি ভদ্র ছেলে"},
+   {a:"هُوَ راشِدٌ",b:"সে রাশেদ"},
+   {a:"هُوَ تِلْمِيذٌ ذَكِيٌّ",b:"সে একজন মেধাবী ছাত্র"}]},
+ {id:"s2",afterId:9,icon:"👨‍👩‍👦",title:"মাজেদের পরিবার",sub:"অধ্যায় ১ শেষে পরিবার ও সম্বন্ধ ঝালাই",
+  lines:[
+   {a:"هٰذا بَيْتُ ماجِدٍ",b:"এটি মাজেদের বাড়ি"},
+   {a:"أَبُوهُ مُعَلِّمٌ وَ أُمُّهُ مُعَلِّمَةٌ",b:"তার আব্বা একজন শিক্ষক এবং তার আম্মা একজন শিক্ষিকা"},
+   {a:"عِنْدَهُ كِتابٌ مُفِيدٌ",b:"তার কাছে একটি উপকারী বই আছে"},
+   {a:"اَلْكِتابُ فِي غُرْفَتِهِ",b:"বইটি তার কামরায়"},
+   {a:"فِي قَلْبِ ماجِدٍ حُبُّ الْعِلْمِ",b:"মাজেদের হৃদয়ে জ্ঞানের ভালোবাসা"}]},
+ {id:"s3",afterId:17,icon:"🐘",title:"হাতি ও পাখিরা",sub:"অধ্যায় ২ শেষে প্রাণী ও দেহের শব্দ ঝালাই",
+  lines:[
+   {a:"هٰذا فِيلٌ كَبِيرٌ",b:"ইহা একটি বড় হাতি"},
+   {a:"رَأْسُهُ صَغِيرٌ وَ خُرْطُومُهُ طَوِيلٌ",b:"তার মাথা ছোট এবং তার শুঁড় লম্বা"},
+   {a:"ذٰلِكَ غُرابٌ وَ هٰذا بُلْبُلٌ",b:"ওটি একটি কাক এবং এটি একটি বুলবুলি"},
+   {a:"اَلْغُرابُ طائِرٌ قَبِيحٌ",b:"কাক একটি কুৎসিত পাখি"},
+   {a:"اَلْبُلْبُلُ طائِرٌ جَمِيلٌ",b:"বুলবুলি একটি সুন্দর পাখি"}]},
+ {id:"s4",afterId:29,icon:"🔥",title:"ইবরাহীম (আঃ) ও অত্যাচারী বাদশাহ",sub:"অধ্যায় ৩ শেষে অতীত কালের ক্রিয়া দিয়ে বইয়ের আসল কাহিনী",
+  lines:[
+   {a:"قالَ إِبْراهِيمُ: رَبِّي يُحْيِي وَ يُمِيتُ",b:"ইবরাহীম (আঃ) বললেন: আমার রব জীবন দেন ও মৃত্যু দেন"},
+   {a:"قالَ الْمَلِكُ: أَنَا أُحْيِي وَ أُمِيتُ",b:"বাদশাহ বলল: আমিও জীবন দিই ও মৃত্যু দিই"},
+   {a:"وَ كانَ الْمَلِكُ غَبِيًّا",b:"এবং বাদশাহ ছিল নির্বোধ"},
+   {a:"لا يَعْرِفُ مَعْنَى الْحَياةِ وَ الْمَوْتِ",b:"সে জীবন ও মৃত্যুর প্রকৃত অর্থ জানত না"},
+   {a:"هٰذِهِ قِصَّةٌ عَجِيبَةٌ فِي كِتابِ اللّٰهِ",b:"এটি আল্লাহর কিতাবে একটি আশ্চর্যজনক ঘটনা"}]},
+ {id:"s5",afterId:35,icon:"🕌",title:"রাসূলুল্লাহ ﷺ-এর দাওয়াত",sub:"সমাপনী গল্প — সম্পূর্ণ কিতাব অভিনন্দন!",
+  lines:[
+   {a:"دَعا رَسُولُ اللّٰهِ ﷺ النّاسَ وَ قالَ: اُعْبُدُوا اللّٰهَ",b:"রাসূলুল্লাহ ﷺ মানুষকে ডাকলেন এবং বললেন: আল্লাহর ইবাদত কর"},
+   {a:"فَقَبِلَ قَوْمٌ دَعْوَتَهُ وَ دَخَلُوا فِي الْإِسْلامِ",b:"তখন একদল মানুষ তাঁর দাওয়াত গ্রহণ করল ও ইসলামে প্রবেশ করল"},
+   {a:"بَعْدَ وَفاةِ الرَّسُولِ نَشَرَ الصَّحابَةُ الْإِسْلامَ فِي الْعالَمِ",b:"রাসূল ﷺ-এর ইন্তেকালের পর সাহাবাগণ বিশ্বে ইসলাম ছড়িয়ে দিলেন"},
+   {a:"وَ الْيَوْمَ أَنْتَ أَيْضًا تَتَعَلَّمُ لُغَةَ الْقُرْآنِ",b:"আর আজ তুমিও শিখছ কুরআনের ভাষা"},
+   {a:"هٰذِهِ نِعْمَةٌ عَظِيمَةٌ، فَاشْكُرِ اللّٰهَ",b:"এটি একটি বিশাল নিয়ামত, তাই আল্লাহর শোকর কর"}]}
+];
 const BADGES=[
  {id:"first",emo:"🌱",nm:"প্রথম পদক্ষেপ",desc:"প্রথম পাঠ শেষ করো",chk:s=>s.lessonsDone>=1},
  {id:"streak3",emo:"🔥",nm:"৩ দিনের ধারা",desc:"টানা ৩ দিন শেখো",chk:s=>s.bestStreak>=3},
@@ -438,18 +545,92 @@ const BADGES=[
  {id:"sec3",emo:"🌳",nm:"ক্রিয়ার কারিগর",desc:"অধ্যায় ৩-এর সব পাঠ শেষ করো",chk:s=>allDone(s,18,29)},
  {id:"sec4",emo:"🕌",nm:"উচ্চতর সোপান",desc:"অধ্যায় ৪-এর সব পাঠ শেষ করো",chk:s=>allDone(s,30,35)},
  {id:"khatm",emo:"🏆",nm:"পূর্ণ কিতাব",desc:"গোটা কিতাবের সব পাঠ শেষ করো",chk:s=>allDone(s,0,35)},
- {id:"w300",emo:"📜",nm:"ভাষাবিদ",desc:"৩০০টি শব্দ শেখো",chk:s=>Object.keys(s.words).length>=300}
+ {id:"w300",emo:"📜",nm:"ভাষাবিদ",desc:"৩০০টি শব্দ শেখো",chk:s=>Object.keys(s.words).length>=300},
+ {id:"stories",emo:"🧞",nm:"গল্পপ্রেমী",desc:"সবগুলো গল্প পড়ো",chk:s=>STORIES.every(st=>s.storiesDone&&s.storiesDone[st.id])}
 ];
 const LEVELS=[{t:"নবীন তালিবে ইলম",e:"🌱"},{t:"আগ্রহী শিক্ষার্থী",e:"📖"},{t:"পরিশ্রমী তালিব",e:"✏️"},{t:"মেধাবী ছাত্র",e:"🌟"},{t:"আরবির বন্ধু",e:"🕌"},{t:"ভাষা-অভিযাত্রী",e:"🧭"},{t:"দক্ষ তালিবে ইলম",e:"🎓"},{t:"আরবি-বিশারদ",e:"👑"}];
 const RIVALS=["সাঈদ","খাদীজা","বিলাল","ফাতেমা","মাজেদ","যাইনাব","খালেদ","ফারহানা","মাহমুদ"];
 /* ════════ STATE ════════ */
 const DEF={xp:0,gems:0,hearts:5,streak:0,bestStreak:0,lastDay:null,heartDay:null,
  crowns:{},words:{},badges:{},lessonsDone:0,perfect:0,chestCount:0,rivalXP:null,
- dayXP:0,goalDay:null,goal:30};
-let S=load();
-function load(){try{const j=JSON.parse(localStorage.getItem("eas_state"));return Object.assign({},DEF,j||{})}catch(e){return{...DEF}}}
-function save(){localStorage.setItem("eas_state",JSON.stringify(S))}
+ dayXP:0,goalDay:null,goal:30,storiesDone:{},introShown:false,migNoticeShown:true};
+const ADMIN_CODE="ARBI-USTAD-2026";
+let S=null,CUR=null;
+/* ════════ লগইন / প্রোফাইল ════════ */
+function loadUsers(){try{return JSON.parse(localStorage.getItem("eas_users"))||{}}catch(e){return{}}}
+function saveUsers(u){localStorage.setItem("eas_users",JSON.stringify(u))}
+function migrateLegacy(){
+  const legacy=localStorage.getItem("eas_state");
+  const users=loadUsers();
+  if(legacy&&!Object.keys(users).length){
+    try{
+      const st=JSON.parse(legacy);
+      users["আমি"]={pass:"",isAdmin:false,state:Object.assign({},DEF,st,{introShown:true,migNoticeShown:false})};
+      saveUsers(users);
+      localStorage.setItem("eas_current","আমি");
+      localStorage.setItem("eas_migrated","1");
+    }catch(e){}
+  }
+}
+function save(){
+  if(!CUR)return;
+  const users=loadUsers();
+  if(!users[CUR])users[CUR]={pass:"",isAdmin:false};
+  users[CUR].state=S;
+  saveUsers(users);
+}
 function totalCrowns(s){return Object.values(s.crowns).reduce((a,b)=>a+b,0)}
+function doLogin(){
+  const name=$("#li-name").value.trim();
+  const pass=$("#li-pass").value;
+  const wantAdmin=$("#li-admin-chk").checked;
+  const code=$("#li-admin-code").value.trim();
+  const err=$("#li-err");err.style.display="none";
+  if(!name){err.textContent="নাম লেখো";err.style.display="block";return}
+  const users=loadUsers();
+  let u=users[name];
+  if(u){
+    if((u.pass||"")!==pass){err.textContent="পাসওয়ার্ড সঠিক নয়";err.style.display="block";return}
+  }else{
+    u={pass,isAdmin:false,state:Object.assign({},DEF)};
+    users[name]=u;
+  }
+  if(wantAdmin){
+    if(code!==ADMIN_CODE){err.textContent="এডমিন কোড সঠিক নয়";err.style.display="block";return}
+    u.isAdmin=true;
+  }
+  saveUsers(users);
+  localStorage.setItem("eas_current",name);
+  CUR=name;
+  S=Object.assign({},DEF,u.state||{});
+  S.isAdmin=!!u.isAdmin;
+  enterApp();
+}
+function doLogout(){
+  save();
+  localStorage.removeItem("eas_current");
+  CUR=null;S=null;
+  location.reload();
+}
+function enterApp(){
+  $("#scr-login").classList.remove("active");
+  $("#topbar").style.display="flex";$("#tabbar").style.display="flex";
+  dailyRefresh();updateTop();showTab("home");
+  if(!S.introShown){
+    S.introShown=true;save();
+    modal(`<div class="emo">🦉📖</div><h2>এসো আরবি শিখি!</h2>
+    <p>মাওলানা আবু তাহের মিসবাহ্‌র প্রিয় কিতাবটি এবার খেলার ছলে!<br><br>
+    ✅ প্রতিদিন খেলে <b>🔥 ধারা</b> ধরে রাখো<br>
+    ✅ সঠিক উত্তরে <b>⚡XP</b> ও <b>💎 রত্ন</b> জেতো<br>
+    ✅ ভুল হলে <b>❤️ হৃদয়</b> কমবে — সাবধান!<br>
+    ✅ প্রতিটি পাঠে <b>👑 মুকুট</b> জিতে পরের পাঠ খোলো<br>
+    ✅ অধ্যায় শেষে <b>📜 গল্প</b> পড়ে অনুশীলন করো</p>`,
+    `<button class="btn" onclick="closeModal()">বিসমিল্লাহ — শুরু করি!</button>`);
+  }else if(!S.migNoticeShown){
+    S.migNoticeShown=true;save();
+    modal(`<div class="emo">🎊</div><h2>স্বাগতম ফিরে, ${esc(CUR)}!</h2><p>তোমার আগের সব অগ্রগতি অক্ষত আছে। এখন <b>সম্পূর্ণ কিতাব</b> শেখা যায় — ৩৬টি পাঠ, ৫টি গল্প, আর এখন প্রোফাইলও যোগ হলো!<br><br>📖 প্রতিটি নামের নিজস্ব অগ্রগতি<br>📜 অধ্যায় শেষে বইয়ের আসল গল্প পড়ো<br>🎯 দৈনিক লক্ষ্য পূরণ করো</p>`,`<button class="btn" onclick="closeModal()">আলহামদুলিল্লাহ — চালিয়ে যাই!</button>`);
+  }
+}
 function today(){return new Date().toISOString().slice(0,10)}
 function dailyRefresh(){
   const t=today();
@@ -528,7 +709,7 @@ function showTab(t){
   ["home","words","league","profile"].forEach(x=>{
     $("#scr-"+x).classList.toggle("active",x===t);
     $("#tab-"+x).classList.toggle("on",x===t)});
-  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");
+  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");
   $("#topbar").style.display="flex";$("#tabbar").style.display="flex";
   if(t==="home")renderPath();if(t==="words")renderWords();
   if(t==="league")renderLeague();if(t==="profile")renderProfile();
@@ -540,12 +721,13 @@ function unitState(i){
   if(i===0)return"avail";
   return (S.crowns[i-1]||0)>=1?"avail":"locked";
 }
+const SEC_GRAD=["linear-gradient(135deg,#58cc02,#3a9c00)","linear-gradient(135deg,#1cb0f6,#0d84c4)","linear-gradient(135deg,#ce82ff,#9a3fe0)","linear-gradient(135deg,#ff9600,#e07200)"];
 function renderPath(){
   const p=$("#path");
   const gPct=Math.min(100,Math.round(S.dayXP/S.goal*100));
   let h=`<div style="text-align:center;padding:4px 20px 0">
    <div style="font-size:13px;color:var(--gray);font-weight:700">📕 এসো আরবি শিখি · সম্পূর্ণ কিতাব (৩ খণ্ড)</div>
-   <div style="font-size:15px;font-weight:800;margin-top:2px">ইলমের সফরে স্বাগতম! 🌙</div>
+   <div style="font-size:16px;font-weight:800;margin-top:2px">🦉 ইলমের সফরে স্বাগতম, ${esc(CUR||"বন্ধু")}!</div>
    <div style="margin:12px 16px 0;border:2px solid var(--line);border-radius:14px;padding:10px 14px;text-align:right">
      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:800">
        <span style="color:${gPct>=100?"var(--green-d)":"var(--gray)"}">${gPct>=100?"🎯 লক্ষ্য অর্জিত! মাশাআল্লাহ":"🎯 আজকের লক্ষ্য"}</span>
@@ -555,13 +737,13 @@ function renderPath(){
        <div style="height:100%;width:${gPct}%;background:${gPct>=100?"var(--green)":"var(--gold)"};border-radius:6px;transition:width .4s"></div>
      </div>
    </div></div>`;
-  SECTIONS.forEach(sec=>{
+  SECTIONS.forEach((sec,si)=>{
     const done=UNITS.slice(sec.from,sec.to+1).filter(u=>(S.crowns[u.id]||0)>0).length;
     const tot=sec.to-sec.from+1;
-    h+=`<div style="margin:24px 16px 4px;background:#3c3c3c;border-radius:16px;padding:13px 18px;color:#fff;display:flex;justify-content:space-between;align-items:center">
+    h+=`<div style="margin:24px 16px 4px;background:${SEC_GRAD[si%SEC_GRAD.length]};border-radius:16px;padding:13px 18px;color:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 0 rgba(0,0,0,.15)">
       <div><div style="font-size:16.5px;font-weight:800">${sec.ic} ${sec.t}</div>
-      <div style="font-size:12.5px;opacity:.85;margin-top:1px">${sec.s}</div></div>
-      <div style="font-size:13px;font-weight:800;background:rgba(255,255,255,.15);border-radius:10px;padding:4px 9px;white-space:nowrap">${done}/${tot}</div>
+      <div style="font-size:12.5px;opacity:.92;margin-top:1px">${sec.s}</div></div>
+      <div style="font-size:13px;font-weight:800;background:rgba(255,255,255,.22);border-radius:10px;padding:4px 9px;white-space:nowrap">${done}/${tot}</div>
     </div>`;
     UNITS.slice(sec.from,sec.to+1).forEach(u=>{
       const i=u.id,st=unitState(i),c=S.crowns[i]||0;
@@ -573,18 +755,30 @@ function renderPath(){
         </button>
         <div class="node-label">${st==="done"?"সম্পূর্ণ!":st==="locked"?"তালাবদ্ধ":"শুরু করো"}</div>
       </div></div>`;
+      const story=STORIES.find(s=>s.afterId===i);
+      if(story){
+        const idx=STORIES.indexOf(story);
+        const unlocked=S.isAdmin||(S.crowns[story.afterId]||0)>0;
+        const doneS=S.storiesDone&&S.storiesDone[story.id];
+        h+=`<div class="story-card ${unlocked?"":"locked"}" onclick="${unlocked?`openStory(${idx})`:`storyLockedMsg()`}">
+          <div class="emo">${doneS?"✅":story.icon}</div>
+          <div class="txt"><div class="t">📖 গল্প · ${story.title}</div><div class="s">${unlocked?story.sub:"আগে উপরের পাঠে ন্যূনতম ১টি মুকুট জেতো"}</div></div>
+        </div>`;
+      }
     });
   });
   h+=`<div style="text-align:center;padding:10px;color:var(--gray);font-weight:700;font-size:13px">১ম খণ্ডের ৩ অধ্যায় + ২য়-৩য় খণ্ডের নির্যাস — সম্পূর্ণ কিতাব, আলহামদুলিল্লাহ 🤲</div>`;
   p.innerHTML=h;
 }
+function storyLockedMsg(){modal(`<div class="emo">🔒</div><h2>গল্পটি এখনো তালাবদ্ধ</h2><p>এই গল্পের আগের পাঠে অন্তত ১টি মুকুট (👑) জিতলে গল্পটি খুলবে।</p>`,`<button class="btn blue" onclick="closeModal()">ঠিক আছে</button>`)}
 function tapUnit(i){
   const st=unitState(i);
-  if(st==="locked"){modal(`<div class="emo">🔒</div><h2>এখনো তালাবদ্ধ</h2><p>আগের পাঠে অন্তত ১টি মুকুট (👑) জিতলে এই পাঠ খুলবে।</p>`,`<button class="btn blue" onclick="closeModal()">ঠিক আছে</button>`);return}
-  if(S.hearts<=0){modal(`<div class="emo">💔</div><h2>হৃদয় শেষ!</h2><p>আগামীকাল হৃদয়গুলো আবার ভরে যাবে। অথবা ৩০ 💎 দিয়ে এখনই ভরে নাও।</p>`,
+  if(st==="locked"&&!S.isAdmin){modal(`<div class="emo">🔒</div><h2>এখনো তালাবদ্ধ</h2><p>আগের পাঠে অন্তত ১টি মুকুট (👑) জিতলে এই পাঠ খুলবে।</p>`,`<button class="btn blue" onclick="closeModal()">ঠিক আছে</button>`);return}
+  if(S.hearts<=0&&!S.isAdmin){modal(`<div class="emo">💔</div><h2>হৃদয় শেষ!</h2><p>আগামীকাল হৃদয়গুলো আবার ভরে যাবে। অথবা ৩০ 💎 দিয়ে এখনই ভরে নাও।</p>`,
    `<button class="btn blue" onclick="buyHearts()">💎 ৩০ দিয়ে ভরো</button><div style="height:10px"></div><button class="btn ghost" onclick="closeModal()">পরে</button>`);return}
   const u=UNITS[i],c=S.crowns[i]||0;
-  modal(`<div class="emo">${u.icon}</div><h2>${u.title}</h2><p>${u.sub}<br>মুকুট: ${"👑".repeat(c)||"—"} (${c}/৩)</p><div class="tipbox" style="text-align:right">${u.tip}</div>`,
+  const adminNote=(st==="locked"&&S.isAdmin)?`<p style="color:var(--purple);font-weight:800">👑 এডমিন প্রিভিউ — তালাবদ্ধ পাঠ, তবু খোলা যাচ্ছে</p>`:"";
+  modal(`<div class="emo">${u.icon}</div><h2>${u.title}</h2><p>${u.sub}<br>মুকুট: ${"👑".repeat(c)||"—"} (${c}/৩)</p>${adminNote}<div class="tipbox">${u.tip}</div>`,
    `<button class="btn" onclick="closeModal();startLesson(${i})">শুরু করো +XP</button><div style="height:10px"></div><button class="btn ghost" onclick="closeModal()">বাতিল</button>`);
 }
 function buyHearts(){
@@ -626,17 +820,54 @@ function startReview(){
   if(S.hearts<=0){modal(`<div class="emo">💔</div><h2>হৃদয় শেষ!</h2><p>আগামীকাল হৃদয়গুলো আবার ভরে যাবে।</p>`,`<button class="btn ghost" onclick="closeModal()">পরে</button>`);return}
   L={ui:-1,review:true,ex:genReviewExercises(ws),i:0,wrong:0,correctWords:new Set()};
   ["home","words","league","profile"].forEach(x=>$("#scr-"+x).classList.remove("active"));
-  $("#scr-result").classList.remove("active");
+  $("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");
   $("#topbar").style.display="none";$("#tabbar").style.display="none";
   $("#scr-lesson").classList.add("active");
   renderEx();
 }
 function startLesson(ui){
   L={ui,ex:genExercises(ui),i:0,wrong:0,correctWords:new Set()};
-  $("#scr-home").classList.remove("active");$("#scr-result").classList.remove("active");
+  $("#scr-home").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");
   $("#topbar").style.display="none";$("#tabbar").style.display="none";
   $("#scr-lesson").classList.add("active");
   renderEx();
+}
+/* ════════ গল্প স্ক্রীন ════════ */
+let curStory=null;
+function openStory(idx){
+  const st=STORIES[idx];
+  const unlocked=S.isAdmin||(S.crowns[st.afterId]||0)>0;
+  if(!unlocked){storyLockedMsg();return}
+  curStory=idx;
+  ["home","words","league","profile"].forEach(x=>$("#scr-"+x).classList.remove("active"));
+  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");
+  $("#topbar").style.display="none";$("#tabbar").style.display="none";
+  $("#story-top .ttl").textContent=st.icon+" "+st.title;
+  const already=S.storiesDone&&S.storiesDone[st.id];
+  $("#story-body").innerHTML=`<div class="story-head"><div class="emo">${st.icon}</div><h1>${st.title}</h1>
+    <p style="color:var(--gray);font-weight:600;font-size:13.5px;margin-top:4px">${st.sub}</p></div>
+    ${st.lines.map(ln=>`<div class="story-line"><span class="ar">${ln.a}<button class="sp" onclick="speak('${ln.a.replace(/'/g,"\\'")}')">🔊</button></span><span class="bn">${ln.b}</span></div>`).join("")}`;
+  $("#story-finish-btn").textContent=already?"আবার পড়লাম — ফিরে যাই":"শেষ করলাম ✅ (+XP পাবে)";
+  $("#scr-story").classList.add("active");
+  window.scrollTo(0,0);
+}
+function finishStory(){
+  const st=STORIES[curStory];
+  if(!S.storiesDone)S.storiesDone={};
+  const already=S.storiesDone[st.id];
+  if(!already){
+    S.storiesDone[st.id]=true;S.xp+=25;S.gems+=8;S.dayXP+=25;
+    save();updateTop();
+    const newBadges=BADGES.filter(b=>!S.badges[b.id]&&b.chk(S));
+    newBadges.forEach(b=>S.badges[b.id]=true);save();
+    xpFloat("⚡+25 XP");
+    if(newBadges.length){
+      showTab("home");
+      modal(`<div class="emo">${newBadges[0].emo}</div><h2>নতুন অর্জন: ${newBadges[0].nm}</h2><p>${newBadges[0].desc}</p>`,`<button class="btn" onclick="closeModal()">দারুণ!</button>`);
+      return;
+    }
+  }
+  showTab("home");
 }
 function quitLesson(){
   if(confirm("পাঠ ছেড়ে দিলে এই অগ্রগতি হারাবে। ছাড়বে?")){speechSynthesis.cancel();showTab("home")}
@@ -816,54 +1047,62 @@ function afterResult(){
 /* ════════ WORDS ════════ */
 function renderWords(){
   const list=$("#word-list"),ws=Object.entries(S.words);
-  if(!ws.length){list.innerHTML=`<div style="text-align:center;padding:40px 0;color:var(--gray);font-weight:700">এখনো কোনো শব্দ শেখোনি।<br>প্রথম পাঠ শুরু করো! 🌱</div>`;return}
+  if(!ws.length){list.innerHTML=`<div style="text-align:center;padding:40px 0;color:var(--gray);font-weight:700"><div style="font-size:52px;margin-bottom:10px">🦉</div>এখনো কোনো শব্দ শেখোনি।<br>প্রথম পাঠ শুরু করো! 🌱</div>`;return}
   list.innerHTML=`<button class="btn blue" style="margin-bottom:14px" onclick="startReview()">🔁 শব্দ অনুশীলন করো (${ws.length}টি শব্দ)</button>`
    +ws.map(([a,b])=>`<div class="word-row"><span class="ar">${a}</span><span class="bn">${b}</span><button onclick="speak('${a}')">🔊</button></div>`).join("");
 }
-/* ════════ LEAGUE ════════ */
+/* ════════ LEADERBOARD ════════ */
 function renderLeague(){
   if(!S.rivalXP){S.rivalXP=RIVALS.map(()=>Math.floor(Math.random()*400)+30);save()}
   const rows=RIVALS.map((n,i)=>({n,xp:S.rivalXP[i],me:false}));
-  rows.push({n:"তুমি",xp:S.xp,me:true});
+  rows.push({n:CUR||"তুমি",xp:S.xp,me:true});
   rows.sort((a,b)=>b.xp-a.xp);
   $("#lb-list").innerHTML=rows.map((r,i)=>`<div class="lb-row ${r.me?"me":""}">
     <span class="rank">${i+1}</span><span>${i===0?"🥇":i===1?"🥈":i===2?"🥉":"🔹"}</span>
-    <span>${r.n}</span><span class="xps">⚡${r.xp} XP</span></div>`).join("")
-    +`<p style="color:var(--gray);font-size:12.5px;font-weight:600;margin-top:12px;text-align:center">* এটি অনুশীলনের জন্য একটি ডেমো লিগ — প্রতিদ্বন্দ্বীরা কাল্পনিক।</p>`;
+    <span>${esc(r.n)}</span><span class="xps">⚡${r.xp} XP</span></div>`).join("")
+    +`<p style="color:var(--gray);font-size:12.5px;font-weight:600;margin-top:12px;text-align:center">প্রতি সপ্তাহে তালিকা নতুন করে শুরু হয় — প্রতিদিন অনুশীলন করে শীর্ষে থাকো!</p>`;
 }
 /* ════════ PROFILE ════════ */
 function renderProfile(){
   const lvl=Math.min(LEVELS.length-1,Math.floor(S.xp/150));
-  $("#pf-av").textContent=LEVELS[lvl].e;$("#pf-title").textContent=LEVELS[lvl].t;
+  $("#pf-av").textContent=LEVELS[lvl].e;
+  $("#pf-title").innerHTML=`${esc(CUR||"")}${S.isAdmin?'<span class="admin-tag">👑 এডমিন</span>':""}<br><span style="font-size:15px;color:var(--gray)">${LEVELS[lvl].t}</span>`;
   $("#pf-sub").textContent=`লেভেল ${lvl+1} · পরের লেভেলে ${150-(S.xp%150)} XP বাকি`;
   $("#pf-xp").textContent=S.xp;$("#pf-streak").textContent=S.streak+" 🔥";
   $("#pf-crowns").textContent=totalCrowns(S)+"/"+(UNITS.length*3);$("#pf-words").textContent=Object.keys(S.words).length;
   $("#badge-grid").innerHTML=BADGES.map(b=>`<div class="badge ${S.badges[b.id]?"":"off"}"><div class="emo">${b.emo}</div><div class="nm">${b.nm}</div><div style="font-size:10.5px;color:var(--gray);font-weight:600">${b.desc}</div></div>`).join("");
+  const wrap=$("#admin-panel-wrap");
+  if(S.isAdmin){
+    const unitRows=UNITS.map(u=>`<div class="admin-row"><span class="an">${u.icon} ${u.title}</span><button onclick="startLesson(${u.id})">প্রিভিউ</button></div>`).join("");
+    const storyRows=STORIES.map((s,idx)=>`<div class="admin-row"><span class="an">📖 ${s.title}</span><button class="gold" onclick="openStory(${idx})">প্রিভিউ</button></div>`).join("");
+    wrap.innerHTML=`<details class="admin-acc"><summary>🛠️ এডমিন প্যানেল — সব পাঠ ও গল্প যাচাই করো</summary>
+      <p style="color:var(--gray);font-weight:600;font-size:13px;margin:8px 0">তালাবদ্ধ থাকলেও যেকোনো পাঠ/গল্প সরাসরি খুলে মান যাচাই করতে পারবে।</p>
+      <div style="margin-top:6px">${unitRows}</div>
+      <div style="margin-top:14px;font-weight:800;color:var(--purple)">📖 গল্পসমূহ</div>
+      <div>${storyRows}</div>
+    </details>`;
+  }else{wrap.innerHTML=""}
 }
-function resetAll(){if(confirm("সত্যিই সব প্রগ্রেস মুছে ফেলবে?")){localStorage.removeItem("eas_state");location.reload()}}
+function resetAll(){
+  if(confirm("সত্যিই সব প্রগ্রেস মুছে ফেলবে?")){
+    const users=loadUsers();
+    if(CUR&&users[CUR]){users[CUR].state=Object.assign({},DEF,{introShown:true});saveUsers(users)}
+    location.reload();
+  }
+}
 /* ════════ INIT ════════ */
-dailyRefresh();updateTop();renderPath();
-if(localStorage.getItem("eas_welcome")&&!localStorage.getItem("eas_v2")){
-  localStorage.setItem("eas_v2","1");
-  modal(`<div class="emo">🎊</div><h2>বিশাল আপডেট!</h2>
-  <p>এখন <b>সম্পূর্ণ কিতাব</b> — ৩৬টি পাঠ, ৪টি অধ্যায়!<br><br>
-  🌿 নতুন ৫০০+ শব্দ ও বাক্য<br>
-  🌳 ক্রিয়া: অতীত-বর্তমান-আদেশ-বাব<br>
-  🕌 বহুবচন, সংখ্যা, কুরআন-হাদীস<br>
-  ❓ নতুন অনুশীলন: প্রশ্নোত্তর, শূন্যস্থান, অর্থ বাছাই<br>
-  🎯 দৈনিক লক্ষ্য ও 🔁 শব্দ অনুশীলন</p>`,
-  `<button class="btn" onclick="closeModal()">আলহামদুলিল্লাহ — চালিয়ে যাই!</button>`);
-}
-if(!localStorage.getItem("eas_welcome")){
-  localStorage.setItem("eas_welcome","1");localStorage.setItem("eas_v2","1");
-  modal(`<div class="emo">📕</div><h2>এসো আরবি শিখি!</h2>
-  <p>মাওলানা আবু তাহের মিসবাহ্‌র প্রিয় কিতাবটি এবার খেলার ছলে!<br><br>
-  ✅ প্রতিদিন খেলে <b>🔥 ধারা</b> ধরে রাখো<br>
-  ✅ সঠিক উত্তরে <b>⚡XP</b> ও <b>💎 রত্ন</b> জেতো<br>
-  ✅ ভুল হলে <b>❤️ হৃদয়</b> কমবে — সাবধান!<br>
-  ✅ প্রতিটি পাঠে <b>👑 মুকুট</b> জিতে পরের পাঠ খোলো</p>`,
-  `<button class="btn" onclick="closeModal()">বিসমিল্লাহ — শুরু করি!</button>`);
-}
+migrateLegacy();
+CUR=localStorage.getItem("eas_current");
+(function boot(){
+  const users=loadUsers();
+  if(CUR&&users[CUR]){
+    S=Object.assign({},DEF,users[CUR].state||{});
+    S.isAdmin=!!users[CUR].isAdmin;
+    enterApp();
+  }else{
+    $("#scr-login").classList.add("active");
+  }
+})();
 </script>
 </body>
 </html>
