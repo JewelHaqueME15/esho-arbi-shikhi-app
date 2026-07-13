@@ -173,6 +173,25 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .admin-row button{background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:7px 13px;border-radius:10px;white-space:nowrap}
 .admin-row button.gold{background:var(--gold);color:#5a4008}
 details.admin-acc summary{cursor:pointer;font-weight:800;font-size:15px;padding:6px 0;color:var(--purple)}
+/* ═══ ছবি-ভিত্তিক প্রশ্ন (pic_mc) ═══ */
+.pic-emo{font-size:88px;text-align:center;margin:14px 0 26px;line-height:1}
+/* ═══ ছবি দেখে বাক্য বানাও (visual challenge) ═══ */
+#scr-visual{padding-bottom:110px}
+#visual-top{display:flex;align-items:center;gap:12px;padding:14px 16px;position:sticky;top:0;background:#fff;border-bottom:2px solid var(--line);z-index:20}
+#visual-top .quit{font-size:22px;color:var(--gray);font-weight:800}
+#visual-top .ttl{font-weight:800;font-size:16px;flex:1}
+.visual-head{text-align:center;padding:24px 20px 4px}
+.visual-head .emo{font-size:80px;line-height:1}
+.visual-head h1{font-size:20px;font-weight:800;margin-top:12px}
+.visual-head .hint{color:var(--gray);font-weight:600;font-size:14px;margin-top:8px}
+#vc-answer{min-height:64px;border-top:2px solid var(--line);border-bottom:2px solid var(--line);margin:20px 16px;padding:10px 4px;display:flex;flex-wrap:wrap;gap:8px;direction:rtl}
+#vc-bank{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;direction:rtl;padding:0 16px}
+#visual-check-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:16px 20px 22px;background:#fff;border-top:2px solid var(--line);z-index:40}
+#visual-check-bar.ok{background:#d7ffb8;border-color:#d7ffb8}
+#visual-check-bar.bad{background:#ffdfe0;border-color:#ffdfe0}
+#vc-fb{font-weight:800;font-size:15.5px;margin-bottom:10px;display:none}
+#visual-check-bar.ok #vc-fb{display:block;color:var(--green-d)}
+#visual-check-bar.bad #vc-fb{display:block;color:var(--red)}
 /* ═══ শব্দ-পরিচিতি টেবিল (বইয়ের মতো দুই কলাম) ═══ */
 #scr-vocab{padding-bottom:110px}
 #vocab-top{display:flex;align-items:center;gap:12px;padding:14px 16px;position:sticky;top:0;background:#fff;border-bottom:2px solid var(--line);z-index:20}
@@ -247,6 +266,13 @@ details.admin-acc summary{cursor:pointer;font-weight:800;font-size:15px;padding:
   <div id="vocab-top"><button class="quit" onclick="showTab('home')">✕</button><div class="ttl">📚 নতুন শব্দ</div></div>
   <div id="vocab-body"></div>
   <div id="vocab-check-bar"><button class="btn" id="vocab-start-btn">অনুশীলন শুরু করো →</button></div>
+</div>
+
+<!-- ═══ VISUAL CHALLENGE ═══ -->
+<div id="scr-visual" class="screen">
+  <div id="visual-top"><button class="quit" onclick="showTab('home')">✕</button><div class="ttl">🖼️ ছবি দেখে বাক্য বানাও</div></div>
+  <div id="visual-body"></div>
+  <div id="visual-check-bar"><div id="vc-fb"></div><button class="btn" id="vc-check-btn" disabled>যাচাই করো</button></div>
 </div>
 
 <!-- ═══ WORDS ═══ -->
@@ -734,7 +760,7 @@ function showTab(t){
   ["home","words","league","profile"].forEach(x=>{
     $("#scr-"+x).classList.toggle("active",x===t);
     $("#tab-"+x).classList.toggle("on",x===t)});
-  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");
+  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");$("#scr-visual").classList.remove("active");
   $("#topbar").style.display="flex";$("#tabbar").style.display="flex";
   if(t==="home")renderPath();if(t==="words")renderWords();
   if(t==="league")renderLeague();if(t==="profile")renderProfile();
@@ -824,6 +850,9 @@ function genExercises(ui){
   shuffle(u.sents).slice(0,2).forEach(s=>ex.push({t:"tr",s,opts:shuffle([s.b,...pick(u.sents.map(x=>x.b),3,s.b)])}));
   if(u.qa)shuffle(u.qa).slice(0,2).forEach(item=>ex.push({t:"qa",q:item.q,opts:shuffle(item.o.slice()),ans:item.o[item.c]}));
   if(u.fill)shuffle(u.fill).slice(0,2).forEach(item=>ex.push({t:"fill",q:item.q,opts:shuffle(item.o.slice()),ans:item.o[item.c]}));
+  const picVocab=shuffle(u.vocab.filter(v=>v.img));
+  const allVimg=allV.filter(v=>v.img);
+  picVocab.slice(0,2).forEach(w=>ex.push({t:"pic_mc",w,opts:shuffle([w.a,...pick(allVimg.map(v=>v.a),3,w.a)])}));
   return shuffle(ex);
 }
 /* রিভিউ: শেখা শব্দ থেকে মিশ্র অনুশীলন */
@@ -845,14 +874,14 @@ function startReview(){
   if(S.hearts<=0){modal(`<div class="emo">💔</div><h2>হৃদয় শেষ!</h2><p>আগামীকাল হৃদয়গুলো আবার ভরে যাবে।</p>`,`<button class="btn ghost" onclick="closeModal()">পরে</button>`);return}
   L={ui:-1,review:true,ex:genReviewExercises(ws),i:0,wrong:0,correctWords:new Set()};
   ["home","words","league","profile"].forEach(x=>$("#scr-"+x).classList.remove("active"));
-  $("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");
+  $("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");$("#scr-visual").classList.remove("active");
   $("#topbar").style.display="none";$("#tabbar").style.display="none";
   $("#scr-lesson").classList.add("active");
   renderEx();
 }
 function startLesson(ui){
   L={ui,ex:genExercises(ui),i:0,wrong:0,correctWords:new Set()};
-  $("#scr-home").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");
+  $("#scr-home").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");$("#scr-visual").classList.remove("active");
   $("#topbar").style.display="none";$("#tabbar").style.display="none";
   $("#scr-lesson").classList.add("active");
   renderEx();
@@ -861,7 +890,7 @@ function startLesson(ui){
 function openVocabIntro(ui){
   const u=UNITS[ui];
   ["home","words","league","profile"].forEach(x=>$("#scr-"+x).classList.remove("active"));
-  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");
+  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-visual").classList.remove("active");
   $("#topbar").style.display="none";$("#tabbar").style.display="none";
   $("#vocab-top .ttl").textContent=u.icon+" "+u.title;
   $("#vocab-body").innerHTML=`<div class="vocab-head"><div class="emo">${u.icon}</div><h1>নতুন শব্দগুলো শিখে নাও</h1>
@@ -883,7 +912,7 @@ function openStory(idx){
   if(!unlocked){storyLockedMsg();return}
   curStory=idx;
   ["home","words","league","profile"].forEach(x=>$("#scr-"+x).classList.remove("active"));
-  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-vocab").classList.remove("active");
+  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-vocab").classList.remove("active");$("#scr-visual").classList.remove("active");
   $("#topbar").style.display="none";$("#tabbar").style.display="none";
   $("#story-top .ttl").textContent=st.icon+" "+st.title;
   const already=S.storiesDone&&S.storiesDone[st.id];
@@ -910,6 +939,57 @@ function finishStory(){
       return;
     }
   }
+  showTab("home");
+}
+/* ════════ ছবি দেখে বাক্য বানাও (visual sentence challenge) ════════ */
+const VISUAL_CHALLENGE_UNITS=[2,6,12,16,19,27,30,32];
+let VC=null;
+function maybeVisualChallenge(ui){
+  if(!VISUAL_CHALLENGE_UNITS.includes(ui))return false;
+  const u=UNITS[ui];
+  const candidates=(u.sents||[]).filter(s=>s.img);
+  if(!candidates.length)return false;
+  const s=shuffle(candidates)[0];
+  VC={ui,sent:s,built:[]};
+  const words=shuffle(s.a.split(" "));
+  ["home","words","league","profile"].forEach(x=>$("#scr-"+x).classList.remove("active"));
+  $("#scr-lesson").classList.remove("active");$("#scr-result").classList.remove("active");$("#scr-story").classList.remove("active");$("#scr-vocab").classList.remove("active");
+  $("#topbar").style.display="none";$("#tabbar").style.display="none";
+  $("#visual-body").innerHTML=`<div class="visual-head"><div class="emo">${s.img}</div><h1>ছবিটি দেখে আরবি বাক্যটি বানাও</h1>
+    <p class="hint">ইঙ্গিত: ${s.b}</p></div>
+    <div id="vc-answer"></div>
+    <div id="vc-bank">${words.map((w,i)=>`<button class="tile" data-i="${i}" data-w="${esc(w)}" onclick="vcTapTile(this)"><span class="ar">${w}</span></button>`).join("")}</div>`;
+  $("#visual-check-bar").className="";$("#vc-fb").textContent="";
+  const cb=$("#vc-check-btn");cb.disabled=true;cb.textContent="যাচাই করো";cb.onclick=vcCheck;
+  $("#scr-visual").classList.add("active");
+  window.scrollTo(0,0);
+  return true;
+}
+function vcTapTile(el){
+  if(el.classList.contains("used"))return;
+  el.classList.add("used");VC.built.push(el.dataset.w);
+  const chip=document.createElement("button");chip.className="tile";chip.innerHTML=`<span class="ar">${el.dataset.w}</span>`;
+  chip.onclick=()=>{VC.built.splice(VC.built.indexOf(el.dataset.w),1);chip.remove();el.classList.remove("used");$("#vc-check-btn").disabled=VC.built.length===0};
+  $("#vc-answer").appendChild(chip);
+  $("#vc-check-btn").disabled=false;
+}
+function vcCheck(){
+  const good=VC.built.join(" ")===VC.sent.a;
+  const cb=$("#vc-check-btn");
+  if(good){
+    sndOk();$("#visual-check-bar").className="ok";$("#vc-fb").textContent="✅ চমৎকার! সঠিক বাক্য বানিয়েছ";
+    speak(VC.sent.a);
+    S.xp+=20;S.gems+=6;S.dayXP+=20;save();updateTop();
+    cb.textContent="চালিয়ে যাও";
+  }else{
+    sndBad();$("#visual-check-bar").className="bad";$("#vc-fb").textContent="❌ সঠিক বাক্য: "+VC.sent.a;
+    cb.textContent="বুঝেছি";
+  }
+  cb.onclick=finishVisualChallenge;
+}
+function finishVisualChallenge(){
+  if(!S.visualDone)S.visualDone={};
+  S.visualDone[VC.ui]=true;save();
   showTab("home");
 }
 function quitLesson(){
@@ -951,6 +1031,10 @@ function renderEx(){
   }else if(e.t==="fill"){
     A.innerHTML=`<div class="ex-title">শূন্যস্থানে সঠিক শব্দটি বসাও</div>
     <div class="big-ar" style="font-size:30px;line-height:2">${e.q}</div>
+    <div class="opts grid2">${e.opts.map((o,i)=>`<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}');speak('${o}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+  }else if(e.t==="pic_mc"){
+    A.innerHTML=`<div class="ex-title">এটি কী? (ছবি দেখে আরবি শব্দ বাছাই করো)</div>
+    <div class="pic-emo">${e.w.img}</div>
     <div class="opts grid2">${e.opts.map((o,i)=>`<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}');speak('${o}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
   }else if(e.t==="match"){
     const ar=shuffle(e.pairs.map(p=>p.a)),bn=shuffle(e.pairs.map(p=>p.b));
@@ -1003,6 +1087,7 @@ function checkAnswer(){
   else if(e.t==="build"){good=L.built.join(" ")===e.s.a;correctTxt=e.s.a}
   else if(e.t==="tr"){good=L.sel===e.s.b;correctTxt=e.s.b}
   else if(e.t==="qa"||e.t==="fill"){good=L.sel===e.ans;correctTxt=e.ans}
+  else if(e.t==="pic_mc"){good=L.sel===e.w.a;correctTxt=e.w.a}
   document.querySelectorAll(".opt").forEach(o=>{
     const v=o.dataset.v||o.textContent.trim();
     if(o.classList.contains("sel"))o.classList.add(good?"ok":"bad");
@@ -1044,6 +1129,7 @@ function finishLesson(){
   let gems=L.review?2+Math.floor(Math.random()*4):5+Math.floor(Math.random()*6);
   const hadGoal=S.dayXP>=S.goal;
   S.xp+=xp;S.gems+=gems;S.dayXP+=xp;S.lessonsDone++;if(perfect)S.perfect++;
+  L.wasFirstCompletion=!L.review&&(S.crowns[L.ui]||0)===0;
   if(!L.review){
     S.crowns[L.ui]=Math.min(3,(S.crowns[L.ui]||0)+1);
     L.correctWords.forEach(w=>{const v=UNITS[L.ui].vocab.find(x=>x.a===w);if(v)S.words[w]=v.b});
@@ -1082,8 +1168,11 @@ function afterResult(){
     const r=Math.random(),prize=r<.5?{e:"💎",t:"রত্ন",v:10+Math.floor(Math.random()*15)}:r<.8?{e:"⚡",t:"বোনাস XP",v:20+Math.floor(Math.random()*30)}:{e:"❤️",t:"হৃদয় রিফিল",v:0};
     if(prize.t==="রত্ন")S.gems+=prize.v;else if(prize.t==="বোনাস XP")S.xp+=prize.v;else S.hearts=5;
     save();updateTop();
-    modal(`<div class="emo">🎁</div><h2>রহস্য সিন্দুক!</h2><p>তুমি পেলে: ${prize.e} ${prize.v||"সম্পূর্ণ"} ${prize.t}!</p>`,`<button class="btn" onclick="closeModal();showTab('home')">আলহামদুলিল্লাহ!</button>`);
+    modal(`<div class="emo">🎁</div><h2>রহস্য সিন্দুক!</h2><p>তুমি পেলে: ${prize.e} ${prize.v||"সম্পূর্ণ"} ${prize.t}!</p>`,`<button class="btn" onclick="closeModal();afterResult()">আলহামদুলিল্লাহ!</button>`);
     return;
+  }
+  if(L&&L.wasFirstCompletion&&!(S.visualDone&&S.visualDone[L.ui])){
+    if(maybeVisualChallenge(L.ui))return;
   }
   showTab("home");
 }
