@@ -178,7 +178,7 @@ details.admin-acc summary{cursor:pointer;font-weight:800;font-size:15px;padding:
 <!-- ═══ লগইন ═══ -->
 <div id="scr-login" class="screen active">
   <div class="login-card">
-    <div class="mascot">🦉📖</div>
+    <div class="mascot">📖</div>
     <h1>এসো আরবি শিখি</h1>
     <p class="sub">তোমার নাম লিখে প্রোফাইলে প্রবেশ করো। প্রতিটি নামের জন্য আলাদা অগ্রগতি সংরক্ষিত হবে।</p>
     <div class="field"><label>তোমার নাম</label><input type="text" id="li-name" placeholder="যেমনঃ রাশেদ" maxlength="24"></div>
@@ -618,7 +618,7 @@ function enterApp(){
   dailyRefresh();updateTop();showTab("home");
   if(!S.introShown){
     S.introShown=true;save();
-    modal(`<div class="emo">🦉📖</div><h2>এসো আরবি শিখি!</h2>
+    modal(`<div class="emo">📖</div><h2>এসো আরবি শিখি!</h2>
     <p>মাওলানা আবু তাহের মিসবাহ হুজুরের মুফিদ কিতাবটি এবার খেলার ছলে!<br><br>
     ✅ প্রতিদিন খেলে <b>🔥 ধারা</b> ধরে রাখো<br>
     ✅ সঠিক উত্তরে <b>⚡XP</b> ও <b>💎 রত্ন</b> জেতো<br>
@@ -727,7 +727,7 @@ function renderPath(){
   const gPct=Math.min(100,Math.round(S.dayXP/S.goal*100));
   let h=`<div style="text-align:center;padding:4px 20px 0">
    <div style="font-size:13px;color:var(--gray);font-weight:700">📕 এসো আরবি শিখি · সম্পূর্ণ কিতাব (৩ খণ্ড)</div>
-   <div style="font-size:16px;font-weight:800;margin-top:2px">🦉 ইলমের সফরে স্বাগতম, ${esc(CUR||"বন্ধু")}!</div>
+   <div style="font-size:16px;font-weight:800;margin-top:2px">ইলমের সফরে স্বাগতম, ${esc(CUR||"বন্ধু")}! 🌙</div>
    <div style="margin:12px 16px 0;border:2px solid var(--line);border-radius:14px;padding:10px 14px;text-align:right">
      <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:800">
        <span style="color:${gPct>=100?"var(--green-d)":"var(--gray)"}">${gPct>=100?"🎯 লক্ষ্য অর্জিত! মাশাআল্লাহ":"🎯 আজকের লক্ষ্য"}</span>
@@ -1047,7 +1047,7 @@ function afterResult(){
 /* ════════ WORDS ════════ */
 function renderWords(){
   const list=$("#word-list"),ws=Object.entries(S.words);
-  if(!ws.length){list.innerHTML=`<div style="text-align:center;padding:40px 0;color:var(--gray);font-weight:700"><div style="font-size:52px;margin-bottom:10px">🦉</div>এখনো কোনো শব্দ শেখোনি।<br>প্রথম পাঠ শুরু করো! 🌱</div>`;return}
+  if(!ws.length){list.innerHTML=`<div style="text-align:center;padding:40px 0;color:var(--gray);font-weight:700"><div style="font-size:52px;margin-bottom:10px">📖</div>এখনো কোনো শব্দ শেখোনি।<br>প্রথম পাঠ শুরু করো! 🌱</div>`;return}
   list.innerHTML=`<button class="btn blue" style="margin-bottom:14px" onclick="startReview()">🔁 শব্দ অনুশীলন করো (${ws.length}টি শব্দ)</button>`
    +ws.map(([a,b])=>`<div class="word-row"><span class="ar">${a}</span><span class="bn">${b}</span><button onclick="speak('${a}')">🔊</button></div>`).join("");
 }
