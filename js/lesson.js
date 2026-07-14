@@ -272,6 +272,8 @@ export function next(wasOk) {
 export function finishLesson() {
   speechSynthesis.cancel();
   const perfect = L.wrong === 0;
+  const accuracy = (L.ex.length - L.wrong) / L.ex.length;
+  const passedHalf = accuracy >= 0.5;
   const comboBonus = (L.maxCombo || 0) >= 8 ? 20 : (L.maxCombo || 0) >= 5 ? 10 : (L.maxCombo || 0) >= 3 ? 5 : 0;
   let xp = (L.review ? L.ex.length * 5 + (perfect ? 10 : 0) : L.ex.length * 10 + (perfect ? 20 : 0)) + comboBonus;
   let gems = L.review ? 2 + Math.floor(Math.random() * 4) : 5 + Math.floor(Math.random() * 6);
@@ -300,13 +302,19 @@ export function finishLesson() {
     <div class="result-cards">
       <div class="rcard" style="border-color:var(--gold)"><div class="top" style="background:var(--gold)">মোট XP</div><div class="val" style="color:var(--gold)">⚡${xp}</div></div>
       <div class="rcard" style="border-color:var(--blue)"><div class="top" style="background:var(--blue)">রত্ন</div><div class="val" style="color:var(--blue)">💎${gems}</div></div>
-      <div class="rcard" style="border-color:var(--green)"><div class="top" style="background:var(--green)">সঠিকতা</div><div class="val" style="color:var(--green-d)">${Math.round((L.ex.length - L.wrong) / L.ex.length * 100)}%</div></div>
+      <div class="rcard" style="border-color:var(--green)"><div class="top" style="background:var(--green)">সঠিকতা</div><div class="val" style="color:var(--green-d)">${Math.round(accuracy * 100)}%</div></div>
     </div>
-    <div id="result-extra">${comboBonus ? `<p style="color:var(--orange);font-weight:800;margin-top:10px">🔥 সর্বোচ্চ কম্বো x${L.maxCombo} — বোনাস ⚡${comboBonus} XP!</p>` : ""}</div>
+    <div id="result-extra">${comboBonus ? `<p style="color:var(--orange);font-weight:800;margin-top:10px">🔥 সর্বোচ্চ কম্বো x${L.maxCombo} — বোনাস ⚡${comboBonus} XP!</p>` : ""}
+    ${passedHalf ? `<div class="dua-box">
+      <p class="t">🤲 জ্ঞান বৃদ্ধির দোয়া</p>
+      <p class="ar">رَبِّ زِدْنِي عِلْمًا</p>
+      <p class="bn">"হে আমার রব! আমার জ্ঞান বৃদ্ধি করে দিন" — সবার জন্য এই দোয়া (সূরা ত্বহা, ২০:১১৪)</p>
+    </div>` : ""}</div>
     <button class="btn" onclick="afterResult()">চালিয়ে যাও</button>
   </div>`;
   L.newBadges = newBadges;
   if (perfect) celebrateConfetti();
+  if (passedHalf) setTimeout(() => speak("مَا شَاءَ اللّٰهُ! مَرْحَبًا!"), 500);
   window.scrollTo(0, 0);
 }
 export function afterResult() {
