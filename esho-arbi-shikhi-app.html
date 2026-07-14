@@ -17,7 +17,8 @@ body{font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;background:var(-
 .ar{font-family:'Noto Naskh Arabic','Traditional Arabic',serif;direction:rtl;unicode-bidi:isolate;font-weight:600}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 .screen{display:none;padding-bottom:90px}
-.screen.active{display:block}
+.screen.active{display:block;animation:screenIn .25s ease}
+@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 /* top bar */
 #topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:20;border-bottom:2px solid var(--line)}
 .stat{display:flex;align-items:center;gap:5px;font-weight:700;font-size:17px}
@@ -51,6 +52,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 #pbar>div{height:100%;width:0%;background:var(--green);border-radius:9px;transition:width .3s}
 #lesson-hearts{color:var(--red);font-weight:800;font-size:16px}
 #ex-area{padding:8px 20px 20px}
+#ex-area.ex-anim{animation:exIn .22s ease}
+@keyframes exIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
 .ex-title{font-size:19px;font-weight:800;margin:10px 0 18px}
 .big-ar{font-size:44px;text-align:center;margin:8px 0 22px;line-height:1.9}
 .big-bn{font-size:26px;text-align:center;margin:8px 0 22px;font-weight:700}
@@ -60,9 +63,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .opts{display:flex;flex-direction:column;gap:12px}
 .opts.grid2{display:grid;grid-template-columns:1fr 1fr}
 .opt{border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;padding:14px;font-size:19px;font-weight:600;text-align:center;background:#fff;transition:.12s}
+.opt:active{transform:translateY(2px)}
 .opt .ar{font-size:26px}
 .opt.sel{border-color:var(--blue);background:#e7f6ff;color:var(--blue-d)}
-.opt.ok{border-color:var(--green);background:#e9ffd9;color:var(--green-d)}
+.opt.ok{border-color:var(--green);background:#e9ffd9;color:var(--green-d);animation:correctPop .3s ease}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
 .opt.bad{border-color:var(--red);background:#ffe5e5;color:var(--red);animation:shake .45s}
 @keyframes shake{15%,85%{transform:translateX(-3px)}30%,70%{transform:translateX(5px)}45%,55%{transform:translateX(-7px)}}
 .opt.faded{opacity:.35;pointer-events:none}
@@ -71,7 +76,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* build */
 #build-answer{min-height:64px;border-top:2px solid var(--line);border-bottom:2px solid var(--line);margin-bottom:20px;padding:10px 4px;display:flex;flex-wrap:wrap;gap:8px;direction:rtl}
 #build-bank{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;direction:rtl}
-.tile{border:2px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:8px 16px;font-size:24px;background:#fff}
+.tile{border:2px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:8px 16px;font-size:24px;background:#fff;transition:.12s}
+.tile:active{transform:translateY(2px)}
 .tile.used{opacity:.3;pointer-events:none}
 /* footer check */
 #check-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:16px 20px 22px;background:#fff;border-top:2px solid var(--line);z-index:40}
@@ -567,12 +573,21 @@ const STORIES=[
    {a:"ذٰلِكَ غُرابٌ وَ هٰذا بُلْبُلٌ",b:"ওটি একটি কাক এবং এটি একটি বুলবুলি",img:"🐦‍⬛"},
    {a:"اَلْغُرابُ طائِرٌ قَبِيحٌ",b:"কাক একটি কুৎসিত পাখি",img:"🐦‍⬛"},
    {a:"اَلْبُلْبُلُ طائِرٌ جَمِيلٌ",b:"বুলবুলি একটি সুন্দর পাখি",img:"🐦"}]},
+ {id:"s6",afterId:23,icon:"🧑‍🏫",title:"রাশেদের পাঠ মুখস্থ",sub:"অধ্যায় ২ শেষে ক্রিয়া ও কর্ম দিয়ে স্কুলের একটি দৃশ্য",
+  lines:[
+   {a:"خَلَعَ راشِدٌ لِباسَ الْمَنْزِلِ وَ لَبِسَ لِباسَ الْمَدْرَسَةِ",b:"রাশেদ ঘরের পোশাক খুলে মাদরাসার পোশাক পরল",img:"🏫"},
+   {a:"سَأَلَ الْمُعَلِّمُ راشِدًا: هَلْ حَفِظْتَ دَرْسَكَ يا راشِدُ؟",b:"শিক্ষক রাশেদকে জিজ্ঞেস করলেন: রাশেদ! তুমি কি তোমার পাঠ মুখস্থ করেছ?",img:"🧑‍🏫"},
+   {a:"قالَ راشِدٌ: نَعَمْ.. حَفِظْتُ دَرْسِي",b:"রাশেদ বলল: হ্যাঁ, আমি আমার পাঠ মুখস্থ করেছি"},
+   {a:"قالَ الْمُعَلِّمُ: اِفْتَحْ كِتابَكَ وَ اقْرَأْ دَرْسَكَ",b:"শিক্ষক বললেন: তোমার বই খোলো এবং তোমার পাঠ পড়ো",img:"📖"},
+   {a:"حَفِظَ هٰذَا الْوَلَدُ سُورَةً جَدِيدَةً",b:"এই ছেলেটি একটি নতুন সূরা মুখস্থ করেছে",img:"👦"}]},
  {id:"s4",afterId:29,icon:"🔥",title:"ইবরাহীম (আঃ) ও অত্যাচারী বাদশাহ",sub:"অধ্যায় ৩ শেষে অতীত কালের ক্রিয়া দিয়ে বইয়ের আসল কাহিনী",
   lines:[
    {a:"قالَ إِبْراهِيمُ: رَبِّي يُحْيِي وَ يُمِيتُ",b:"ইবরাহীম (আঃ) বললেন: আমার রব জীবন দেন ও মৃত্যু দেন"},
    {a:"قالَ الْمَلِكُ: أَنَا أُحْيِي وَ أُمِيتُ",b:"বাদশাহ বলল: আমিও জীবন দিই ও মৃত্যু দিই"},
-   {a:"وَ كانَ الْمَلِكُ غَبِيًّا",b:"এবং বাদশাহ ছিল নির্বোধ"},
-   {a:"لا يَعْرِفُ مَعْنَى الْحَياةِ وَ الْمَوْتِ",b:"সে জীবন ও মৃত্যুর প্রকৃত অর্থ জানত না"},
+   {a:"وَ كانَ الْمَلِكُ غَبِيًّا لا يَعْرِفُ مَعْنَى الْحَياةِ وَ الْمَوْتِ",b:"এবং বাদশাহ ছিল নির্বোধ, সে জীবন ও মৃত্যুর প্রকৃত অর্থ জানত না"},
+   {a:"فَدَعا رَجُلًا كانَ فِي السِّجْنِ فَتَرَكَهُ",b:"তখন সে একজন লোককে ডাকল যে জেলে ছিল, অতঃপর তাকে মুক্তি দিল"},
+   {a:"وَ دَعا رَجُلًا كانَ خارِجَ السِّجْنِ فَقَتَلَهُ",b:"এবং আরেকজন লোককে ডাকল যে জেলের বাইরে ছিল, অতঃপর তাকে হত্যা করল"},
+   {a:"وَ قالَ: اُنْظُرْ يا إِبْراهِيمُ! كَيْفَ أَحْيَيْتُ رَجُلًا وَ أَمَتُّ رَجُلًا",b:"এবং বলল: দেখো ইবরাহীম! আমি কীভাবে একজনকে জীবন দিলাম আর একজনকে মৃত্যু দিলাম"},
    {a:"هٰذِهِ قِصَّةٌ عَجِيبَةٌ فِي كِتابِ اللّٰهِ",b:"এটি আল্লাহর কিতাবে একটি আশ্চর্যজনক ঘটনা"}]},
  {id:"s5",afterId:35,icon:"🕌",title:"রাসূলুল্লাহ ﷺ-এর দাওয়াত",sub:"সমাপনী গল্প — সম্পূর্ণ কিতাব অভিনন্দন!",
   lines:[
@@ -1030,6 +1045,7 @@ function setProgress(){$("#pbar>div").style.width=(L.i/L.ex.length*100)+"%";$("#
 function renderEx(){
   const e=L.ex[L.i];setProgress();
   const A=$("#ex-area");
+  A.classList.remove("ex-anim");void A.offsetWidth;A.classList.add("ex-anim");
   $("#check-bar").className="";$("#fb-text").textContent="";
   const cb=$("#btn-check");cb.disabled=true;cb.textContent="যাচাই করো";cb.onclick=checkAnswer;
   L.sel=null;L.matchDone=0;L.matchSel=null;L.built=[];
