@@ -1,3 +1,9 @@
 # Keep the source PDF out of the public repo/deployment
 *.pdf
 .claude/settings.local.json
+
+# Backend
+node_modules/
+.env
+.env.local
+.vercel

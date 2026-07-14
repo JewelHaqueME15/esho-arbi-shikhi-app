@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>এসো আরবি শিখি — মজায় মজায়</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- ═══ লগইন ═══ -->
+<div id="scr-login" class="screen active">
+  <div class="login-card">
+    <div class="mascot">📖</div>
+    <h1>এসো আরবি শিখি</h1>
+    <p class="sub">তোমার নাম লিখে প্রোফাইলে প্রবেশ করো। প্রতিটি নামের জন্য আলাদা অগ্রগতি সংরক্ষিত হবে।</p>
+    <div class="field"><label>তোমার নাম</label><input type="text" id="li-name" placeholder="যেমনঃ রাশেদ" maxlength="24"></div>
+    <div class="field"><label>পাসওয়ার্ড (ঐচ্ছিক)</label><input type="password" id="li-pass" placeholder="না দিলেও চলবে" maxlength="24"></div>
+    <div class="chk-row"><input type="checkbox" id="li-admin-chk" onchange="document.getElementById('li-admin-wrap').style.display=this.checked?'block':'none'"><label for="li-admin-chk">আমি একজন এডমিন / শিক্ষক</label></div>
+    <div id="li-admin-wrap" class="field"><label>এডমিন কোড</label><input type="password" id="li-admin-code" placeholder="এডমিন কোড দাও"></div>
+    <div id="li-err"></div>
+    <button class="btn" onclick="doLogin()">প্রবেশ করো →</button>
+    <p style="color:var(--gray);font-weight:600;font-size:12.5px;margin-top:14px">নতুন নাম দিলে নতুন প্রোফাইল তৈরি হয়ে যাবে</p>
+  </div>
+</div>
+
+<!-- ═══ HOME ═══ -->
+<div id="topbar" style="display:none">
+  <button id="sound-toggle" onclick="toggleSound()" style="font-size:21px" title="শব্দ চালু/বন্ধ করো">🔊</button>
+  <div class="stat streak"><span class="ico">🔥</span><span id="st-streak">0</span></div>
+  <div class="stat gems"><span class="ico">💎</span><span id="st-gems">0</span></div>
+  <div class="stat hearts"><span class="ico">❤️</span><span id="st-hearts">5</span></div>
+</div>
+
+<div id="scr-home" class="screen"><div id="path"></div></div>
+
+<!-- ═══ LESSON ═══ -->
+<div id="scr-lesson" class="screen">
+  <div id="lesson-top">
+    <button class="quit" onclick="quitLesson()">✕</button>
+    <div id="pbar"><div></div></div>
+    <div id="lesson-hearts">❤️5</div>
+  </div>
+  <div id="ex-area"></div>
+  <div id="check-bar">
+    <div id="fb-text"></div>
+    <button id="btn-check" class="btn" disabled>যাচাই করো</button>
+  </div>
+</div>
+
+<!-- ═══ RESULT ═══ -->
+<div id="scr-result" class="screen"></div>
+
+<!-- ═══ STORY ═══ -->
+<div id="scr-story" class="screen">
+  <div id="story-top"><button class="quit" onclick="showTab('home')">✕</button><div class="ttl">📖 গল্প</div></div>
+  <div id="story-body"></div>
+  <div id="story-check-bar"><button class="btn" id="story-finish-btn" onclick="finishStory()">শেষ করলাম ✅</button></div>
+</div>
+
+<!-- ═══ VOCAB INTRO ═══ -->
+<div id="scr-vocab" class="screen">
+  <div id="vocab-top"><button class="quit" onclick="showTab('home')">✕</button><div class="ttl">📚 নতুন শব্দ</div></div>
+  <div id="vocab-body"></div>
+  <div id="vocab-check-bar"><button class="btn" id="vocab-start-btn">অনুশীলন শুরু করো →</button></div>
+</div>
+
+<!-- ═══ VISUAL CHALLENGE ═══ -->
+<div id="scr-visual" class="screen">
+  <div id="visual-top"><button class="quit" onclick="showTab('home')">✕</button><div class="ttl">🖼️ ছবি দেখে বাক্য বানাও</div></div>
+  <div id="visual-body"></div>
+  <div id="visual-check-bar"><div id="vc-fb"></div><button class="btn" id="vc-check-btn" disabled>যাচাই করো</button></div>
+</div>
+
+<!-- ═══ WORDS ═══ -->
+<div id="scr-words" class="screen">
+  <div class="section"><h2>📖 শব্দভাণ্ডার</h2>
+  <p style="color:var(--gray);font-weight:600;font-size:14px;margin-bottom:10px">তোমার অর্জিত শব্দগুলো — 🔊 চাপলে উচ্চারণ শুনবে</p>
+  <div id="word-list"></div></div>
+</div>
+
+<!-- ═══ LEAGUE ═══ -->
+<div id="scr-league" class="screen">
+  <div class="section"><h2>🏆 Leaderboard</h2>
+  <p style="color:var(--gray);font-weight:600;font-size:14px;margin-bottom:10px">এই সপ্তাহে XP অর্জন করে তালিকার শীর্ষে ওঠো!</p>
+  <div id="lb-list"></div></div>
+</div>
+
+<!-- ═══ PROFILE ═══ -->
+<div id="scr-profile" class="screen">
+  <div class="profile-head">
+    <div class="av" id="pf-av">🌱</div>
+    <h1 id="pf-title">নবীন তালিবে ইলম</h1>
+    <p id="pf-sub">লেভেল ১</p>
+  </div>
+  <div class="section">
+    <div class="stat-grid">
+      <div class="scard"><div class="ic">⚡</div><div><div class="v" id="pf-xp">0</div><div class="l">মোট XP</div></div></div>
+      <div class="scard"><div class="ic">🔥</div><div><div class="v" id="pf-streak">0</div><div class="l">দিনের ধারা</div></div></div>
+      <div class="scard"><div class="ic">👑</div><div><div class="v" id="pf-crowns">0</div><div class="l">মুকুট</div></div></div>
+      <div class="scard"><div class="ic">📚</div><div><div class="v" id="pf-words">0</div><div class="l">শেখা শব্দ</div></div></div>
+    </div>
+  </div>
+  <div class="section"><h2>🎖️ অর্জনসমূহ</h2><div class="badge-grid" id="badge-grid"></div></div>
+  <div class="section" id="admin-panel-wrap"></div>
+  <div class="section"><button class="btn ghost" onclick="doLogout()">🔁 প্রোফাইল পরিবর্তন করো</button></div>
+  <div class="section"><button class="btn red" onclick="resetAll()">সব প্রগ্রেস মুছে ফেলো</button></div>
+</div>
+
+<div id="tabbar" style="display:none">
+  <button id="tab-home" class="on" onclick="showTab('home')">🏠<span>শেখা</span></button>
+  <button id="tab-words" onclick="showTab('words')">📖<span>শব্দভাণ্ডার</span></button>
+  <button id="tab-league" onclick="showTab('league')">🏆<span>Leaderboard</span></button>
+  <button id="tab-profile" onclick="showTab('profile')">👤<span>প্রোফাইল</span></button>
+</div>
+
+<div id="modal"><div class="box" id="modal-box"></div></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
