@@ -12,3 +12,10 @@ export function pick(arr, n, not) {
   const p = shuffle(arr.filter((x) => x !== not));
   return p.slice(0, n);
 }
+// Extra decoy tiles for word-bank sentence-building exercises — words drawn
+// from `pool` that aren't already part of the correct answer.
+export function pickExtra(pool, excludeArr, n) {
+  const exclude = new Set(excludeArr);
+  const candidates = shuffle(pool.filter((w) => !exclude.has(w)));
+  return candidates.slice(0, n);
+}

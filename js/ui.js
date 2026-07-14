@@ -5,6 +5,24 @@ import { updateSoundBtn } from "./tts.js";
 
 export function updateTop() { $("#st-streak").textContent = S.streak; $("#st-gems").textContent = S.gems; $("#st-hearts").textContent = S.hearts; updateSoundBtn(); }
 export function xpFloat(t) { const d = document.createElement("div"); d.className = "xp-float"; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 1100); }
+export function comboFloat(t) { const d = document.createElement("div"); d.className = "combo-badge"; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 950); }
+export function celebrateConfetti() {
+  const colors = ["#58cc02", "#1cb0f6", "#ffc800", "#ce82ff", "#ff4b4b", "#ff9600"];
+  const wrap = document.createElement("div");
+  wrap.className = "confetti-wrap";
+  for (let i = 0; i < 46; i++) {
+    const p = document.createElement("div");
+    p.className = "confetti-piece";
+    p.style.left = Math.random() * 100 + "%";
+    p.style.background = colors[i % colors.length];
+    p.style.animationDelay = (Math.random() * 0.4) + "s";
+    p.style.animationDuration = (1.8 + Math.random() * 1.2) + "s";
+    p.style.transform = `rotate(${Math.random() * 360}deg)`;
+    wrap.appendChild(p);
+  }
+  document.body.appendChild(wrap);
+  setTimeout(() => wrap.remove(), 3200);
+}
 export function modal(html, btns) { $("#modal-box").innerHTML = html + (btns || ""); $("#modal").classList.add("show"); }
 export function closeModal() { $("#modal").classList.remove("show"); }
 

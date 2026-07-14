@@ -1,7 +1,7 @@
-import { $, esc, shuffle, pick } from "./utils.js";
+import { $, esc, shuffle, pick, pickExtra } from "./utils.js";
 import { S, save, bumpStreak } from "./state.js";
-import { UNITS, BADGES } from "./data.js";
-import { modal, closeModal, showTab, updateTop, xpFloat } from "./ui.js";
+import { UNITS, BADGES, LEVELS } from "./data.js";
+import { modal, closeModal, showTab, updateTop, xpFloat, comboFloat, celebrateConfetti } from "./ui.js";
 import { speak, sndOk, sndBad, sndPair } from "./tts.js";
 import { maybeVisualChallenge } from "./visual.js";
 
@@ -14,8 +14,19 @@ export function genExercises(ui) {
   vocab.slice(3, 5).forEach((w) => ex.push({ t: "mc_ba", w, opts: shuffle([w.a, ...pick(allV.map((v) => v.a), 3, w.a)]) }));
   vocab.slice(5, 7).forEach((w) => ex.push({ t: "listen", w, opts: shuffle([w.a, ...pick(allV.map((v) => v.a), 3, w.a)]) }));
   ex.push({ t: "match", pairs: shuffle(u.vocab).slice(0, 4) });
-  shuffle(u.sents).slice(0, 2).forEach((s) => ex.push({ t: "build", s }));
+  const bnPool = [...new Set([...u.vocab.flatMap((v) => v.b.split(" ")), ...u.sents.flatMap((x) => x.b.split(" "))])];
+  shuffle(u.sents).slice(0, 2).forEach((s) => {
+    const words = s.a.split(" ");
+    const distractors = pickExtra(u.vocab.map((v) => v.a), words, 1 + Math.floor(Math.random() * 2));
+    ex.push({ t: "build", s, distractors });
+  });
   shuffle(u.sents).slice(0, 2).forEach((s) => ex.push({ t: "tr", s, opts: shuffle([s.b, ...pick(u.sents.map((x) => x.b), 3, s.b)]) }));
+  // অনুবাদ থেকে আরবি বাক্য সাজানোর বিপরীত: আরবি বাক্য দেখে অনুবাদ সাজাও
+  shuffle(u.sents).slice(0, 2).forEach((s) => {
+    const words = s.b.split(" ");
+    const distractors = pickExtra(bnPool, words, 1 + Math.floor(Math.random() * 2));
+    ex.push({ t: "build_ba", s, distractors });
+  });
   if (u.qa) shuffle(u.qa).slice(0, 2).forEach((item) => ex.push({ t: "qa", q: item.q, opts: shuffle(item.o.slice()), ans: item.o[item.c] }));
   if (u.fill) shuffle(u.fill).slice(0, 2).forEach((item) => ex.push({ t: "fill", q: item.q, opts: shuffle(item.o.slice()), ans: item.o[item.c] }));
   const picVocab = shuffle(u.vocab.filter((v) => v.img));
@@ -24,6 +35,10 @@ export function genExercises(ui) {
   picVocab.slice(2, 4).forEach((w) => {
     const distractors = shuffle(allVimg.filter((v) => v.a !== w.a)).slice(0, 3);
     ex.push({ t: "pic_ba", w, opts: shuffle([w, ...distractors]) });
+  });
+  picVocab.slice(4, 6).forEach((w) => {
+    const distractors = shuffle(allVimg.filter((v) => v.a !== w.a)).slice(0, 3);
+    ex.push({ t: "listen_pic", w, opts: shuffle([w, ...distractors]) });
   });
   if (picVocab.length >= 4) ex.push({ t: "pic_match", pairs: shuffle(picVocab).slice(0, 4) });
   return shuffle(ex);
@@ -45,7 +60,7 @@ export function startReview() {
   const ws = Object.entries(S.words).map(([a, b]) => ({ a, b }));
   if (ws.length < 4) { modal(`<div class="emo">🌱</div><h2>আরেকটু শেখো!</h2><p>অন্তত ৪টি শব্দ শিখলে অনুশীলন খুলবে। আগে কয়েকটি পাঠ শেষ করো।</p>`, `<button class="btn blue" onclick="closeModal()">ঠিক আছে</button>`); return; }
   if (S.hearts <= 0) { modal(`<div class="emo">💔</div><h2>হৃদয় শেষ!</h2><p>আগামীকাল হৃদয়গুলো আবার ভরে যাবে।</p>`, `<button class="btn ghost" onclick="closeModal()">পরে</button>`); return; }
-  L = { ui: -1, review: true, ex: genReviewExercises(ws), i: 0, wrong: 0, correctWords: new Set() };
+  L = { ui: -1, review: true, ex: genReviewExercises(ws), i: 0, wrong: 0, correctWords: new Set(), combo: 0, maxCombo: 0 };
   ["home", "words", "league", "profile"].forEach((x) => $("#scr-" + x).classList.remove("active"));
   $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-vocab").classList.remove("active"); $("#scr-visual").classList.remove("active");
   $("#topbar").style.display = "none"; $("#tabbar").style.display = "none";
@@ -53,7 +68,7 @@ export function startReview() {
   renderEx();
 }
 export function startLesson(ui) {
-  L = { ui, ex: genExercises(ui), i: 0, wrong: 0, correctWords: new Set() };
+  L = { ui, ex: genExercises(ui), i: 0, wrong: 0, correctWords: new Set(), combo: 0, maxCombo: 0 };
   $("#scr-home").classList.remove("active"); $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-vocab").classList.remove("active"); $("#scr-visual").classList.remove("active");
   $("#topbar").style.display = "none"; $("#tabbar").style.display = "none";
   $("#scr-lesson").classList.add("active");
@@ -128,6 +143,12 @@ export function renderEx() {
     <div class="speak-row"><button class="speak-btn" onclick="speak('${e.w.a}')">🔊</button><span class="ar" style="font-size:36px">${e.w.a}</span></div>
     <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o.a)}')"><span style="font-size:44px">${o.img}</span></button>`).join("")}</div>`;
     setTimeout(() => speak(e.w.a), 300);
+  } else if (e.t === "listen_pic") {
+    A.innerHTML = `<div class="ex-title">শব্দটি শুনে সঠিক ছবি বাছাই করো</div>
+    <div class="speak-row"><button class="speak-btn" style="width:70px;height:70px;font-size:32px" onclick="speak('${e.w.a}')">🔊</button></div>
+    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o.a)}')"><span style="font-size:44px">${o.img}</span></button>`).join("")}</div>
+    <p style="text-align:center;color:var(--gray);font-weight:600;font-size:13px;margin-top:14px">শুনতে না পেলে 🔊 বোতামটি আবার চাপো</p>`;
+    setTimeout(() => speak(e.w.a), 350);
   } else if (e.t === "pic_match") {
     const ar = shuffle(e.pairs.map((p) => p.a)), ic = shuffle(e.pairs.map((p) => p.img));
     A.innerHTML = `<div class="ex-title">শব্দ ও ছবি মেলাও</div><div class="match-cols">
@@ -141,11 +162,29 @@ export function renderEx() {
       <div style="display:flex;flex-direction:column;gap:12px">${bn.map((b) => `<button class="opt" data-side="b" data-v="${esc(b)}" onclick="tapMatch(this)">${b}</button>`).join("")}</div></div>`;
     cb.textContent = "সব জোড়া মেলাও";
   } else if (e.t === "build") {
-    const words = shuffle(e.s.a.split(" "));
+    const words = shuffle([...e.s.a.split(" "), ...(e.distractors || [])]);
     A.innerHTML = `<div class="ex-title">আরবিতে বাক্যটি সাজাও</div>
     <div class="big-bn" style="font-size:21px">"${e.s.b}"</div>
     <div id="build-answer"></div>
     <div id="build-bank">${words.map((w, i) => `<button class="tile" data-i="${i}" data-w="${esc(w)}" onclick="tapTile(this)"><span class="ar">${w}</span></button>`).join("")}</div>`;
+  } else if (e.t === "build_ba") {
+    const words = shuffle([...e.s.b.split(" "), ...(e.distractors || [])]);
+    A.innerHTML = `<div class="ex-title">অর্থ অনুযায়ী বাক্যটি সাজাও</div>
+    <div class="speak-row"><button class="speak-btn" onclick="speak('${e.s.a}')">🔊</button></div>
+    <div class="big-ar" style="font-size:26px;line-height:2">${e.s.a}</div>
+    <div id="build-answer" style="direction:ltr"></div>
+    <div id="build-bank" style="direction:ltr">${words.map((w, i) => `<button class="tile" data-i="${i}" data-w="${esc(w)}" onclick="tapTile(this)">${esc(w)}</button>`).join("")}</div>`;
+    setTimeout(() => speak(e.s.a), 300);
+  }
+}
+/* ── কম্বো (টানা সঠিক উত্তর) ── */
+function bumpCombo(good) {
+  if (good) {
+    L.combo = (L.combo || 0) + 1;
+    if (L.combo > (L.maxCombo || 0)) L.maxCombo = L.combo;
+    if (L.combo === 3 || L.combo === 5 || L.combo === 8) comboFloat("🔥 কম্বো x" + L.combo + "!");
+  } else {
+    L.combo = 0;
   }
 }
 /* ── ইন্টার‌্যাকশন ── */
@@ -161,10 +200,12 @@ export function tapMatch(el) {
   const a = L.matchSel.dataset.side === "a" ? L.matchSel : el, b = L.matchSel.dataset.side === "a" ? el : L.matchSel;
   const good = e.pairs.some((p) => p.a === a.dataset.v && (p.b === b.dataset.v || p.img === b.dataset.v));
   if (good) {
+    bumpCombo(true);
     sndPair(); [a, b].forEach((x) => { x.classList.remove("sel"); x.classList.add("ok"); setTimeout(() => x.classList.add("faded"), 350); });
     L.matchDone++; if (a.dataset.side === "a") speak(a.dataset.v);
     L.correctWords.add(a.dataset.v); if (L.matchDone === e.pairs.length) { $("#btn-check").disabled = false; $("#btn-check").textContent = "চালিয়ে যাও"; feedback(true, "চমৎকার জোড়া!"); L.autoOk = true; }
   } else {
+    bumpCombo(false);
     sndBad(); [a, b].forEach((x) => { x.classList.add("bad"); setTimeout(() => x.classList.remove("bad", "sel"), 600); });
     loseHeart(); if (S.hearts <= 0) { outOfHearts(); return; }
   }
@@ -173,7 +214,9 @@ export function tapMatch(el) {
 export function tapTile(el) {
   if (el.classList.contains("used")) return;
   el.classList.add("used"); L.built.push(el.dataset.w);
-  const chip = document.createElement("button"); chip.className = "tile"; chip.innerHTML = `<span class="ar">${el.dataset.w}</span>`;
+  const isAr = !!el.querySelector(".ar");
+  const chip = document.createElement("button"); chip.className = "tile";
+  chip.innerHTML = isAr ? `<span class="ar">${el.dataset.w}</span>` : esc(el.dataset.w);
   chip.onclick = () => { L.built.splice(L.built.indexOf(el.dataset.w), 1); chip.remove(); el.classList.remove("used"); $("#btn-check").disabled = L.built.length === 0; };
   $("#build-answer").appendChild(chip);
   $("#btn-check").disabled = false;
@@ -186,19 +229,22 @@ export function checkAnswer() {
   if (e.t === "mc_ab") { good = L.sel === e.w.b; correctTxt = e.w.b; }
   else if (e.t === "mc_ba" || e.t === "listen") { good = L.sel === e.w.a; correctTxt = e.w.a; }
   else if (e.t === "build") { good = L.built.join(" ") === e.s.a; correctTxt = e.s.a; }
+  else if (e.t === "build_ba") { good = L.built.join(" ") === e.s.b; correctTxt = e.s.b; }
   else if (e.t === "tr") { good = L.sel === e.s.b; correctTxt = e.s.b; }
   else if (e.t === "qa" || e.t === "fill") { good = L.sel === e.ans; correctTxt = e.ans; }
-  else if (e.t === "pic_mc" || e.t === "pic_ba") { good = L.sel === e.w.a; correctTxt = e.w.a; }
+  else if (e.t === "pic_mc" || e.t === "pic_ba" || e.t === "listen_pic") { good = L.sel === e.w.a; correctTxt = e.w.a; }
   document.querySelectorAll(".opt").forEach((o) => {
     const v = o.dataset.v || o.textContent.trim();
     if (o.classList.contains("sel")) o.classList.add(good ? "ok" : "bad");
   });
   if (good) {
+    bumpCombo(true);
     if (e.w) L.correctWords.add(e.w.a);
     const sp = e.w ? e.w.a : (e.s ? e.s.a : (e.ans && /[؀-ۿ]/.test(e.ans) ? e.ans : null));
     feedback(true, praise()); if (sp) speak(sp);
     $("#btn-check").textContent = "চালিয়ে যাও"; $("#btn-check").onclick = () => next(true);
   } else {
+    bumpCombo(false);
     L.wrong++; loseHeart();
     if (S.hearts <= 0) { outOfHearts(); return; }
     feedback(false, "সঠিক উত্তর: " + correctTxt);
@@ -226,10 +272,14 @@ export function next(wasOk) {
 export function finishLesson() {
   speechSynthesis.cancel();
   const perfect = L.wrong === 0;
-  let xp = L.review ? L.ex.length * 5 + (perfect ? 10 : 0) : L.ex.length * 10 + (perfect ? 20 : 0);
+  const comboBonus = (L.maxCombo || 0) >= 8 ? 20 : (L.maxCombo || 0) >= 5 ? 10 : (L.maxCombo || 0) >= 3 ? 5 : 0;
+  let xp = (L.review ? L.ex.length * 5 + (perfect ? 10 : 0) : L.ex.length * 10 + (perfect ? 20 : 0)) + comboBonus;
   let gems = L.review ? 2 + Math.floor(Math.random() * 4) : 5 + Math.floor(Math.random() * 6);
   const hadGoal = S.dayXP >= S.goal;
+  const prevLvl = Math.min(LEVELS.length - 1, Math.floor(S.xp / 150));
   S.xp += xp; S.gems += gems; S.dayXP += xp; S.lessonsDone++; if (perfect) S.perfect++;
+  const newLvl = Math.min(LEVELS.length - 1, Math.floor(S.xp / 150));
+  L.leveledUp = newLvl > prevLvl ? newLvl : null;
   L.wasFirstCompletion = !L.review && (S.crowns[L.ui] || 0) === 0;
   if (!L.review) {
     S.crowns[L.ui] = Math.min(3, (S.crowns[L.ui] || 0) + 1);
@@ -252,16 +302,22 @@ export function finishLesson() {
       <div class="rcard" style="border-color:var(--blue)"><div class="top" style="background:var(--blue)">রত্ন</div><div class="val" style="color:var(--blue)">💎${gems}</div></div>
       <div class="rcard" style="border-color:var(--green)"><div class="top" style="background:var(--green)">সঠিকতা</div><div class="val" style="color:var(--green-d)">${Math.round((L.ex.length - L.wrong) / L.ex.length * 100)}%</div></div>
     </div>
-    <div id="result-extra"></div>
+    <div id="result-extra">${comboBonus ? `<p style="color:var(--orange);font-weight:800;margin-top:10px">🔥 সর্বোচ্চ কম্বো x${L.maxCombo} — বোনাস ⚡${comboBonus} XP!</p>` : ""}</div>
     <button class="btn" onclick="afterResult()">চালিয়ে যাও</button>
   </div>`;
   L.newBadges = newBadges;
+  if (perfect) celebrateConfetti();
   window.scrollTo(0, 0);
 }
 export function afterResult() {
   if (L.newBadges && L.newBadges.length) {
     const b = L.newBadges.shift();
     modal(`<div class="emo">${b.emo}</div><h2>নতুন অর্জন: ${b.nm}</h2><p>${b.desc}</p>`, `<button class="btn" onclick="closeModal();afterResult()">দারুণ!</button>`);
+    return;
+  }
+  if (L.leveledUp != null) {
+    const lvl = L.leveledUp; L.leveledUp = null;
+    modal(`<div class="emo">${LEVELS[lvl].e}</div><h2>লেভেল আপ! 🎉</h2><p>তুমি এখন <b>লেভেল ${lvl + 1}</b>: ${LEVELS[lvl].t}!</p>`, `<button class="btn" onclick="closeModal();afterResult()">দারুণ!</button>`);
     return;
   }
   if (S.chestCount % 3 === 0 && S.chestCount > 0) {
