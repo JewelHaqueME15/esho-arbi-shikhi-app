@@ -1,4 +1,4 @@
-import { $, esc, shuffle } from "./utils.js";
+import { $, esc, shuffle, pickExtra } from "./utils.js";
 import { S, save } from "./state.js";
 import { UNITS } from "./data.js";
 import { showTab, updateTop } from "./ui.js";
@@ -13,7 +13,9 @@ export function maybeVisualChallenge(ui) {
   if (!candidates.length) return false;
   const s = shuffle(candidates)[0];
   VC = { ui, sent: s, built: [] };
-  const words = shuffle(s.a.split(" "));
+  const correctWords = s.a.split(" ");
+  const distractors = pickExtra(u.vocab.map((v) => v.a), correctWords, 1 + Math.floor(Math.random() * 2));
+  const words = shuffle([...correctWords, ...distractors]);
   ["home", "words", "league", "profile"].forEach((x) => $("#scr-" + x).classList.remove("active"));
   $("#scr-lesson").classList.remove("active"); $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-vocab").classList.remove("active");
   $("#topbar").style.display = "none"; $("#tabbar").style.display = "none";
