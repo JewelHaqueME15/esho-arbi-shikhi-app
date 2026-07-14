@@ -1,5 +1,1 @@
-{
-  "rewrites": [
-    { "source": "/", "destination": "/esho-arbi-shikhi-app.html" }
-  ]
-}
+{}
