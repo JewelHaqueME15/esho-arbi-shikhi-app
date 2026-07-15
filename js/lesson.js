@@ -6,6 +6,23 @@ import { speak, sndOk, sndBad, sndPair } from "./tts.js";
 import { maybeVisualChallenge } from "./visual.js";
 
 export let L = null; // চলমান পাঠ
+
+/* Picture questions must never show the same icon twice — otherwise two options
+   look equally correct and the question is unanswerable. Different words often
+   share an icon (a pen / the pen / pens are all 🖊️), so filtering by word alone
+   isn't enough; these filter by icon. */
+function pickDistinctIcons(pool) {
+  const seen = new Set(), out = [];
+  for (const v of shuffle(pool)) {
+    if (seen.has(v.img)) continue;
+    seen.add(v.img); out.push(v);
+  }
+  return out;
+}
+function picDistractors(pool, answer, n) {
+  return pickDistinctIcons(pool.filter((v) => v.img !== answer.img)).slice(0, n);
+}
+
 export function genExercises(ui) {
   const u = UNITS[ui], ex = [];
   const vocab = shuffle(u.vocab).slice(0, 8);
@@ -29,18 +46,12 @@ export function genExercises(ui) {
   });
   if (u.qa) shuffle(u.qa).slice(0, 2).forEach((item) => ex.push({ t: "qa", q: item.q, opts: shuffle(item.o.slice()), ans: item.o[item.c] }));
   if (u.fill) shuffle(u.fill).slice(0, 2).forEach((item) => ex.push({ t: "fill", q: item.q, opts: shuffle(item.o.slice()), ans: item.o[item.c] }));
-  const picVocab = shuffle(u.vocab.filter((v) => v.img));
+  const picVocab = pickDistinctIcons(u.vocab.filter((v) => v.img));
   const allVimg = allV.filter((v) => v.img);
-  picVocab.slice(0, 2).forEach((w) => ex.push({ t: "pic_mc", w, opts: shuffle([w.a, ...pick(allVimg.map((v) => v.a), 3, w.a)]) }));
-  picVocab.slice(2, 4).forEach((w) => {
-    const distractors = shuffle(allVimg.filter((v) => v.a !== w.a)).slice(0, 3);
-    ex.push({ t: "pic_ba", w, opts: shuffle([w, ...distractors]) });
-  });
-  picVocab.slice(4, 6).forEach((w) => {
-    const distractors = shuffle(allVimg.filter((v) => v.a !== w.a)).slice(0, 3);
-    ex.push({ t: "listen_pic", w, opts: shuffle([w, ...distractors]) });
-  });
-  if (picVocab.length >= 4) ex.push({ t: "pic_match", pairs: shuffle(picVocab).slice(0, 4) });
+  picVocab.slice(0, 2).forEach((w) => ex.push({ t: "pic_mc", w, opts: shuffle([w.a, ...picDistractors(allVimg, w, 3).map((v) => v.a)]) }));
+  picVocab.slice(2, 4).forEach((w) => ex.push({ t: "pic_ba", w, opts: shuffle([w, ...picDistractors(allVimg, w, 3)]) }));
+  picVocab.slice(4, 6).forEach((w) => ex.push({ t: "listen_pic", w, opts: shuffle([w, ...picDistractors(allVimg, w, 3)]) }));
+  if (picVocab.length >= 4) ex.push({ t: "pic_match", pairs: picVocab.slice(0, 4) });
   return shuffle(ex);
 }
 /* রিভিউ: শেখা শব্দ থেকে মিশ্র অনুশীলন */

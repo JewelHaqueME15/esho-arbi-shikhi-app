@@ -6,6 +6,9 @@
   "engines": {
     "node": ">=18"
   },
+  "scripts": {
+    "test": "node scripts/check-icons.mjs"
+  },
   "dependencies": {
     "@vercel/postgres": "^0.10.0",
     "bcryptjs": "^2.4.3",
