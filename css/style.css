@@ -4,8 +4,10 @@
   --bg:#fff; --ink:#3c3c3c; --gray:#afafaf; --line:#e5e5e5; --soft:#f7f7f7;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif;background:var(--bg);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh;position:relative;user-select:none}
-.ar{font-family:'Noto Naskh Arabic','Traditional Arabic',serif;direction:rtl;unicode-bidi:isolate;font-weight:600}
+/* Bengali/Latin render from the Bengali fonts; those have no Arabic glyphs, so any
+   Arabic character anywhere falls through per-glyph to the Indo-Pak Naskh font. */
+body{font-family:'Noto Sans Bengali','Hind Siliguri','Scheherazade New','Noto Naskh Arabic',sans-serif;background:var(--bg);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh;position:relative;user-select:none}
+.ar{font-family:'Scheherazade New','Noto Naskh Arabic','Traditional Arabic',serif;direction:rtl;unicode-bidi:isolate;font-weight:600}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 .screen{display:none;padding-bottom:90px}
 .screen.active{display:block;animation:screenIn .25s ease}
@@ -46,7 +48,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 #ex-area.ex-anim{animation:exIn .22s ease}
 @keyframes exIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
 .ex-title{font-size:19px;font-weight:800;margin:10px 0 18px}
-.big-ar{font-size:44px;text-align:center;margin:8px 0 22px;line-height:1.9}
+.big-ar{font-family:'Scheherazade New','Noto Naskh Arabic','Traditional Arabic',serif;font-size:44px;text-align:center;margin:8px 0 22px;line-height:1.9}
 .big-bn{font-size:26px;text-align:center;margin:8px 0 22px;font-weight:700}
 .speak-btn{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;width:52px;height:52px;border-radius:14px;font-size:24px;box-shadow:0 4px 0 var(--blue-d);vertical-align:middle}
 .speak-btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--blue-d)}
@@ -213,7 +215,7 @@ details.admin-acc summary{cursor:pointer;font-weight:800;font-size:15px;padding:
 .vocab-row:nth-child(even){background:var(--soft)}
 .vocab-row+.vocab-row{border-top:1px solid var(--line)}
 .vocab-bn{padding:13px 12px;font-weight:700;font-size:14.5px;display:flex;align-items:center;color:var(--ink);border-right:2px solid var(--line)}
-.vocab-ar{padding:11px 12px;direction:rtl;text-align:right;font-size:23px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:nowrap}
+.vocab-ar{font-family:'Scheherazade New','Noto Naskh Arabic','Traditional Arabic',serif;padding:11px 12px;direction:rtl;text-align:right;font-size:23px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:nowrap}
 .vocab-ar .vocab-icon{font-size:23px;flex-shrink:0}
 .vocab-ar .vocab-sp{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;width:28px;height:28px;border-radius:8px;font-size:13px}
 #vocab-check-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:16px 20px 22px;background:#fff;border-top:2px solid var(--line);z-index:40}
