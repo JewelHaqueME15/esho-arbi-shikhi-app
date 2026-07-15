@@ -150,6 +150,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .chk-row input{width:18px;height:18px}
 #li-admin-wrap{display:none;margin-top:10px}
 #li-err{color:var(--red);font-weight:700;font-size:13.5px;margin:8px 0;display:none}
+.dev-credit{color:var(--gray);font-weight:700;font-size:12px;margin-top:26px}
+.dev-credit a{color:var(--blue);text-decoration:none}
+.dev-credit a:active{opacity:.6}
 /* ═══ কনফেটি ═══ */
 .confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
 .confetti-piece{position:absolute;top:-20px;width:9px;height:14px;opacity:.9;border-radius:2px;animation:confettiFall linear forwards}
