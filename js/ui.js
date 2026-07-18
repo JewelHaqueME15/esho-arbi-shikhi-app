@@ -61,6 +61,9 @@ export function renderPath() {
        <div style="height:100%;width:${gPct}%;background:${gPct >= 100 ? "var(--green)" : "var(--gold)"};border-radius:6px;transition:width .4s"></div>
      </div>
    </div></div>`;
+  // শেখা শব্দ যথেষ্ট হলে হোম থেকেই দ্রুত অনুশীলন — খুঁজতে হবে না
+  const learnedCount = Object.keys(S.words).length;
+  if (learnedCount >= 4) h += `<div style="padding:12px 16px 0"><button class="btn blue" onclick="startReview()">🔁 শেখা শব্দ অনুশীলন করো (${learnedCount}টি)</button></div>`;
   SECTIONS.forEach((sec, si) => {
     const done = UNITS.slice(sec.from, sec.to + 1).filter((u) => (S.crowns[u.id] || 0) > 0).length;
     const tot = sec.to - sec.from + 1;

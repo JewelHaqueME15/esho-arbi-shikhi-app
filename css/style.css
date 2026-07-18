@@ -43,6 +43,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 #lesson-top .quit{font-size:22px;color:var(--gray);font-weight:800}
 #pbar{flex:1;height:16px;background:var(--line);border-radius:9px;overflow:hidden}
 #pbar>div{height:100%;width:0%;background:var(--green);border-radius:9px;transition:width .3s}
+#lesson-rule{font-size:20px;line-height:1;padding:5px 8px;border-radius:10px;background:var(--soft);border:2px solid var(--line)}
+#lesson-rule:active{transform:translateY(1px)}
 #lesson-hearts{color:var(--red);font-weight:800;font-size:16px}
 #ex-area{padding:8px 20px 20px}
 #ex-area.ex-anim{animation:exIn .22s ease}

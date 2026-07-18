@@ -132,10 +132,21 @@ export function openVocabIntro(ui) {
 export function quitLesson() {
   if (confirm("পাঠ ছেড়ে দিলে এই অগ্রগতি হারাবে। ছাড়বে?")) { speechSynthesis.cancel(); showTab("home"); }
 }
+/* পাঠ চলাকালীন নিয়ম-ব্যাখ্যা আবার দেখা — নতুন শিক্ষার্থী ভুলে গেলে যেন ফিরে দেখতে পারে */
+export function showRule() {
+  if (!L || L.ui == null || L.ui < 0) return;
+  const u = UNITS[L.ui];
+  modal(`<div class="emo">📘</div><h2>${u.title}</h2>
+    <div class="tipbox learn-tip" style="text-align:left;margin-top:6px">${LEARN[L.ui] || u.tip}</div>`,
+    `<button class="btn blue" onclick="closeModal()">বুঝেছি, চালিয়ে যাই</button>`);
+  document.querySelectorAll("#modal-box .learn-tip .ar").forEach((el) => { el.classList.add("tap-ar"); el.onclick = () => speak(el.textContent.trim()); });
+}
 export function setProgress() { $("#pbar>div").style.width = (L.i / L.ex.length * 100) + "%"; $("#lesson-hearts").textContent = "❤️" + S.hearts; }
 /* ── রেন্ডার ── */
 export function renderEx() {
   const e = L.ex[L.i]; setProgress();
+  // নিয়ম-দেখার বোতাম শুধু সাধারণ পাঠে (রিভিউতে একক পাঠ নেই, তাই লুকানো)
+  const rb = $("#lesson-rule"); if (rb) rb.style.display = (L.ui != null && L.ui >= 0) ? "" : "none";
   const A = $("#ex-area");
   A.classList.remove("ex-anim"); void A.offsetWidth; A.classList.add("ex-anim");
   $("#check-bar").className = ""; $("#fb-text").textContent = "";
@@ -243,7 +254,7 @@ export function tapMatch(el) {
   } else {
     bumpCombo(false);
     sndBad(); [a, b].forEach((x) => { x.classList.add("bad"); setTimeout(() => x.classList.remove("bad", "sel"), 600); });
-    loseHeart(); if (S.hearts <= 0) { outOfHearts(); return; }
+    loseHeart(); // মিলে গেলে পুনরায় চেষ্টা করতে দাও; মাঝপথে আটকানো নেই
   }
   L.matchSel = null;
 }
@@ -282,7 +293,8 @@ export function checkAnswer() {
   } else {
     bumpCombo(false);
     L.wrong++; loseHeart();
-    if (S.hearts <= 0) { outOfHearts(); return; }
+    // শুরু করা পাঠটি সবসময় শেষ করতে দাও — মাঝপথে হৃদয় শেষ হলেও আটকাবে না (নতুন
+    // শিক্ষার্থীর জন্য কোমল)। নতুন পাঠ শুরুর সময় হৃদয়ের শর্ত ঠিকই থাকে।
     feedback(false, "সঠিক উত্তর: " + correctTxt);
     $("#btn-check").textContent = "বুঝেছি"; $("#btn-check").onclick = () => next(false);
   }
@@ -295,10 +307,6 @@ export function feedback(ok, txt) {
   const cb = $("#btn-check"); cb.disabled = false; cb.classList.toggle("red", !ok);
 }
 export function loseHeart() { S.hearts = Math.max(0, S.hearts - 1); save(); setProgress(); updateTop(); }
-export function outOfHearts() {
-  modal(`<div class="emo">💔</div><h2>হৃদয় শেষ!</h2><p>ভুল হলে হৃদয় কমে — এটাই খেলার নিয়ম। আগামীকাল আবার ভরে যাবে, অথবা ৩০💎 দিয়ে ভরে নাও।</p>`,
-   `<button class="btn blue" onclick="buyHearts();if(S.hearts>0){renderEx()}">💎 ৩০ দিয়ে ভরো</button><div style="height:10px"></div><button class="btn ghost" onclick="closeModal();showTab('home')">বাড়ি ফিরে যাও</button>`);
-}
 export function next(wasOk) {
   const cb = $("#btn-check"); cb.classList.remove("red");
   L.i++;
