@@ -2,6 +2,7 @@ import { $, esc, shuffle, pick, pickExtra } from "./utils.js";
 import { S, save, bumpStreak } from "./state.js";
 import { UNITS, BADGES, LEVELS } from "./data.js";
 import { LEARN } from "./lessons.js";
+import { ICONS } from "./icons.js";
 import { modal, closeModal, showTab, updateTop, xpFloat, comboFloat, celebrateConfetti } from "./ui.js";
 import { speak, sndOk, sndBad, sndPair } from "./tts.js";
 import { maybeVisualChallenge } from "./visual.js";
@@ -117,7 +118,7 @@ export function openVocabIntro(ui) {
     <div class="vocab-section-h">📖 নতুন শব্দ <span>🔊 চাপলে উচ্চারণ শুনবে</span></div>
     <div class="vocab-table">${u.vocab.map((v) => `<div class="vocab-row">
       <div class="vocab-bn">${v.b}</div>
-      <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button>${v.img ? `<span class="vocab-icon">${v.img}</span>` : ""}<span>${v.a}</span></div>
+      <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button>${(v.img || ICONS[v.a]) ? `<span class="vocab-icon">${v.img || ICONS[v.a]}</span>` : ""}<span>${v.a}</span></div>
     </div>`).join("")}</div>`;
   // ব্যাখ্যার আরবি উদাহরণে চাপলে উচ্চারণ শোনা যায় — নতুন শিক্ষার্থীর জন্য সহায়ক
   $("#vocab-body").querySelectorAll(".learn-tip .ar").forEach((el) => {

@@ -237,5 +237,11 @@ details.admin-acc summary{cursor:pointer;font-weight:800;font-size:15px;padding:
 .vocab-bn{padding:13px 12px;font-weight:700;font-size:14.5px;display:flex;align-items:center;color:var(--ink);border-right:2px solid var(--line)}
 .vocab-ar{font-family:'Scheherazade New','Noto Naskh Arabic','Traditional Arabic',serif;padding:11px 12px;direction:rtl;text-align:right;font-size:23px;font-weight:700;display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:nowrap}
 .vocab-ar .vocab-icon{font-size:23px;flex-shrink:0}
+/* কাছে/দূরের ইশারা: ছোট তীর = কাছে (হাজা/হাজিহি), লম্বা তীর = দূরে (জালিকা/তিলকা) */
+.dem-arrow{display:inline-flex;align-items:center;direction:ltr;color:var(--blue);vertical-align:middle}
+.dem-arrow::before{content:"";height:3px;background:currentColor;border-radius:3px}
+.dem-arrow.near::before{width:13px}
+.dem-arrow.far::before{width:34px}
+.dem-arrow::after{content:"";width:0;height:0;border-left:8px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:-1px}
 .vocab-ar .vocab-sp{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;width:28px;height:28px;border-radius:8px;font-size:13px}
 #vocab-check-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:16px 20px 22px;background:#fff;border-top:2px solid var(--line);z-index:40}
