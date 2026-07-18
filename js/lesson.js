@@ -1,11 +1,27 @@
 import { $, esc, shuffle, pick, pickExtra } from "./utils.js";
 import { S, save, bumpStreak } from "./state.js";
 import { UNITS, BADGES, LEVELS } from "./data.js";
+import { LEARN } from "./lessons.js";
 import { modal, closeModal, showTab, updateTop, xpFloat, comboFloat, celebrateConfetti } from "./ui.js";
 import { speak, sndOk, sndBad, sndPair } from "./tts.js";
 import { maybeVisualChallenge } from "./visual.js";
 
 export let L = null; // চলমান পাঠ
+
+/* অনুশীলনের সহজ → কঠিন ক্রম। শুরুতে ছবিভিত্তিক সহজ প্রশ্ন (চিনে নাও),
+   মাঝে শব্দ বাছাই, শেষে অনুবাদ ও বাক্য গঠন (নিজে বানাও)। shuffle() একই
+   স্তরের ভেতরে বৈচিত্র্য দেয়, আর Array.sort স্থিতিশীল হওয়ায় সামগ্রিক
+   সহজ→কঠিন ঢালটা সবসময় বজায় থাকে। */
+const DIFFICULTY = {
+  pic_mc: 1, pic_match: 1, pic_ba: 2, listen_pic: 3,
+  match: 4, mc_ab: 5,
+  mc_ba: 6, listen: 7,
+  fill: 8, tr: 9, qa: 10,
+  build: 11, build_ba: 12,
+};
+function orderByDifficulty(ex) {
+  return shuffle(ex).sort((a, b) => (DIFFICULTY[a.t] || 6) - (DIFFICULTY[b.t] || 6));
+}
 
 /* Picture questions must never show the same icon twice — otherwise two options
    look equally correct and the question is unanswerable. Different words often
@@ -52,7 +68,7 @@ export function genExercises(ui) {
   picVocab.slice(2, 4).forEach((w) => ex.push({ t: "pic_ba", w, opts: shuffle([w, ...picDistractors(allVimg, w, 3)]) }));
   picVocab.slice(4, 6).forEach((w) => ex.push({ t: "listen_pic", w, opts: shuffle([w, ...picDistractors(allVimg, w, 3)]) }));
   if (picVocab.length >= 4) ex.push({ t: "pic_match", pairs: picVocab.slice(0, 4) });
-  return shuffle(ex);
+  return orderByDifficulty(ex);
 }
 /* রিভিউ: শেখা শব্দ থেকে মিশ্র অনুশীলন */
 export function genReviewExercises(ws) {
@@ -65,7 +81,7 @@ export function genReviewExercises(ws) {
     else ex.push({ t: "listen", w, opts: shuffle([w.a, ...pick(ws.map((v) => v.a), 3, w.a)]) });
   }
   if (ws.length >= 4) ex.push({ t: "match", pairs: shuffle(ws).slice(0, 4) });
-  return shuffle(ex);
+  return orderByDifficulty(ex);
 }
 export function startReview() {
   const ws = Object.entries(S.words).map(([a, b]) => ({ a, b }));
@@ -92,13 +108,22 @@ export function openVocabIntro(ui) {
   $("#scr-lesson").classList.remove("active"); $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-visual").classList.remove("active");
   $("#topbar").style.display = "none"; $("#tabbar").style.display = "none";
   $("#vocab-top .ttl").textContent = u.icon + " " + u.title;
-  $("#vocab-body").innerHTML = `<div class="vocab-head"><div class="emo">${u.icon}</div><h1>নতুন শব্দগুলো শিখে নাও</h1>
-    <p style="color:var(--gray);font-weight:600;font-size:13px;margin-top:4px">🔊 চাপলে উচ্চারণ শুনবে</p></div>
+  $("#vocab-body").innerHTML = `<div class="vocab-head"><div class="emo">${u.icon}</div><h1>${u.title}</h1>
+    <p style="color:var(--gray);font-weight:600;font-size:13px;margin-top:4px">${u.sub}</p></div>
+    <div class="learn-card">
+      <div class="learn-h">📘 নিয়ম ও ব্যাখ্যা <span>🔊 আরবিতে চাপো</span></div>
+      <div class="tipbox learn-tip">${LEARN[ui] || u.tip}</div>
+    </div>
+    <div class="vocab-section-h">📖 নতুন শব্দ <span>🔊 চাপলে উচ্চারণ শুনবে</span></div>
     <div class="vocab-table">${u.vocab.map((v) => `<div class="vocab-row">
       <div class="vocab-bn">${v.b}</div>
       <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button>${v.img ? `<span class="vocab-icon">${v.img}</span>` : ""}<span>${v.a}</span></div>
-    </div>`).join("")}</div>
-    <div class="tipbox" style="margin:16px">${u.tip}</div>`;
+    </div>`).join("")}</div>`;
+  // ব্যাখ্যার আরবি উদাহরণে চাপলে উচ্চারণ শোনা যায় — নতুন শিক্ষার্থীর জন্য সহায়ক
+  $("#vocab-body").querySelectorAll(".learn-tip .ar").forEach((el) => {
+    el.classList.add("tap-ar");
+    el.onclick = () => speak(el.textContent.trim());
+  });
   $("#vocab-start-btn").onclick = () => startLesson(ui);
   $("#scr-vocab").classList.add("active");
   window.scrollTo(0, 0);
