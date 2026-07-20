@@ -116,9 +116,12 @@ export function openVocabIntro(ui) {
       <div class="tipbox learn-tip">${LEARN[ui] || u.tip}</div>
     </div>
     <div class="vocab-section-h">📖 নতুন শব্দ <span>🔊 চাপলে উচ্চারণ শুনবে</span></div>
-    <div class="vocab-table">${u.vocab.map((v) => `<div class="vocab-row">
+    <div class="vocab-table">
+      <div class="vocab-row vocab-hrow"><div class="vocab-bn">অর্থ</div><div class="vocab-pic">ছবি</div><div class="vocab-ar">শব্দ</div></div>
+      ${u.vocab.map((v) => `<div class="vocab-row">
       <div class="vocab-bn">${v.b}</div>
-      <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button>${(v.img || ICONS[v.a]) ? `<span class="vocab-icon">${v.img || ICONS[v.a]}</span>` : ""}<span>${v.a}</span></div>
+      <div class="vocab-pic">${v.img || ICONS[v.a] || ""}</div>
+      <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button><span>${v.a}</span></div>
     </div>`).join("")}</div>`;
   // ব্যাখ্যার আরবি উদাহরণে চাপলে উচ্চারণ শোনা যায় — নতুন শিক্ষার্থীর জন্য সহায়ক
   $("#vocab-body").querySelectorAll(".learn-tip .ar").forEach((el) => {
@@ -161,7 +164,7 @@ export function renderEx() {
   } else if (e.t === "mc_ba") {
     A.innerHTML = `<div class="ex-title">আরবিতে কোনটি?</div>
     <div class="big-bn">${e.w.b}</div>
-    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}');speak('${o}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
   } else if (e.t === "listen") {
     A.innerHTML = `<div class="ex-title">যা শুনছ সেটি বাছাই করো</div>
     <div class="speak-row"><button class="speak-btn" style="width:70px;height:70px;font-size:32px" onclick="speak('${e.w.a}')">🔊</button></div>
@@ -177,15 +180,15 @@ export function renderEx() {
   } else if (e.t === "qa") {
     A.innerHTML = `<div class="ex-title">প্রশ্নের সঠিক উত্তরটি বাছাই করো</div>
     <div class="big-ar" style="font-size:26px;line-height:2">${e.q} <button class="speak-btn" style="width:42px;height:42px;font-size:19px;vertical-align:middle" onclick="speak('${e.q.replace(/\(.*?\)/g, "").trim()}')">🔊</button></div>
-    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}');speak('${o}')"><span class="ar" style="font-size:21px">${o}</span></button>`).join("")}</div>`;
+    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar" style="font-size:21px">${o}</span></button>`).join("")}</div>`;
   } else if (e.t === "fill") {
     A.innerHTML = `<div class="ex-title">শূন্যস্থানে সঠিক শব্দটি বসাও</div>
     <div class="big-ar" style="font-size:30px;line-height:2">${e.q}</div>
-    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}');speak('${o}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
   } else if (e.t === "pic_mc") {
     A.innerHTML = `<div class="ex-title">এটি কী? (ছবি দেখে আরবি শব্দ বাছাই করো)</div>
     <div class="pic-emo">${e.w.img}</div>
-    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}');speak('${o}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
   } else if (e.t === "pic_ba") {
     A.innerHTML = `<div class="ex-title">কোন ছবিটি এই শব্দের অর্থ?</div>
     <div class="speak-row"><button class="speak-btn" onclick="speak('${e.w.a}')">🔊</button><span class="ar" style="font-size:36px">${e.w.a}</span></div>
@@ -246,11 +249,13 @@ export function tapMatch(el) {
   if (L.matchSel && L.matchSel.dataset.side === el.dataset.side) { L.matchSel.classList.remove("sel"); L.matchSel = el; el.classList.add("sel"); return; }
   if (!L.matchSel) { L.matchSel = el; el.classList.add("sel"); if (el.dataset.side === "a") speak(el.dataset.v); return; }
   const a = L.matchSel.dataset.side === "a" ? L.matchSel : el, b = L.matchSel.dataset.side === "a" ? el : L.matchSel;
+  // আরবি টাইল প্রথমে চাপা হলে তখনই উচ্চারণ শোনানো হয়েছে — তখন আর দ্বিতীয়বার নয়
+  const alreadySpoke = L.matchSel.dataset.side === "a";
   const good = e.pairs.some((p) => p.a === a.dataset.v && (p.b === b.dataset.v || p.img === b.dataset.v));
   if (good) {
     bumpCombo(true);
     sndPair(); [a, b].forEach((x) => { x.classList.remove("sel"); x.classList.add("ok"); setTimeout(() => x.classList.add("faded"), 350); });
-    L.matchDone++; if (a.dataset.side === "a") speak(a.dataset.v);
+    L.matchDone++; if (!alreadySpoke) speak(a.dataset.v);
     L.correctWords.add(a.dataset.v); if (L.matchDone === e.pairs.length) { $("#btn-check").disabled = false; $("#btn-check").textContent = "চালিয়ে যাও"; feedback(true, "চমৎকার জোড়া!"); L.autoOk = true; }
   } else {
     bumpCombo(false);
@@ -288,8 +293,9 @@ export function checkAnswer() {
   if (good) {
     bumpCombo(true);
     if (e.w) L.correctWords.add(e.w.a);
-    const sp = e.w ? e.w.a : (e.s ? e.s.a : (e.ans && /[؀-ۿ]/.test(e.ans) ? e.ans : null));
-    feedback(true, praise()); if (sp) speak(sp);
+    // ডুয়োলিঙ্গো-স্টাইল: সঠিক হলে শুধু সফলতার চিমে — শব্দটি আবার পড়ে শোনানো হয় না,
+    // কারণ প্রশ্নের সময় সেটি একবার শোনানো হয়েই গেছে (আগে দুইবার শোনা যেত)।
+    feedback(true, praise());
     $("#btn-check").textContent = "চালিয়ে যাও"; $("#btn-check").onclick = () => next(true);
   } else {
     bumpCombo(false);
@@ -297,6 +303,8 @@ export function checkAnswer() {
     // শুরু করা পাঠটি সবসময় শেষ করতে দাও — মাঝপথে হৃদয় শেষ হলেও আটকাবে না (নতুন
     // শিক্ষার্থীর জন্য কোমল)। নতুন পাঠ শুরুর সময় হৃদয়ের শর্ত ঠিকই থাকে।
     feedback(false, "সঠিক উত্তর: " + correctTxt);
+    // ভুল হলে সঠিক আরবিটি একবার শুনিয়ে দাও — এতে শুদ্ধ উচ্চারণ শেখা হয়
+    if (/[؀-ۿ]/.test(correctTxt)) speak(correctTxt);
     $("#btn-check").textContent = "বুঝেছি"; $("#btn-check").onclick = () => next(false);
   }
 }

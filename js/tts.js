@@ -13,7 +13,26 @@ export function sndPair() { tone(880, 0, .1, "sine", .15); }
 document.addEventListener("pointerdown", function once() { ac(); if ("speechSynthesis" in window) { speechSynthesis.resume(); } document.removeEventListener("pointerdown", once); }, { once: true });
 
 /* ════════ TTS ════════ */
-export function arVoice() { if (!("speechSynthesis" in window)) return null; const vs = speechSynthesis.getVoices(); return vs.find((v) => v.lang && v.lang.toLowerCase().startsWith("ar")) || vs.find((v) => /arab/i.test(v.name)) || null; }
+/* ডিভাইসে থাকা আরবি ভয়েসগুলো */
+function arVoices() {
+  if (!("speechSynthesis" in window)) return [];
+  const vs = speechSynthesis.getVoices();
+  return vs.filter((v) => (v.lang && v.lang.toLowerCase().startsWith("ar")) || /arab/i.test(v.name));
+}
+/* ভয়েসের নাম দেখে লিঙ্গ অনুমান — উইন্ডোজ/অ্যাপল/অ্যান্ড্রয়েডের প্রচলিত আরবি কণ্ঠগুলো।
+   (ব্রাউজার API সরাসরি লিঙ্গ জানায় না, তাই নামই ভরসা।) */
+const MALE_VOICE_RE = /naayf|nayf|majed|maged|tarik|tariq|hamed|hamza|mehdi|\bmale\b|-male/i;
+const FEMALE_VOICE_RE = /hoda|huda|laila|layla|salma|zahra|amira|sana|fatima|\bfemale\b|-female/i;
+export function genderVoice(gender) {
+  if (!gender) return null;
+  const re = gender === "male" ? MALE_VOICE_RE : FEMALE_VOICE_RE;
+  return arVoices().find((v) => re.test(v.name)) || null;
+}
+export function arVoice() {
+  const g = (S && S.gender) ? genderVoice(S.gender) : null;
+  if (g) return g;
+  return arVoices()[0] || null;
+}
 if ("speechSynthesis" in window) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
 let curAudio = null, lastSpeakTxt = null, soundFailCount = 0, soundNoticeShown = false;
 
@@ -40,6 +59,10 @@ export function speak(txt) {
   if (!S.soundOn) return;
   if (curAudio) { try { curAudio.pause(); } catch (e) {} curAudio = null; }
   if ("speechSynthesis" in window) speechSynthesis.cancel();
+  /* Google প্রক্সির (/api/tts) আরবি কণ্ঠ একটাই — সেখানে ছেলে/মেয়ে কণ্ঠ বাছাই করার
+     কোনো উপায় নেই। তাই শিক্ষার্থীর লিঙ্গের সাথে মেলে এমন কণ্ঠ ডিভাইসে ইনস্টল থাকলে
+     সেটিকেই অগ্রাধিকার দাও; না থাকলে আগের মতো প্রক্সিই চলবে। */
+  if (S.gender && genderVoice(S.gender)) { ttsSpeak(txt); return; }
   if (navigator.onLine !== false) {
     const a = new Audio(ttsUrl(txt));
     curAudio = a; a.volume = 1;

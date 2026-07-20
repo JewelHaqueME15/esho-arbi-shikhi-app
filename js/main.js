@@ -28,6 +28,9 @@ function forgetLegacyUser(name) {
 async function afterAuth({ username, isAdmin, state }) {
   setSession(Object.assign({}, DEF, state || {}), username);
   S.isAdmin = !!isAdmin;
+  // লগইন ফর্মে লিঙ্গ বেছে নিলে (এবং আগে সংরক্ষিত না থাকলে) সেটি কাজে লাগাও
+  const g = document.querySelector('input[name="li-gender"]:checked');
+  if (g && !S.gender) { S.gender = g.value; save(); }
   enterApp();
 }
 async function doLogin() {
@@ -60,12 +63,22 @@ async function doLogout() {
   try { await api.logout(); } catch { /* clear client state regardless */ }
   location.reload();
 }
-function enterApp() {
-  $("#scr-login").classList.remove("active");
-  $("#topbar").style.display = "flex"; $("#tabbar").style.display = "flex";
-  dailyRefresh(); updateTop(); showTab("home");
-  if (!S.briefShown) {
-    S.briefShown = true; S.introShown = true; save();
+/* শুরুর মডালগুলো একটার পর একটা দেখানোর সারি (একসাথে দেখালে একটা আরেকটাকে ঢেকে দিত) */
+let introQueue = [];
+function nextIntro() {
+  const f = introQueue.shift();
+  if (f) f(); else closeModal();
+}
+function setGender(g) { S.gender = g; save(); nextIntro(); }
+function showGenderAsk() {
+  modal(`<div class="emo">🗣️</div><h2>কণ্ঠস্বর বেছে নাও</h2>
+  <p>তুমি ছেলে না মেয়ে? সেই অনুযায়ী আরবি উচ্চারণের কণ্ঠস্বর বাছাই করা হবে — ছেলেদের জন্য পুরুষকণ্ঠ, মেয়েদের জন্য নারীকণ্ঠ।<br><br>পরে প্রোফাইল থেকে যেকোনো সময় বদলাতে পারবে।</p>`,
+    `<button class="btn" onclick="setGender('male')">👦 ছেলে</button><div style="height:10px"></div><button class="btn blue" onclick="setGender('female')">👧 মেয়ে</button>`);
+}
+function showMigNotice() {
+  modal(`<div class="emo">🎊</div><h2>স্বাগতম ফিরে!</h2><p>তোমার আগের সব অগ্রগতি অক্ষত আছে, এখন নিরাপদে সার্ভারে সংরক্ষিত হচ্ছে।</p>`, `<button class="btn" onclick="nextIntro()">আলহামদুলিল্লাহ — চালিয়ে যাই!</button>`);
+}
+function showBrief() {
     modal(`<div class="emo">📖</div><h2>এসো আরবি শিখি!</h2>
     <p>মাওলানা আবু তাহের মিসবাহ হুজুরের জনপ্রিয় কিতাবটি এবার খেলার ছলে! ধাপে ধাপে শব্দ ও নিয়ম শিখে তুমি ইনশাআল্লাহ কুরআন-হাদীসের সহজ আরবি বুঝতে শিখবে।</p>
     <div class="brief-box">
@@ -87,11 +100,17 @@ function enterApp() {
         <li>অধ্যায় শেষে <b>📜 গল্প</b> পড়ে মজায় মজায় অনুশীলন</li>
       </ul>
     </div>`,
-    `<button class="btn" onclick="closeModal()">বিসমিল্লাহ — শুরু করি!</button>`);
-  } else if (!S.migNoticeShown) {
-    S.migNoticeShown = true; save();
-    modal(`<div class="emo">🎊</div><h2>স্বাগতম ফিরে!</h2><p>তোমার আগের সব অগ্রগতি অক্ষত আছে, এখন নিরাপদে সার্ভারে সংরক্ষিত হচ্ছে।</p>`, `<button class="btn" onclick="closeModal()">আলহামদুলিল্লাহ — চালিয়ে যাই!</button>`);
-  }
+    `<button class="btn" onclick="nextIntro()">বিসমিল্লাহ — শুরু করি!</button>`);
+}
+function enterApp() {
+  $("#scr-login").classList.remove("active");
+  $("#topbar").style.display = "flex"; $("#tabbar").style.display = "flex";
+  dailyRefresh(); updateTop(); showTab("home");
+  introQueue = [];
+  if (!S.briefShown) { S.briefShown = true; S.introShown = true; save(); introQueue.push(showBrief); }
+  else if (!S.migNoticeShown) { S.migNoticeShown = true; save(); introQueue.push(showMigNotice); }
+  if (!S.gender) introQueue.push(showGenderAsk); // লগইনে না দিলে এখানে একবার জিজ্ঞেস করো
+  nextIntro();
 }
 
 /* ════════ ইনিশিয়াল বুট ════════ */
@@ -109,4 +128,5 @@ Object.assign(window, {
   doLogin, doLogout, toggleSound, quitLesson, showTab, finishStory, resetAll,
   closeModal, tapUnit, storyLockedMsg, openVocabIntro, buyHearts, speak,
   vcTapTile, selOpt, tapMatch, tapTile, afterResult, startReview, startLesson, openStory, showRule,
+  nextIntro, setGender, showGenderAsk,
 });

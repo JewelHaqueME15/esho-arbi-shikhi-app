@@ -18,6 +18,12 @@
     <p class="sub">তোমার নাম লিখে প্রোফাইলে প্রবেশ করো। প্রতিটি নামের জন্য আলাদা অগ্রগতি সংরক্ষিত হবে।</p>
     <div class="field"><label>তোমার নাম</label><input type="text" id="li-name" placeholder="যেমনঃ রাশেদ" maxlength="24"></div>
     <div class="field"><label>পাসওয়ার্ড (ঐচ্ছিক)</label><input type="password" id="li-pass" placeholder="না দিলেও চলবে" maxlength="24"></div>
+    <div class="field"><label>তুমি ছেলে না মেয়ে? (উচ্চারণের কণ্ঠস্বর ঠিক করতে)</label>
+      <div class="gender-row">
+        <label class="gender-opt"><input type="radio" name="li-gender" value="male"><span>👦 ছেলে</span></label>
+        <label class="gender-opt"><input type="radio" name="li-gender" value="female"><span>👧 মেয়ে</span></label>
+      </div>
+    </div>
     <div class="chk-row"><input type="checkbox" id="li-admin-chk" onchange="document.getElementById('li-admin-wrap').style.display=this.checked?'block':'none'"><label for="li-admin-chk">আমি একজন এডমিন / শিক্ষক</label></div>
     <div id="li-admin-wrap" class="field"><label>এডমিন কোড</label><input type="password" id="li-admin-code" placeholder="এডমিন কোড দাও"></div>
     <div id="li-err"></div>
@@ -107,6 +113,7 @@
   </div>
   <div class="section"><h2>🎖️ অর্জনসমূহ</h2><div class="badge-grid" id="badge-grid"></div></div>
   <div class="section" id="admin-panel-wrap"></div>
+  <div class="section"><button class="btn ghost" onclick="showGenderAsk()">🗣️ কণ্ঠস্বর বদলাও (ছেলে / মেয়ে)</button></div>
   <div class="section"><button class="btn ghost" onclick="doLogout()">🔁 প্রোফাইল পরিবর্তন করো</button></div>
   <div class="section"><button class="btn red" onclick="resetAll()">সব প্রগ্রেস মুছে ফেলো</button></div>
 </div>
