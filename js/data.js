@@ -316,6 +316,8 @@ export const BADGES=[
  {id:"streak7",emo:"🌋",nm:"৭ দিনের ধারা",desc:"টানা ৭ দিন শেখো",chk:s=>s.bestStreak>=7},
  {id:"w50",emo:"📚",nm:"শব্দবীর",desc:"৫০টি শব্দ শেখো",chk:s=>Object.keys(s.words).length>=50},
  {id:"w100",emo:"🎓",nm:"শব্দসম্রাট",desc:"১০০টি শব্দ শেখো",chk:s=>Object.keys(s.words).length>=100},
+ {id:"flash1",emo:"🃏",nm:"ফ্ল্যাশকার্ড শুরু",desc:"একটি ফ্ল্যাশকার্ড সেশন শেষ করো",chk:s=>(s.flashDone||0)>=1},
+ {id:"star20",emo:"⭐",nm:"মুখস্থের তারা",desc:"২০টি শব্দে ৩ তারা অর্জন করো",chk:s=>Object.values(s.wordStars||{}).filter(v=>v>=3).length>=20},
  {id:"perf5",emo:"💯",nm:"নিখুঁত ৫",desc:"৫টি নিখুঁত পাঠ",chk:s=>s.perfect>=5},
  {id:"cr10",emo:"👑",nm:"মুকুটধারী",desc:"১০টি মুকুট জেতো",chk:s=>totalCrowns(s)>=10},
  {id:"cr30",emo:"🏰",nm:"মুকুট-সম্রাট",desc:"৫০টি মুকুট জেতো",chk:s=>totalCrowns(s)>=50},

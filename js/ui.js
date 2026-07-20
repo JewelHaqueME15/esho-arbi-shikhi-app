@@ -1,6 +1,7 @@
 import { $, esc } from "./utils.js";
 import { S, CUR, DEF, save, flushSave } from "./state.js";
 import { UNITS, SECTIONS, STORIES, BADGES, LEVELS, RIVALS, totalCrowns } from "./data.js";
+import { wordIcon, starsHTML } from "./icons.js";
 import { updateSoundBtn } from "./tts.js";
 
 export function updateTop() { $("#st-streak").textContent = S.streak; $("#st-gems").textContent = S.gems; $("#st-hearts").textContent = S.hearts; updateSoundBtn(); }
@@ -32,7 +33,7 @@ export function showTab(t) {
     $("#scr-" + x).classList.toggle("active", x === t);
     $("#tab-" + x).classList.toggle("on", x === t);
   });
-  $("#scr-lesson").classList.remove("active"); $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-vocab").classList.remove("active"); $("#scr-visual").classList.remove("active");
+  $("#scr-lesson").classList.remove("active"); $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-vocab").classList.remove("active"); $("#scr-visual").classList.remove("active"); $("#scr-flash").classList.remove("active");
   $("#topbar").style.display = "flex"; $("#tabbar").style.display = "flex";
   if (t === "home") renderPath(); if (t === "words") renderWords();
   if (t === "league") renderLeague(); if (t === "profile") renderProfile();
@@ -117,8 +118,26 @@ export function buyHearts() {
 export function renderWords() {
   const list = $("#word-list"), ws = Object.entries(S.words);
   if (!ws.length) { list.innerHTML = `<div style="text-align:center;padding:40px 0;color:var(--gray);font-weight:700"><div style="font-size:52px;margin-bottom:10px">📖</div>এখনো কোনো শব্দ শেখোনি।<br>প্রথম পাঠ শুরু করো! 🌱</div>`; return; }
-  list.innerHTML = `<button class="btn blue" style="margin-bottom:14px" onclick="startReview()">🔁 শব্দ অনুশীলন করো (${ws.length}টি শব্দ)</button>`
-   + ws.map(([a, b]) => `<div class="word-row"><span class="ar">${a}</span><span class="bn">${b}</span><button onclick="speak('${a}')">🔊</button></div>`).join("");
+  const stars = S.wordStars || {};
+  const mastered = ws.filter(([a]) => (stars[a] || 0) >= 3).length;
+  const pct = Math.round((mastered / ws.length) * 100);
+  list.innerHTML = `
+    <div class="words-actions">
+      <button class="wa-card" onclick="startFlash()"><span class="e">🃏</span><span class="t">ফ্ল্যাশকার্ড</span><span class="s">উল্টে উল্টে মুখস্থ</span></button>
+      <button class="wa-card alt" onclick="startReview()"><span class="e">🔁</span><span class="t">অনুশীলন</span><span class="s">প্রশ্ন-উত্তরে ঝালাই</span></button>
+    </div>
+    <div class="words-stat">
+      <div class="ws-row"><span>⭐ মুখস্থ হয়েছে</span><span><b>${mastered}</b> / ${ws.length}</span></div>
+      <div class="ws-bar"><div style="width:${pct}%"></div></div>
+    </div>`
+   + ws.map(([a, b]) => {
+     const n = stars[a] || 0, ico = wordIcon(a);
+     return `<div class="word-row">
+       <div class="w-ico">${ico}</div>
+       <div class="w-main"><span class="ar">${a}</span><span class="bn">${b}</span></div>
+       <div class="w-right"><span class="w-stars">${starsHTML(n)}</span><button onclick="speak('${a.replace(/'/g, "\\'")}')">🔊</button></div>
+     </div>`;
+   }).join("");
 }
 /* ════════ LEADERBOARD ════════ */
 export function renderLeague() {

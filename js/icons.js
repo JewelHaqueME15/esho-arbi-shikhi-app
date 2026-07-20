@@ -10,6 +10,8 @@
    সংখ্যা, অব্যয় ও ইশারার সর্বনামে।
 
    হাজা/হাজিহি (কাছে) → ছোট তীর, জালিকা/তিলকা (দূরে) → লম্বা তীর। */
+import { UNITS } from "./data.js";
+
 export const ICONS = {
   // ইশারার সর্বনাম — কাছে (ছোট তীর) / দূরে (লম্বা তীর)
   "هٰذا": '<span class="dem-arrow near"></span>',
@@ -132,3 +134,19 @@ export const ICONS = {
   "دَعْوَةٌ": "📣", "صَحابَةٌ": "👥", "أَصْنامٌ": "🗿", "وَفاةٌ": "⚰️", "قِيامَةٌ": "⏰",
   "حِسابٌ": "🧮", "سَبِيلُ اللّٰهِ": "🛤️",
 };
+
+/* ── শব্দের চেহারা: শব্দভাণ্ডার ও ফ্ল্যাশকার্ড — দুই জায়গাতেই লাগে, তাই এখানে ──
+   (ui.js ↔ flash.js পরস্পরকে import করলে চক্র তৈরি হতো, তাই helper দুটি এখানে) */
+const IMG_BY_WORD = (() => {
+  const m = {};
+  for (const u of UNITS) for (const v of u.vocab) if (v.img && !m[v.a]) m[v.a] = v.img;
+  return m;
+})();
+/* ছবি-অনুশীলনের `img` আগে, না থাকলে প্রদর্শন-আইকন (ক্রিয়ায় কিছুই নেই) */
+export function wordIcon(a) { return IMG_BY_WORD[a] || ICONS[a] || ""; }
+/* ৩টি তারা — কতটা মুখস্থ হয়েছে */
+export function starsHTML(n) {
+  let h = "";
+  for (let i = 0; i < 3; i++) h += `<span class="w-star${i < n ? " on" : ""}">★</span>`;
+  return h;
+}

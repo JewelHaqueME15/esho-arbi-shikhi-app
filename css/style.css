@@ -9,9 +9,12 @@
 body{font-family:'Noto Sans Bengali','Hind Siliguri','Scheherazade New','Noto Naskh Arabic',sans-serif;background:var(--bg);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh;position:relative;user-select:none}
 .ar{font-family:'Scheherazade New','Noto Naskh Arabic','Traditional Arabic',serif;direction:rtl;unicode-bidi:isolate;font-weight:600}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
-.screen{display:none;padding-bottom:90px}
+.screen{display:none;padding-bottom:90px;position:relative}
 .screen.active{display:block;animation:screenIn .25s ease}
-@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* স্লাইড-ইন `top` দিয়ে, `transform` দিয়ে নয়: transform থাকলে সেটি ভেতরের
+   position:fixed বারগুলোর (check-bar / vocab-check-bar / flash-bar) containing
+   block হয়ে যায়, ফলে বারগুলো স্ক্রীনের নিচে ছিটকে পড়ে। top-এ সেই সমস্যা নেই। */
+@keyframes screenIn{from{opacity:0;top:8px}to{opacity:1;top:0}}
 /* top bar */
 #topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:20;border-bottom:2px solid var(--line)}
 .stat{display:flex;align-items:center;gap:5px;font-weight:700;font-size:17px}
@@ -112,10 +115,58 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .lb-row .rank{width:26px;font-weight:800;color:var(--gray)}
 .lb-row.me{background:#fff8e0;border-radius:10px}
 .lb-row .xps{margin-left:auto;color:var(--gray);font-weight:700}
-.word-row{display:flex;align-items:center;gap:12px;padding:10px 6px;border-bottom:1px solid var(--line)}
-.word-row .ar{font-size:26px;min-width:110px}
-.word-row .bn{color:var(--gray);font-weight:600}
-.word-row button{margin-left:auto;font-size:22px}
+/* ═══ শব্দভাণ্ডার তালিকা ═══ */
+.word-row{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line)}
+.word-row .w-ico{font-size:24px;width:32px;text-align:center;flex-shrink:0}
+.word-row .w-main{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.word-row .ar{font-size:25px;line-height:1.5}
+.word-row .bn{color:var(--gray);font-weight:600;font-size:13px}
+.word-row .w-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.word-row button{font-size:21px}
+.w-stars{display:inline-flex;gap:1px}
+.w-star{color:var(--line);font-size:13px}
+.w-star.on{color:var(--gold)}
+/* দুই অ্যাকশন কার্ড: ফ্ল্যাশকার্ড / অনুশীলন */
+.words-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.wa-card{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 8px;border-radius:16px;border:2px solid var(--blue);background:rgba(28,176,246,.08);box-shadow:0 4px 0 var(--blue-d)}
+.wa-card.alt{border-color:var(--green);background:rgba(88,204,2,.10);box-shadow:0 4px 0 var(--green-d)}
+.wa-card:active{transform:translateY(3px);box-shadow:none}
+.wa-card .e{font-size:26px;line-height:1}
+.wa-card .t{font-weight:800;font-size:14.5px;color:var(--ink)}
+.wa-card .s{font-size:10.5px;font-weight:600;color:var(--gray)}
+.words-stat{border:2px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:12px}
+.ws-row{display:flex;justify-content:space-between;font-weight:800;font-size:13px;color:var(--gray)}
+.ws-row b{color:var(--gold);font-size:15px}
+.ws-bar{height:9px;background:var(--line);border-radius:6px;margin-top:7px;overflow:hidden}
+.ws-bar>div{height:100%;background:var(--gold);border-radius:6px;transition:width .4s}
+/* ═══ ফ্ল্যাশকার্ড স্ক্রীন ═══ */
+#scr-flash{padding-bottom:120px}
+#flash-top{display:flex;align-items:center;gap:12px;padding:14px 16px}
+#flash-top .quit{font-size:22px;color:var(--gray);font-weight:800}
+#flash-pbar{flex:1;height:16px;background:var(--line);border-radius:9px;overflow:hidden}
+#flash-pbar>div{height:100%;width:0%;background:var(--gold);border-radius:9px;transition:width .35s}
+#flash-count{font-weight:800;font-size:14px;color:var(--gray);min-width:44px;text-align:right}
+.flash-stage{perspective:1400px;padding:16px 18px 8px}
+.flash-card{position:relative;width:100%;height:320px;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.15,.2,1);cursor:pointer}
+.flash-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;border:3px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:22px;box-shadow:0 7px 0 var(--line);text-align:center}
+.fc-back{transform:rotateY(180deg);border-color:var(--blue);background:linear-gradient(165deg,rgba(28,176,246,.10),#fff 65%);box-shadow:0 7px 0 var(--blue-d)}
+.fc-tag{position:absolute;top:14px;left:16px;font-size:10.5px;font-weight:800;color:var(--gray);letter-spacing:.5px;background:var(--soft);padding:3px 9px;border-radius:8px}
+.fc-tag.blue{color:#fff;background:var(--blue)}
+.fc-icon{font-size:58px;line-height:1}
+.fc-word{font-size:46px;font-weight:700;line-height:1.7}
+.fc-mean{font-size:26px;font-weight:800;color:var(--ink);line-height:1.6}
+.fc-sp{background:var(--blue);color:#fff;width:44px;height:44px;border-radius:12px;font-size:20px;box-shadow:0 3px 0 var(--blue-d)}
+.fc-sp:active{transform:translateY(2px);box-shadow:none}
+.fc-hint{font-size:12px;font-weight:700;color:var(--gray)}
+.fc-stars{display:flex;gap:4px}
+.fc-stars .w-star{font-size:22px}
+#flash-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;padding:14px 18px 22px;background:#fff;border-top:2px solid var(--line);z-index:40}
+.flash-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flash-result{display:flex;justify-content:center;gap:10px;margin-top:14px}
+.flash-result>div{flex:1;border:2px solid var(--line);border-radius:14px;padding:9px 4px;display:flex;flex-direction:column}
+.flash-result b{font-size:19px;color:var(--ink)}
+.flash-result span{font-size:11px;font-weight:700;color:var(--gray)}
 .tipbox{background:var(--soft);border:2px solid var(--line);border-radius:16px;padding:18px 18px;margin:14px 0;font-size:16.5px;line-height:2.4;direction:ltr;text-align:left}
 .tipbox b{color:var(--green-d);font-weight:800}
 .tipbox .ar{display:inline-block;font-size:29px;font-weight:700;color:var(--ink);margin:3px 6px 3px 2px;line-height:1.9;unicode-bidi:isolate}

@@ -5,6 +5,7 @@ import { showTab, tapUnit, buyHearts, storyLockedMsg, resetAll, modal, closeModa
 import { startLesson, startReview, openVocabIntro, selOpt, tapMatch, tapTile, quitLesson, afterResult, showRule } from "./lesson.js";
 import { openStory, finishStory } from "./stories.js";
 import { vcTapTile } from "./visual.js";
+import { startFlash, flipCard, flashKnown, flashAgain, quitFlash } from "./flash.js";
 import { speak, toggleSound } from "./tts.js";
 
 /* ════════ পুরনো (localStorage) প্রোফাইল থেকে নতুন অ্যাকাউন্টে একবার প্রগ্রেস আনার ব্রিজ ════════ */
@@ -129,4 +130,5 @@ Object.assign(window, {
   closeModal, tapUnit, storyLockedMsg, openVocabIntro, buyHearts, speak,
   vcTapTile, selOpt, tapMatch, tapTile, afterResult, startReview, startLesson, openStory, showRule,
   nextIntro, setGender, showGenderAsk,
+  startFlash, flipCard, flashKnown, flashAgain, quitFlash,
 });
