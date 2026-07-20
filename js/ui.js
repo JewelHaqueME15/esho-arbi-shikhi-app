@@ -1,7 +1,8 @@
-import { $, esc } from "./utils.js";
+import { $, esc, bn } from "./utils.js";
 import { S, CUR, DEF, save, flushSave } from "./state.js";
-import { UNITS, SECTIONS, STORIES, BADGES, LEVELS, RIVALS, totalCrowns } from "./data.js";
+import { UNITS, SECTIONS, STORIES, BADGES, LEVELS, totalCrowns } from "./data.js";
 import { wordIcon, starsHTML } from "./icons.js";
+import * as api from "./api.js";
 import { updateSoundBtn } from "./tts.js";
 
 export function updateTop() { $("#st-streak").textContent = S.streak; $("#st-gems").textContent = S.gems; $("#st-hearts").textContent = S.hearts; updateSoundBtn(); }
@@ -65,18 +66,23 @@ export function renderPath() {
   // শেখা শব্দ যথেষ্ট হলে হোম থেকেই দ্রুত অনুশীলন — খুঁজতে হবে না
   const learnedCount = Object.keys(S.words).length;
   if (learnedCount >= 4) h += `<div style="padding:12px 16px 0"><button class="btn blue" onclick="startReview()">🔁 শেখা শব্দ অনুশীলন করো (${learnedCount}টি)</button></div>`;
+  let lastPart = null;
   SECTIONS.forEach((sec, si) => {
     const done = UNITS.slice(sec.from, sec.to + 1).filter((u) => (S.crowns[u.id] || 0) > 0).length;
     const tot = sec.to - sec.from + 1;
-    h += `<div style="margin:24px 16px 4px;background:${SEC_GRAD[si % SEC_GRAD.length]};border-radius:16px;padding:13px 18px;color:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 0 rgba(0,0,0,.15)">
-      <div><div style="font-size:16.5px;font-weight:800">${sec.ic} ${sec.t}</div>
-      <div style="font-size:12.5px;opacity:.92;margin-top:1px">${sec.s}</div></div>
-      <div style="font-size:13px;font-weight:800;background:rgba(255,255,255,.22);border-radius:10px;padding:4px 9px;white-space:nowrap">${done}/${tot}</div>
+    // খণ্ড বদলালে বড় করে খণ্ডের নাম — বইয়ের তিন খণ্ড স্পষ্ট বোঝা যায়
+    if (sec.part !== lastPart) {
+      lastPart = sec.part;
+      h += `<div class="part-head"><span class="rule"></span><span class="pt">${sec.part}</span><span class="rule"></span></div>`;
+    }
+    h += `<div class="sec-head" style="background:${SEC_GRAD[si % SEC_GRAD.length]}">
+      <div><div class="st">${sec.t}</div><div class="ss">${sec.s}</div></div>
+      <div class="sc">${done}/${tot}</div>
     </div>`;
-    UNITS.slice(sec.from, sec.to + 1).forEach((u) => {
+    UNITS.slice(sec.from, sec.to + 1).forEach((u, k) => {
       const i = u.id, st = unitState(i), c = S.crowns[i] || 0;
       const off = i % 4 === 1 ? "offset-l" : i % 4 === 3 ? "offset-r" : "";
-      h += `<div class="unit-head"><h2>${u.icon} ${u.title}</h2><p>${u.sub}</p></div>
+      h += `<div class="unit-head"><h2><span class="un">${bn(i + 1)}</span>${u.title}</h2><p>${u.sub}</p></div>
       <div class="node-row"><div class="node-wrap ${off}">
         <button class="node ${st}" onclick="tapUnit(${i})">${st === "locked" ? "🔒" : st === "done" ? "🏆" : u.icon}
           ${c > 0 ? `<span class="crowns">👑${c}</span>` : ""}
@@ -140,15 +146,30 @@ export function renderWords() {
    }).join("");
 }
 /* ════════ LEADERBOARD ════════ */
-export function renderLeague() {
-  if (!S.rivalXP) { S.rivalXP = RIVALS.map(() => Math.floor(Math.random() * 400) + 30); save(); }
-  const rows = RIVALS.map((n, i) => ({ n, xp: S.rivalXP[i], me: false }));
-  rows.push({ n: CUR || "তুমি", xp: S.xp, me: true });
-  rows.sort((a, b) => b.xp - a.xp);
+/* লিডারবোর্ড এখন আসল — সার্ভার থেকে সব ব্যবহারকারীর XP নিয়ে আসে। */
+function paintLeague(rows, note) {
   $("#lb-list").innerHTML = rows.map((r, i) => `<div class="lb-row ${r.me ? "me" : ""}">
-    <span class="rank">${i + 1}</span><span>${i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : "🔹"}</span>
-    <span>${esc(r.n)}</span><span class="xps">⚡${r.xp} XP</span></div>`).join("")
-    + `<p style="color:var(--gray);font-size:12.5px;font-weight:600;margin-top:12px;text-align:center">প্রতি সপ্তাহে তালিকা নতুন করে শুরু হয় — প্রতিদিন অনুশীলন করে শীর্ষে থাকো!</p>`;
+    <span class="rank">${i + 1}</span><span>${i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : "·"}</span>
+    <span>${esc(r.n)}</span><span class="xps">${r.xp} XP</span></div>`).join("")
+    + `<button class="btn ghost" style="margin-top:14px" onclick="renderLeague()">↻ তালিকা নতুন করে আনো</button>`
+    + `<p style="color:var(--gray);font-size:12.5px;font-weight:600;margin-top:10px;text-align:center">${note}</p>`;
+}
+export async function renderLeague() {
+  const list = $("#lb-list");
+  if (!list.dataset.loaded) list.innerHTML = `<p style="text-align:center;color:var(--gray);font-weight:700;padding:24px 0">তালিকা আনা হচ্ছে…</p>`;
+  try {
+    const res = await api.leaderboard();
+    const rows = (res.rows || []).map((r) => ({ n: r.username, xp: r.xp, me: r.username === res.me }));
+    // নিজের XP সার্ভারে সেভ হওয়ার আগেই বদলাতে পারে — তাই নিজেরটা স্থানীয় মান দিয়ে দেখাও
+    const mine = rows.find((r) => r.me);
+    if (mine) mine.xp = Math.max(mine.xp, S.xp); else rows.push({ n: CUR || "তুমি", xp: S.xp, me: true });
+    rows.sort((a, b) => b.xp - a.xp);
+    list.dataset.loaded = "1";
+    paintLeague(rows, "সব শিক্ষার্থীর আসল XP — পাঠ শেষ করলেই তালিকা বদলাবে।");
+  } catch {
+    // অফলাইন বা সার্ভার নেই — অন্তত নিজের অবস্থান দেখাও
+    paintLeague([{ n: CUR || "তুমি", xp: S.xp, me: true }], "এখন সংযোগ নেই — শুধু তোমার XP দেখানো হচ্ছে।");
+  }
 }
 /* ════════ PROFILE ════════ */
 export function renderProfile() {

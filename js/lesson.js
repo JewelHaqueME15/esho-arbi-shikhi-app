@@ -1,4 +1,4 @@
-import { $, esc, shuffle, pick, pickExtra } from "./utils.js";
+import { $, esc, shuffle, pick, pickExtra, tk, tashkeelLevel } from "./utils.js";
 import { S, save, bumpStreak } from "./state.js";
 import { UNITS, BADGES, LEVELS } from "./data.js";
 import { LEARN } from "./lessons.js";
@@ -104,24 +104,24 @@ export function startLesson(ui) {
 }
 /* ════════ শব্দ-পরিচিতি স্ক্রীন (বইয়ের মতো) ════════ */
 export function openVocabIntro(ui) {
-  const u = UNITS[ui];
+  const u = UNITS[ui], lvl = tashkeelLevel(ui);
   ["home", "words", "league", "profile"].forEach((x) => $("#scr-" + x).classList.remove("active"));
   $("#scr-lesson").classList.remove("active"); $("#scr-result").classList.remove("active"); $("#scr-story").classList.remove("active"); $("#scr-visual").classList.remove("active");
   $("#topbar").style.display = "none"; $("#tabbar").style.display = "none";
-  $("#vocab-top .ttl").textContent = u.icon + " " + u.title;
-  $("#vocab-body").innerHTML = `<div class="vocab-head"><div class="emo">${u.icon}</div><h1>${u.title}</h1>
+  $("#vocab-top .ttl").textContent = u.title;
+  $("#vocab-body").innerHTML = `<div class="vocab-head"><h1>${u.title}</h1>
     <p style="color:var(--gray);font-weight:600;font-size:13px;margin-top:4px">${u.sub}</p></div>
     <div class="learn-card">
-      <div class="learn-h">📘 নিয়ম ও ব্যাখ্যা <span>🔊 আরবিতে চাপো</span></div>
+      <div class="learn-h">নিয়ম ও ব্যাখ্যা <span>আরবিতে চাপলে উচ্চারণ</span></div>
       <div class="tipbox learn-tip">${LEARN[ui] || u.tip}</div>
     </div>
-    <div class="vocab-section-h">📖 নতুন শব্দ <span>🔊 চাপলে উচ্চারণ শুনবে</span></div>
+    <div class="vocab-section-h">নতুন শব্দ <span>🔊 চাপলে উচ্চারণ</span></div>
     <div class="vocab-table">
       <div class="vocab-row vocab-hrow"><div class="vocab-bn">অর্থ</div><div class="vocab-pic">ছবি</div><div class="vocab-ar">শব্দ</div></div>
       ${u.vocab.map((v) => `<div class="vocab-row">
       <div class="vocab-bn">${v.b}</div>
       <div class="vocab-pic">${v.img || ICONS[v.a] || ""}</div>
-      <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button><span>${v.a}</span></div>
+      <div class="vocab-ar"><button class="vocab-sp" onclick="speak('${v.a.replace(/'/g, "\\'")}')">🔊</button><span>${tk(v.a, lvl)}</span></div>
     </div>`).join("")}</div>`;
   // ব্যাখ্যার আরবি উদাহরণে চাপলে উচ্চারণ শোনা যায় — নতুন শিক্ষার্থীর জন্য সহায়ক
   $("#vocab-body").querySelectorAll(".learn-tip .ar").forEach((el) => {
@@ -155,43 +155,46 @@ export function renderEx() {
   A.classList.remove("ex-anim"); void A.offsetWidth; A.classList.add("ex-anim");
   $("#check-bar").className = ""; $("#fb-text").textContent = "";
   const cb = $("#btn-check"); cb.disabled = true; cb.textContent = "যাচাই করো"; cb.onclick = checkAnswer;
-  L.sel = null; L.matchDone = 0; L.matchSel = null; L.built = [];
+  const sk = $("#btn-skip"); if (sk) sk.classList.remove("hide"); // নতুন প্রশ্নে আবার দেখাও
+  L.sel = null; L.matchDone = 0; L.matchSel = null; L.built = []; L.answered = false;
+  // বইয়ের মতো ধাপে ধাপে হারাকাত কমে — শুধু দেখানোর সময়, মেলানো/উচ্চারণে নয়
+  const lvl = tashkeelLevel(L.ui); L.tkLvl = lvl;
   if (e.t === "mc_ab") {
     A.innerHTML = `<div class="ex-title">এই শব্দের অর্থ কী?</div>
-    <div class="speak-row"><button class="speak-btn" onclick="speak('${e.w.a}')">🔊</button><span class="ar" style="font-size:40px">${e.w.a}</span></div>
+    <div class="speak-row"><button class="speak-btn" onclick="speak('${e.w.a}')">🔊</button><span class="ar" style="font-size:40px">${tk(e.w.a,lvl)}</span></div>
     <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')">${o}</button>`).join("")}</div>`;
     setTimeout(() => speak(e.w.a), 300);
   } else if (e.t === "mc_ba") {
     A.innerHTML = `<div class="ex-title">আরবিতে কোনটি?</div>
     <div class="big-bn">${e.w.b}</div>
-    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${tk(o,lvl)}</span></button>`).join("")}</div>`;
   } else if (e.t === "listen") {
     A.innerHTML = `<div class="ex-title">যা শুনছ সেটি বাছাই করো</div>
     <div class="speak-row"><button class="speak-btn" style="width:70px;height:70px;font-size:32px" onclick="speak('${e.w.a}')">🔊</button></div>
-    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>
+    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${tk(o,lvl)}</span></button>`).join("")}</div>
     <p style="text-align:center;color:var(--gray);font-weight:600;font-size:13px;margin-top:14px">শুনতে না পেলে 🔊 বোতামটি আবার চাপো</p>`;
     setTimeout(() => speak(e.w.a), 350);
   } else if (e.t === "tr") {
     A.innerHTML = `<div class="ex-title">বাক্যটির অর্থ কী?</div>
     <div class="speak-row"><button class="speak-btn" onclick="speak('${e.s.a}')">🔊</button></div>
-    <div class="big-ar" style="font-size:28px;line-height:2">${e.s.a}</div>
+    <div class="big-ar" style="font-size:28px;line-height:2">${tk(e.s.a,lvl)}</div>
     <div class="opts">${e.opts.map((o, i) => `<button class="opt" style="font-size:16px" data-i="${i}" onclick="selOpt(this,'${esc(o)}')">${o}</button>`).join("")}</div>`;
     setTimeout(() => speak(e.s.a), 300);
   } else if (e.t === "qa") {
     A.innerHTML = `<div class="ex-title">প্রশ্নের সঠিক উত্তরটি বাছাই করো</div>
-    <div class="big-ar" style="font-size:26px;line-height:2">${e.q} <button class="speak-btn" style="width:42px;height:42px;font-size:19px;vertical-align:middle" onclick="speak('${e.q.replace(/\(.*?\)/g, "").trim()}')">🔊</button></div>
-    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar" style="font-size:21px">${o}</span></button>`).join("")}</div>`;
+    <div class="big-ar" style="font-size:26px;line-height:2">${tk(e.q,lvl)} <button class="speak-btn" style="width:42px;height:42px;font-size:19px;vertical-align:middle" onclick="speak('${e.q.replace(/\(.*?\)/g, "").trim()}')">🔊</button></div>
+    <div class="opts">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar" style="font-size:21px">${tk(o,lvl)}</span></button>`).join("")}</div>`;
   } else if (e.t === "fill") {
     A.innerHTML = `<div class="ex-title">শূন্যস্থানে সঠিক শব্দটি বসাও</div>
-    <div class="big-ar" style="font-size:30px;line-height:2">${e.q}</div>
-    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+    <div class="big-ar" style="font-size:30px;line-height:2">${tk(e.q,lvl)}</div>
+    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${tk(o,lvl)}</span></button>`).join("")}</div>`;
   } else if (e.t === "pic_mc") {
     A.innerHTML = `<div class="ex-title">এটি কী? (ছবি দেখে আরবি শব্দ বাছাই করো)</div>
     <div class="pic-emo">${e.w.img}</div>
-    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${o}</span></button>`).join("")}</div>`;
+    <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o)}')"><span class="ar">${tk(o,lvl)}</span></button>`).join("")}</div>`;
   } else if (e.t === "pic_ba") {
     A.innerHTML = `<div class="ex-title">কোন ছবিটি এই শব্দের অর্থ?</div>
-    <div class="speak-row"><button class="speak-btn" onclick="speak('${e.w.a}')">🔊</button><span class="ar" style="font-size:36px">${e.w.a}</span></div>
+    <div class="speak-row"><button class="speak-btn" onclick="speak('${e.w.a}')">🔊</button><span class="ar" style="font-size:36px">${tk(e.w.a,lvl)}</span></div>
     <div class="opts grid2">${e.opts.map((o, i) => `<button class="opt" data-i="${i}" onclick="selOpt(this,'${esc(o.a)}')"><span style="font-size:44px">${o.img}</span></button>`).join("")}</div>`;
     setTimeout(() => speak(e.w.a), 300);
   } else if (e.t === "listen_pic") {
@@ -203,13 +206,13 @@ export function renderEx() {
   } else if (e.t === "pic_match") {
     const ar = shuffle(e.pairs.map((p) => p.a)), ic = shuffle(e.pairs.map((p) => p.img));
     A.innerHTML = `<div class="ex-title">শব্দ ও ছবি মেলাও</div><div class="match-cols">
-      <div style="display:flex;flex-direction:column;gap:12px">${ar.map((a) => `<button class="opt" data-side="a" data-v="${esc(a)}" onclick="tapMatch(this)"><span class="ar">${a}</span></button>`).join("")}</div>
+      <div style="display:flex;flex-direction:column;gap:12px">${ar.map((a) => `<button class="opt" data-side="a" data-v="${esc(a)}" onclick="tapMatch(this)"><span class="ar">${tk(a,lvl)}</span></button>`).join("")}</div>
       <div style="display:flex;flex-direction:column;gap:12px">${ic.map((im) => `<button class="opt" data-side="b" data-v="${esc(im)}" style="font-size:26px" onclick="tapMatch(this)">${im}</button>`).join("")}</div></div>`;
     cb.textContent = "সব জোড়া মেলাও";
   } else if (e.t === "match") {
     const ar = shuffle(e.pairs.map((p) => p.a)), bn = shuffle(e.pairs.map((p) => p.b));
     A.innerHTML = `<div class="ex-title">জোড়া মেলাও</div><div class="match-cols">
-      <div style="display:flex;flex-direction:column;gap:12px">${ar.map((a) => `<button class="opt" data-side="a" data-v="${esc(a)}" onclick="tapMatch(this)"><span class="ar">${a}</span></button>`).join("")}</div>
+      <div style="display:flex;flex-direction:column;gap:12px">${ar.map((a) => `<button class="opt" data-side="a" data-v="${esc(a)}" onclick="tapMatch(this)"><span class="ar">${tk(a,lvl)}</span></button>`).join("")}</div>
       <div style="display:flex;flex-direction:column;gap:12px">${bn.map((b) => `<button class="opt" data-side="b" data-v="${esc(b)}" onclick="tapMatch(this)">${b}</button>`).join("")}</div></div>`;
     cb.textContent = "সব জোড়া মেলাও";
   } else if (e.t === "build") {
@@ -217,12 +220,12 @@ export function renderEx() {
     A.innerHTML = `<div class="ex-title">আরবিতে বাক্যটি সাজাও</div>
     <div class="big-bn" style="font-size:21px">"${e.s.b}"</div>
     <div id="build-answer"></div>
-    <div id="build-bank">${words.map((w, i) => `<button class="tile" data-i="${i}" data-w="${esc(w)}" onclick="tapTile(this)"><span class="ar">${w}</span></button>`).join("")}</div>`;
+    <div id="build-bank">${words.map((w, i) => `<button class="tile" data-i="${i}" data-w="${esc(w)}" onclick="tapTile(this)"><span class="ar">${tk(w,lvl)}</span></button>`).join("")}</div>`;
   } else if (e.t === "build_ba") {
     const words = shuffle([...e.s.b.split(" "), ...(e.distractors || [])]);
     A.innerHTML = `<div class="ex-title">অর্থ অনুযায়ী বাক্যটি সাজাও</div>
     <div class="speak-row"><button class="speak-btn" onclick="speak('${e.s.a}')">🔊</button></div>
-    <div class="big-ar" style="font-size:26px;line-height:2">${e.s.a}</div>
+    <div class="big-ar" style="font-size:26px;line-height:2">${tk(e.s.a,lvl)}</div>
     <div id="build-answer" style="direction:ltr"></div>
     <div id="build-bank" style="direction:ltr">${words.map((w, i) => `<button class="tile" data-i="${i}" data-w="${esc(w)}" onclick="tapTile(this)">${esc(w)}</button>`).join("")}</div>`;
     setTimeout(() => speak(e.s.a), 300);
@@ -269,23 +272,51 @@ export function tapTile(el) {
   el.classList.add("used"); L.built.push(el.dataset.w);
   const isAr = !!el.querySelector(".ar");
   const chip = document.createElement("button"); chip.className = "tile";
-  chip.innerHTML = isAr ? `<span class="ar">${el.dataset.w}</span>` : esc(el.dataset.w);
+  chip.innerHTML = isAr ? `<span class="ar">${tk(el.dataset.w, (L && L.tkLvl) || 0)}</span>` : esc(el.dataset.w);
   chip.onclick = () => { L.built.splice(L.built.indexOf(el.dataset.w), 1); chip.remove(); el.classList.remove("used"); $("#btn-check").disabled = L.built.length === 0; };
   $("#build-answer").appendChild(chip);
   $("#btn-check").disabled = false;
 }
 /* ── যাচাই ── */
+/* প্রশ্নের সঠিক উত্তরটি — যাচাই ও "এড়িয়ে যাও" দুই জায়গাতেই লাগে */
+function correctTextFor(e) {
+  if (e.t === "mc_ab") return e.w.b;
+  if (e.t === "mc_ba" || e.t === "listen" || e.t === "pic_mc" || e.t === "pic_ba" || e.t === "listen_pic") return e.w.a;
+  if (e.t === "build") return e.s.a;
+  if (e.t === "build_ba") return e.s.b;
+  if (e.t === "tr") return e.s.b;
+  if (e.t === "qa" || e.t === "fill") return e.ans;
+  if (e.t === "match" || e.t === "pic_match") return e.pairs.map((p) => p.a).join(" · ");
+  return "";
+}
+function hideSkip() { const b = $("#btn-skip"); if (b) b.classList.add("hide"); }
+/* ডুয়োলিঙ্গোর মতো: উত্তর না জানলে এড়িয়ে যাও — সঠিক উত্তরটি দেখিয়ে পরেরটিতে যায়
+   (ভুলের মতোই গণ্য হয়, তাই একটি হৃদয় কমে) */
+export function skipEx() {
+  if (!L || L.answered) return;
+  const e = L.ex[L.i];
+  L.answered = true;
+  L.wrong++; bumpCombo(false); loseHeart();
+  const correctTxt = correctTextFor(e);
+  feedback(false, "সঠিক উত্তর: " + correctTxt);
+  if (/[؀-ۿ]/.test(correctTxt)) speak(correctTxt);
+  hideSkip();
+  const cb = $("#btn-check");
+  cb.disabled = false; cb.textContent = "বুঝেছি"; cb.onclick = () => next(false);
+}
 export function checkAnswer() {
   const e = L.ex[L.i];
   if (L.autoOk) { L.autoOk = false; next(true); return; }
-  let good = false, correctTxt = "";
-  if (e.t === "mc_ab") { good = L.sel === e.w.b; correctTxt = e.w.b; }
-  else if (e.t === "mc_ba" || e.t === "listen") { good = L.sel === e.w.a; correctTxt = e.w.a; }
-  else if (e.t === "build") { good = L.built.join(" ") === e.s.a; correctTxt = e.s.a; }
-  else if (e.t === "build_ba") { good = L.built.join(" ") === e.s.b; correctTxt = e.s.b; }
-  else if (e.t === "tr") { good = L.sel === e.s.b; correctTxt = e.s.b; }
-  else if (e.t === "qa" || e.t === "fill") { good = L.sel === e.ans; correctTxt = e.ans; }
-  else if (e.t === "pic_mc" || e.t === "pic_ba" || e.t === "listen_pic") { good = L.sel === e.w.a; correctTxt = e.w.a; }
+  L.answered = true; hideSkip();
+  const correctTxt = correctTextFor(e);
+  let good = false;
+  if (e.t === "mc_ab") good = L.sel === e.w.b;
+  else if (e.t === "mc_ba" || e.t === "listen") good = L.sel === e.w.a;
+  else if (e.t === "build") good = L.built.join(" ") === e.s.a;
+  else if (e.t === "build_ba") good = L.built.join(" ") === e.s.b;
+  else if (e.t === "tr") good = L.sel === e.s.b;
+  else if (e.t === "qa" || e.t === "fill") good = L.sel === e.ans;
+  else if (e.t === "pic_mc" || e.t === "pic_ba" || e.t === "listen_pic") good = L.sel === e.w.a;
   document.querySelectorAll(".opt").forEach((o) => {
     const v = o.dataset.v || o.textContent.trim();
     if (o.classList.contains("sel")) o.classList.add(good ? "ok" : "bad");

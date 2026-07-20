@@ -1,9 +1,28 @@
 import { saveState } from "./api.js";
+import { NEW_OF_OLD } from "./data.js";
+
+/* পাঠগুলো বইয়ের ক্রমে সাজানোর ফলে সূচক বদলেছে। পুরনো ব্যবহারকারীর মুকুট ও
+   অগ্রগতি যেন না হারায়, তাই একবার পুরনো আইডি → নতুন অবস্থানে সরিয়ে নেওয়া হয়। */
+export const ORDER_V = 2;
+export function migrateOrder(st) {
+  if (!st || st.orderV === ORDER_V) return;
+  const remap = (obj) => {
+    const out = {};
+    for (const [k, v] of Object.entries(obj || {})) {
+      const n = NEW_OF_OLD[k];
+      if (n !== undefined) out[n] = v;
+    }
+    return out;
+  };
+  st.crowns = remap(st.crowns);
+  st.visualDone = remap(st.visualDone);
+  st.orderV = ORDER_V;
+}
 
 export const DEF={xp:0,gems:0,hearts:5,streak:0,bestStreak:0,lastDay:null,heartDay:null,
  crowns:{},words:{},badges:{},lessonsDone:0,perfect:0,chestCount:0,rivalXP:null,
  dayXP:0,goalDay:null,goal:30,storiesDone:{},introShown:false,briefShown:false,migNoticeShown:true,
- soundOn:true,visualDone:{},gender:null,wordStars:{},flashDone:0};
+ soundOn:true,visualDone:{},gender:null,wordStars:{},flashDone:0,orderV:2};
 
 // Mutable, module-live-bound globals shared across every screen — mirrors
 // the original single-file app's top-level `S`/`CUR` variables.

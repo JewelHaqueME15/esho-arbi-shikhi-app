@@ -55,6 +55,10 @@ export function migrate({ username, password, wantsAdmin, adminCode, localState 
   });
 }
 
+export function leaderboard() {
+  return request("/api/leaderboard", { method: "GET" });
+}
+
 export function ttsUrl(text) {
   return "/api/tts?q=" + encodeURIComponent(text);
 }

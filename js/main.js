@@ -1,8 +1,8 @@
 import { $ } from "./utils.js";
-import { S, DEF, setSession, dailyRefresh, save } from "./state.js";
+import { S, DEF, setSession, dailyRefresh, save, migrateOrder } from "./state.js";
 import * as api from "./api.js";
-import { showTab, tapUnit, buyHearts, storyLockedMsg, resetAll, modal, closeModal, updateTop } from "./ui.js";
-import { startLesson, startReview, openVocabIntro, selOpt, tapMatch, tapTile, quitLesson, afterResult, showRule } from "./lesson.js";
+import { showTab, tapUnit, buyHearts, storyLockedMsg, resetAll, modal, closeModal, updateTop, renderLeague } from "./ui.js";
+import { startLesson, startReview, openVocabIntro, selOpt, tapMatch, tapTile, quitLesson, afterResult, showRule, skipEx } from "./lesson.js";
 import { openStory, finishStory } from "./stories.js";
 import { vcTapTile } from "./visual.js";
 import { startFlash, flipCard, flashKnown, flashAgain, quitFlash } from "./flash.js";
@@ -27,7 +27,11 @@ function forgetLegacyUser(name) {
 
 /* ════════ লগইন / প্রোফাইল ════════ */
 async function afterAuth({ username, isAdmin, state }) {
-  setSession(Object.assign({}, DEF, state || {}), username);
+  // পাঠের ক্রম বদলেছে — DEF মেশানোর আগেই পুরনো state-টিকে নতুন ক্রমে সরিয়ে নাও
+  // (DEF-এ orderV আছে, তাই আগে মেশালে পুরনো state আর চেনা যেত না)
+  const raw = state || {};
+  migrateOrder(raw);
+  setSession(Object.assign({}, DEF, raw), username);
   S.isAdmin = !!isAdmin;
   // লগইন ফর্মে লিঙ্গ বেছে নিলে (এবং আগে সংরক্ষিত না থাকলে) সেটি কাজে লাগাও
   const g = document.querySelector('input[name="li-gender"]:checked');
@@ -130,5 +134,5 @@ Object.assign(window, {
   closeModal, tapUnit, storyLockedMsg, openVocabIntro, buyHearts, speak,
   vcTapTile, selOpt, tapMatch, tapTile, afterResult, startReview, startLesson, openStory, showRule,
   nextIntro, setGender, showGenderAsk,
-  startFlash, flipCard, flashKnown, flashAgain, quitFlash,
+  startFlash, flipCard, flashKnown, flashAgain, quitFlash, skipEx, renderLeague,
 });

@@ -1,10 +1,11 @@
 import { $, esc, shuffle, pickExtra } from "./utils.js";
 import { S, save } from "./state.js";
-import { UNITS } from "./data.js";
+import { UNITS, NEW_OF_OLD } from "./data.js";
 import { showTab, updateTop } from "./ui.js";
 import { speak, sndOk, sndBad } from "./tts.js";
 
-const VISUAL_CHALLENGE_UNITS = [2, 6, 12, 16, 19, 27, 30, 32];
+/* মাইলফলক পাঠ (পুরনো আইডিতে লেখা) — বইয়ের নতুন ক্রমে বসিয়ে নেওয়া হয় */
+const VISUAL_CHALLENGE_UNITS = [2, 6, 12, 16, 19, 27, 30, 32].map((oldId) => NEW_OF_OLD[oldId]);
 export let VC = null;
 export function maybeVisualChallenge(ui) {
   if (!VISUAL_CHALLENGE_UNITS.includes(ui)) return false;
