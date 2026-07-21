@@ -7,7 +7,9 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node scripts/check-icons.mjs"
+    "build:content": "node scripts/build-content.mjs",
+    "check:content": "node scripts/build-content.mjs --check",
+    "test": "node scripts/check-icons.mjs && node scripts/build-content.mjs --check"
   },
   "dependencies": {
     "@vercel/postgres": "^0.10.0",

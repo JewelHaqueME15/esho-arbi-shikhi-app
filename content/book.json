@@ -1,0 +1,81 @@
+{
+  "note": "পাঠের ক্রম ও অধ্যায়। order-এ ফাইলের নাম বইয়ের ক্রমে সাজানো — এখানে ক্রম বদলালে অ্যাপেও বদলাবে।",
+  "order": [
+    "01-hadha-dhalika",
+    "02-hadhihi-tilka",
+    "03-sifat",
+    "04-pronouns",
+    "05-al-definite",
+    "06-family-possessive",
+    "07-nida",
+    "08-idafa",
+    "09-ayna-places",
+    "10-fi",
+    "11-city-travel",
+    "12-weapons-kitchen",
+    "13-food",
+    "14-nature",
+    "15-professions",
+    "16-fruits",
+    "17-animals",
+    "18-body",
+    "19-sentence-building",
+    "20-past-tense",
+    "21-prepositions",
+    "22-present-future",
+    "23-imperative",
+    "24-negation",
+    "25-answer-particles",
+    "26-masdar",
+    "27-verb-object",
+    "28-object-pronouns",
+    "29-hollow-verbs",
+    "30-bab-ifal",
+    "31-purpose-intent",
+    "32-kana-sara-laysa",
+    "33-defective-verbs",
+    "34-plural-things",
+    "35-plural-people",
+    "36-numbers",
+    "37-comparison",
+    "38-relative-conditional",
+    "39-quran-hadith"
+  ],
+  "sections": [
+    {
+      "part": "১ম খণ্ড",
+      "t": "প্রথম অধ্যায়",
+      "s": "পরিচয় · ইশারা · গুণ · সম্বন্ধ",
+      "from": 0,
+      "to": 10
+    },
+    {
+      "part": "১ম খণ্ড",
+      "t": "দ্বিতীয় অধ্যায়",
+      "s": "নতুন শব্দভাণ্ডারে সব নিয়মের মহড়া",
+      "from": 11,
+      "to": 17
+    },
+    {
+      "part": "১ম খণ্ড",
+      "t": "তৃতীয় অধ্যায়",
+      "s": "বাক্য গঠন ও তারকীব",
+      "from": 18,
+      "to": 18
+    },
+    {
+      "part": "২য় খণ্ড",
+      "t": "ক্রিয়ার জগত",
+      "s": "অতীত · বর্তমান · আদেশ · বাব",
+      "from": 19,
+      "to": 32
+    },
+    {
+      "part": "৩য় খণ্ড",
+      "t": "উচ্চতর সোপান",
+      "s": "বহুবচন · সংখ্যা · তুলনা · কুরআন-হাদীস",
+      "from": 33,
+      "to": 38
+    }
+  ]
+}
