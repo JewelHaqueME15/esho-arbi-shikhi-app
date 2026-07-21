@@ -46,11 +46,20 @@ async function doLogin() {
   const err = $("#li-err"); err.style.display = "none";
   if (!name) { err.textContent = "নাম লেখো"; err.style.display = "block"; return; }
 
+  // সার্ভার ধীর হলে (ঘুমন্ত ডাটাবেস) বোতামটি যেন মরা মনে না হয়
+  const btn = document.querySelector("#scr-login .btn");
+  const label = btn ? btn.textContent : "";
+  if (btn) { btn.disabled = true; btn.textContent = "প্রবেশ করা হচ্ছে…"; }
+  const done = () => { if (btn) { btn.disabled = false; btn.textContent = label; } };
+
   try {
     const res = await api.login({ username: name, password: pass });
-    await afterAuth(res);
+    done(); await afterAuth(res);
     return;
-  } catch { /* no such account yet, or wrong password — try to create/claim it below */ }
+  } catch (e) {
+    // ইন্টারনেট/সার্ভারের সমস্যা হলে নতুন অ্যাকাউন্ট বানানোর চেষ্টা করা অর্থহীন
+    if (e && e.offline) { done(); err.textContent = e.message; err.style.display = "block"; return; }
+  }
 
   try {
     const legacyState = readLegacyState(name);
@@ -58,8 +67,9 @@ async function doLogin() {
       ? await api.migrate({ username: name, password: pass, wantsAdmin: wantAdmin, adminCode: code, localState: legacyState })
       : await api.signup({ username: name, password: pass, wantsAdmin: wantAdmin, adminCode: code });
     if (legacyState) forgetLegacyUser(name);
-    await afterAuth(res);
+    done(); await afterAuth(res);
   } catch (e) {
+    done();
     err.textContent = e.message || "লগইন ব্যর্থ হয়েছে";
     err.style.display = "block";
   }
