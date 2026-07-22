@@ -1,0 +1,3099 @@
+{
+ "note": "কোন পৃষ্ঠা কোন খণ্ডে — দ্রুত দেখার জন্য।",
+ "pages": [
+  {
+   "id": "p001",
+   "pdfPage": 1,
+   "bookPage": 3,
+   "part": "১ম খণ্ড",
+   "chars": 104
+  },
+  {
+   "id": "p002",
+   "pdfPage": 2,
+   "bookPage": 4,
+   "part": "১ম খণ্ড",
+   "chars": 783
+  },
+  {
+   "id": "p003",
+   "pdfPage": 3,
+   "bookPage": 5,
+   "part": "১ম খণ্ড",
+   "chars": 144
+  },
+  {
+   "id": "p004",
+   "pdfPage": 4,
+   "bookPage": 6,
+   "part": "১ম খণ্ড",
+   "chars": 32
+  },
+  {
+   "id": "p005",
+   "pdfPage": 5,
+   "bookPage": 7,
+   "part": "১ম খণ্ড",
+   "chars": 2942
+  },
+  {
+   "id": "p006",
+   "pdfPage": 6,
+   "bookPage": 8,
+   "part": "১ম খণ্ড",
+   "chars": 3971
+  },
+  {
+   "id": "p007",
+   "pdfPage": 7,
+   "bookPage": 9,
+   "part": "১ম খণ্ড",
+   "chars": 4035
+  },
+  {
+   "id": "p008",
+   "pdfPage": 8,
+   "bookPage": 10,
+   "part": "১ম খণ্ড",
+   "chars": 3741
+  },
+  {
+   "id": "p009",
+   "pdfPage": 9,
+   "bookPage": 11,
+   "part": "১ম খণ্ড",
+   "chars": 3614
+  },
+  {
+   "id": "p010",
+   "pdfPage": 10,
+   "bookPage": 12,
+   "part": "১ম খণ্ড",
+   "chars": 4291
+  },
+  {
+   "id": "p011",
+   "pdfPage": 11,
+   "bookPage": 13,
+   "part": "১ম খণ্ড",
+   "chars": 1681
+  },
+  {
+   "id": "p012",
+   "pdfPage": 12,
+   "bookPage": 14,
+   "part": "১ম খণ্ড",
+   "chars": 257
+  },
+  {
+   "id": "p013",
+   "pdfPage": 13,
+   "bookPage": 15,
+   "part": "১ম খণ্ড",
+   "chars": 1641
+  },
+  {
+   "id": "p014",
+   "pdfPage": 14,
+   "bookPage": 16,
+   "part": "১ম খণ্ড",
+   "chars": 509
+  },
+  {
+   "id": "p015",
+   "pdfPage": 15,
+   "bookPage": 17,
+   "part": "১ম খণ্ড",
+   "chars": 363
+  },
+  {
+   "id": "p016",
+   "pdfPage": 16,
+   "bookPage": 18,
+   "part": "১ম খণ্ড",
+   "chars": 175
+  },
+  {
+   "id": "p017",
+   "pdfPage": 17,
+   "bookPage": 19,
+   "part": "১ম খণ্ড",
+   "chars": 591
+  },
+  {
+   "id": "p018",
+   "pdfPage": 18,
+   "bookPage": 20,
+   "part": "১ম খণ্ড",
+   "chars": 471
+  },
+  {
+   "id": "p019",
+   "pdfPage": 19,
+   "bookPage": 21,
+   "part": "১ম খণ্ড",
+   "chars": 351
+  },
+  {
+   "id": "p020",
+   "pdfPage": 20,
+   "bookPage": 22,
+   "part": "১ম খণ্ড",
+   "chars": 836
+  },
+  {
+   "id": "p021",
+   "pdfPage": 21,
+   "bookPage": 23,
+   "part": "১ম খণ্ড",
+   "chars": 517
+  },
+  {
+   "id": "p022",
+   "pdfPage": 22,
+   "bookPage": 24,
+   "part": "১ম খণ্ড",
+   "chars": 1025
+  },
+  {
+   "id": "p023",
+   "pdfPage": 23,
+   "bookPage": 25,
+   "part": "১ম খণ্ড",
+   "chars": 1441
+  },
+  {
+   "id": "p024",
+   "pdfPage": 24,
+   "bookPage": 26,
+   "part": "১ম খণ্ড",
+   "chars": 1263
+  },
+  {
+   "id": "p025",
+   "pdfPage": 25,
+   "bookPage": 27,
+   "part": "১ম খণ্ড",
+   "chars": 1112
+  },
+  {
+   "id": "p026",
+   "pdfPage": 26,
+   "bookPage": 28,
+   "part": "১ম খণ্ড",
+   "chars": 895
+  },
+  {
+   "id": "p027",
+   "pdfPage": 27,
+   "bookPage": 29,
+   "part": "১ম খণ্ড",
+   "chars": 1128
+  },
+  {
+   "id": "p028",
+   "pdfPage": 28,
+   "bookPage": 30,
+   "part": "১ম খণ্ড",
+   "chars": 738
+  },
+  {
+   "id": "p029",
+   "pdfPage": 29,
+   "bookPage": 31,
+   "part": "১ম খণ্ড",
+   "chars": 1391
+  },
+  {
+   "id": "p030",
+   "pdfPage": 30,
+   "bookPage": 32,
+   "part": "১ম খণ্ড",
+   "chars": 1497
+  },
+  {
+   "id": "p031",
+   "pdfPage": 31,
+   "bookPage": 33,
+   "part": "১ম খণ্ড",
+   "chars": 593
+  },
+  {
+   "id": "p032",
+   "pdfPage": 32,
+   "bookPage": 34,
+   "part": "১ম খণ্ড",
+   "chars": 963
+  },
+  {
+   "id": "p033",
+   "pdfPage": 33,
+   "bookPage": 35,
+   "part": "১ম খণ্ড",
+   "chars": 1465
+  },
+  {
+   "id": "p034",
+   "pdfPage": 34,
+   "bookPage": 36,
+   "part": "১ম খণ্ড",
+   "chars": 879
+  },
+  {
+   "id": "p035",
+   "pdfPage": 35,
+   "bookPage": 37,
+   "part": "১ম খণ্ড",
+   "chars": 1389
+  },
+  {
+   "id": "p036",
+   "pdfPage": 36,
+   "bookPage": 38,
+   "part": "১ম খণ্ড",
+   "chars": 1289
+  },
+  {
+   "id": "p037",
+   "pdfPage": 37,
+   "bookPage": 39,
+   "part": "১ম খণ্ড",
+   "chars": 1000
+  },
+  {
+   "id": "p038",
+   "pdfPage": 38,
+   "bookPage": 40,
+   "part": "১ম খণ্ড",
+   "chars": 1727
+  },
+  {
+   "id": "p039",
+   "pdfPage": 39,
+   "bookPage": 41,
+   "part": "১ম খণ্ড",
+   "chars": 1068
+  },
+  {
+   "id": "p040",
+   "pdfPage": 40,
+   "bookPage": 42,
+   "part": "১ম খণ্ড",
+   "chars": 1401
+  },
+  {
+   "id": "p041",
+   "pdfPage": 41,
+   "bookPage": 43,
+   "part": "১ম খণ্ড",
+   "chars": 1158
+  },
+  {
+   "id": "p042",
+   "pdfPage": 42,
+   "bookPage": 44,
+   "part": "১ম খণ্ড",
+   "chars": 648
+  },
+  {
+   "id": "p043",
+   "pdfPage": 43,
+   "bookPage": 45,
+   "part": "১ম খণ্ড",
+   "chars": 1179
+  },
+  {
+   "id": "p044",
+   "pdfPage": 44,
+   "bookPage": 46,
+   "part": "১ম খণ্ড",
+   "chars": 1399
+  },
+  {
+   "id": "p045",
+   "pdfPage": 45,
+   "bookPage": 47,
+   "part": "১ম খণ্ড",
+   "chars": 898
+  },
+  {
+   "id": "p046",
+   "pdfPage": 46,
+   "bookPage": 48,
+   "part": "১ম খণ্ড",
+   "chars": 1448
+  },
+  {
+   "id": "p047",
+   "pdfPage": 47,
+   "bookPage": 49,
+   "part": "১ম খণ্ড",
+   "chars": 1050
+  },
+  {
+   "id": "p049",
+   "pdfPage": 49,
+   "bookPage": 51,
+   "part": "১ম খণ্ড",
+   "chars": 1113
+  },
+  {
+   "id": "p050",
+   "pdfPage": 50,
+   "bookPage": 52,
+   "part": "১ম খণ্ড",
+   "chars": 400
+  },
+  {
+   "id": "p051",
+   "pdfPage": 51,
+   "bookPage": 53,
+   "part": "১ম খণ্ড",
+   "chars": 150
+  },
+  {
+   "id": "p052",
+   "pdfPage": 52,
+   "bookPage": 54,
+   "part": "১ম খণ্ড",
+   "chars": 396
+  },
+  {
+   "id": "p053",
+   "pdfPage": 53,
+   "bookPage": 55,
+   "part": "১ম খণ্ড",
+   "chars": 302
+  },
+  {
+   "id": "p054",
+   "pdfPage": 54,
+   "bookPage": 56,
+   "part": "১ম খণ্ড",
+   "chars": 908
+  },
+  {
+   "id": "p055",
+   "pdfPage": 55,
+   "bookPage": 57,
+   "part": "১ম খণ্ড",
+   "chars": 1136
+  },
+  {
+   "id": "p056",
+   "pdfPage": 56,
+   "bookPage": 58,
+   "part": "১ম খণ্ড",
+   "chars": 1042
+  },
+  {
+   "id": "p057",
+   "pdfPage": 57,
+   "bookPage": 59,
+   "part": "১ম খণ্ড",
+   "chars": 1514
+  },
+  {
+   "id": "p058",
+   "pdfPage": 58,
+   "bookPage": 60,
+   "part": "১ম খণ্ড",
+   "chars": 641
+  },
+  {
+   "id": "p059",
+   "pdfPage": 59,
+   "bookPage": 61,
+   "part": "১ম খণ্ড",
+   "chars": 436
+  },
+  {
+   "id": "p060",
+   "pdfPage": 60,
+   "bookPage": 62,
+   "part": "১ম খণ্ড",
+   "chars": 1086
+  },
+  {
+   "id": "p061",
+   "pdfPage": 61,
+   "bookPage": 63,
+   "part": "১ম খণ্ড",
+   "chars": 1418
+  },
+  {
+   "id": "p062",
+   "pdfPage": 62,
+   "bookPage": 64,
+   "part": "১ম খণ্ড",
+   "chars": 1422
+  },
+  {
+   "id": "p063",
+   "pdfPage": 63,
+   "bookPage": 65,
+   "part": "১ম খণ্ড",
+   "chars": 966
+  },
+  {
+   "id": "p064",
+   "pdfPage": 64,
+   "bookPage": 66,
+   "part": "১ম খণ্ড",
+   "chars": 1167
+  },
+  {
+   "id": "p065",
+   "pdfPage": 65,
+   "bookPage": 67,
+   "part": "১ম খণ্ড",
+   "chars": 648
+  },
+  {
+   "id": "p066",
+   "pdfPage": 66,
+   "bookPage": 68,
+   "part": "১ম খণ্ড",
+   "chars": 1239
+  },
+  {
+   "id": "p067",
+   "pdfPage": 67,
+   "bookPage": 69,
+   "part": "১ম খণ্ড",
+   "chars": 1402
+  },
+  {
+   "id": "p068",
+   "pdfPage": 68,
+   "bookPage": 70,
+   "part": "১ম খণ্ড",
+   "chars": 1131
+  },
+  {
+   "id": "p069",
+   "pdfPage": 69,
+   "bookPage": 71,
+   "part": "১ম খণ্ড",
+   "chars": 1281
+  },
+  {
+   "id": "p070",
+   "pdfPage": 70,
+   "bookPage": 72,
+   "part": "১ম খণ্ড",
+   "chars": 1763
+  },
+  {
+   "id": "p071",
+   "pdfPage": 71,
+   "bookPage": 73,
+   "part": "১ম খণ্ড",
+   "chars": 1218
+  },
+  {
+   "id": "p072",
+   "pdfPage": 72,
+   "bookPage": 74,
+   "part": "১ম খণ্ড",
+   "chars": 1285
+  },
+  {
+   "id": "p073",
+   "pdfPage": 73,
+   "bookPage": 75,
+   "part": "১ম খণ্ড",
+   "chars": 1406
+  },
+  {
+   "id": "p074",
+   "pdfPage": 74,
+   "bookPage": 76,
+   "part": "১ম খণ্ড",
+   "chars": 875
+  },
+  {
+   "id": "p075",
+   "pdfPage": 75,
+   "bookPage": 77,
+   "part": "১ম খণ্ড",
+   "chars": 741
+  },
+  {
+   "id": "p076",
+   "pdfPage": 76,
+   "bookPage": 78,
+   "part": "১ম খণ্ড",
+   "chars": 497
+  },
+  {
+   "id": "p077",
+   "pdfPage": 77,
+   "bookPage": 79,
+   "part": "১ম খণ্ড",
+   "chars": 722
+  },
+  {
+   "id": "p078",
+   "pdfPage": 78,
+   "bookPage": 80,
+   "part": "১ম খণ্ড",
+   "chars": 1004
+  },
+  {
+   "id": "p079",
+   "pdfPage": 79,
+   "bookPage": 81,
+   "part": "১ম খণ্ড",
+   "chars": 1265
+  },
+  {
+   "id": "p080",
+   "pdfPage": 80,
+   "bookPage": 82,
+   "part": "১ম খণ্ড",
+   "chars": 1609
+  },
+  {
+   "id": "p081",
+   "pdfPage": 81,
+   "bookPage": 83,
+   "part": "১ম খণ্ড",
+   "chars": 737
+  },
+  {
+   "id": "p082",
+   "pdfPage": 82,
+   "bookPage": 84,
+   "part": "১ম খণ্ড",
+   "chars": 1064
+  },
+  {
+   "id": "p083",
+   "pdfPage": 83,
+   "bookPage": 85,
+   "part": "১ম খণ্ড",
+   "chars": 1298
+  },
+  {
+   "id": "p084",
+   "pdfPage": 84,
+   "bookPage": 86,
+   "part": "১ম খণ্ড",
+   "chars": 767
+  },
+  {
+   "id": "p085",
+   "pdfPage": 85,
+   "bookPage": 87,
+   "part": "১ম খণ্ড",
+   "chars": 841
+  },
+  {
+   "id": "p086",
+   "pdfPage": 86,
+   "bookPage": 88,
+   "part": "১ম খণ্ড",
+   "chars": 1121
+  },
+  {
+   "id": "p087",
+   "pdfPage": 87,
+   "bookPage": 89,
+   "part": "১ম খণ্ড",
+   "chars": 1039
+  },
+  {
+   "id": "p088",
+   "pdfPage": 88,
+   "bookPage": 90,
+   "part": "১ম খণ্ড",
+   "chars": 227
+  },
+  {
+   "id": "p089",
+   "pdfPage": 89,
+   "bookPage": 91,
+   "part": "১ম খণ্ড",
+   "chars": 814
+  },
+  {
+   "id": "p090",
+   "pdfPage": 90,
+   "bookPage": 92,
+   "part": "১ম খণ্ড",
+   "chars": 777
+  },
+  {
+   "id": "p091",
+   "pdfPage": 91,
+   "bookPage": 93,
+   "part": "১ম খণ্ড",
+   "chars": 1103
+  },
+  {
+   "id": "p092",
+   "pdfPage": 92,
+   "bookPage": 94,
+   "part": "১ম খণ্ড",
+   "chars": 1400
+  },
+  {
+   "id": "p093",
+   "pdfPage": 93,
+   "bookPage": 95,
+   "part": "১ম খণ্ড",
+   "chars": 949
+  },
+  {
+   "id": "p094",
+   "pdfPage": 94,
+   "bookPage": 96,
+   "part": "১ম খণ্ড",
+   "chars": 717
+  },
+  {
+   "id": "p095",
+   "pdfPage": 95,
+   "bookPage": 97,
+   "part": "১ম খণ্ড",
+   "chars": 748
+  },
+  {
+   "id": "p096",
+   "pdfPage": 96,
+   "bookPage": 98,
+   "part": "১ম খণ্ড",
+   "chars": 1007
+  },
+  {
+   "id": "p097",
+   "pdfPage": 97,
+   "bookPage": 99,
+   "part": "১ম খণ্ড",
+   "chars": 1200
+  },
+  {
+   "id": "p098",
+   "pdfPage": 98,
+   "bookPage": 100,
+   "part": "১ম খণ্ড",
+   "chars": 1245
+  },
+  {
+   "id": "p099",
+   "pdfPage": 99,
+   "bookPage": 101,
+   "part": "১ম খণ্ড",
+   "chars": 771
+  },
+  {
+   "id": "p100",
+   "pdfPage": 100,
+   "bookPage": 102,
+   "part": "১ম খণ্ড",
+   "chars": 1138
+  },
+  {
+   "id": "p101",
+   "pdfPage": 101,
+   "bookPage": 103,
+   "part": "১ম খণ্ড",
+   "chars": 1235
+  },
+  {
+   "id": "p102",
+   "pdfPage": 102,
+   "bookPage": 104,
+   "part": "১ম খণ্ড",
+   "chars": 1244
+  },
+  {
+   "id": "p103",
+   "pdfPage": 103,
+   "bookPage": 1,
+   "part": "২য় খণ্ড",
+   "chars": 42
+  },
+  {
+   "id": "p104",
+   "pdfPage": 104,
+   "bookPage": 2,
+   "part": "২য় খণ্ড",
+   "chars": 626
+  },
+  {
+   "id": "p105",
+   "pdfPage": 105,
+   "bookPage": 3,
+   "part": "২য় খণ্ড",
+   "chars": 1140
+  },
+  {
+   "id": "p106",
+   "pdfPage": 106,
+   "bookPage": 4,
+   "part": "২য় খণ্ড",
+   "chars": 1124
+  },
+  {
+   "id": "p107",
+   "pdfPage": 107,
+   "bookPage": 5,
+   "part": "২য় খণ্ড",
+   "chars": 579
+  },
+  {
+   "id": "p108",
+   "pdfPage": 108,
+   "bookPage": 6,
+   "part": "২য় খণ্ড",
+   "chars": 1628
+  },
+  {
+   "id": "p109",
+   "pdfPage": 109,
+   "bookPage": 7,
+   "part": "২য় খণ্ড",
+   "chars": 1128
+  },
+  {
+   "id": "p110",
+   "pdfPage": 110,
+   "bookPage": 8,
+   "part": "২য় খণ্ড",
+   "chars": 669
+  },
+  {
+   "id": "p111",
+   "pdfPage": 111,
+   "bookPage": 9,
+   "part": "২য় খণ্ড",
+   "chars": 568
+  },
+  {
+   "id": "p112",
+   "pdfPage": 112,
+   "bookPage": 10,
+   "part": "২য় খণ্ড",
+   "chars": 1086
+  },
+  {
+   "id": "p113",
+   "pdfPage": 113,
+   "bookPage": 11,
+   "part": "২য় খণ্ড",
+   "chars": 1066
+  },
+  {
+   "id": "p114",
+   "pdfPage": 114,
+   "bookPage": 12,
+   "part": "২য় খণ্ড",
+   "chars": 1231
+  },
+  {
+   "id": "p115",
+   "pdfPage": 115,
+   "bookPage": 13,
+   "part": "২য় খণ্ড",
+   "chars": 1209
+  },
+  {
+   "id": "p116",
+   "pdfPage": 116,
+   "bookPage": 14,
+   "part": "২য় খণ্ড",
+   "chars": 1297
+  },
+  {
+   "id": "p117",
+   "pdfPage": 117,
+   "bookPage": 15,
+   "part": "২য় খণ্ড",
+   "chars": 1230
+  },
+  {
+   "id": "p118",
+   "pdfPage": 118,
+   "bookPage": 16,
+   "part": "২য় খণ্ড",
+   "chars": 1483
+  },
+  {
+   "id": "p119",
+   "pdfPage": 119,
+   "bookPage": 17,
+   "part": "২য় খণ্ড",
+   "chars": 1541
+  },
+  {
+   "id": "p120",
+   "pdfPage": 120,
+   "bookPage": 18,
+   "part": "২য় খণ্ড",
+   "chars": 366
+  },
+  {
+   "id": "p121",
+   "pdfPage": 121,
+   "bookPage": 19,
+   "part": "২য় খণ্ড",
+   "chars": 1343
+  },
+  {
+   "id": "p122",
+   "pdfPage": 122,
+   "bookPage": 20,
+   "part": "২য় খণ্ড",
+   "chars": 1525
+  },
+  {
+   "id": "p123",
+   "pdfPage": 123,
+   "bookPage": 21,
+   "part": "২য় খণ্ড",
+   "chars": 1639
+  },
+  {
+   "id": "p124",
+   "pdfPage": 124,
+   "bookPage": 22,
+   "part": "২য় খণ্ড",
+   "chars": 1722
+  },
+  {
+   "id": "p125",
+   "pdfPage": 125,
+   "bookPage": 23,
+   "part": "২য় খণ্ড",
+   "chars": 791
+  },
+  {
+   "id": "p126",
+   "pdfPage": 126,
+   "bookPage": 24,
+   "part": "২য় খণ্ড",
+   "chars": 1014
+  },
+  {
+   "id": "p127",
+   "pdfPage": 127,
+   "bookPage": 25,
+   "part": "২য় খণ্ড",
+   "chars": 1082
+  },
+  {
+   "id": "p128",
+   "pdfPage": 128,
+   "bookPage": 26,
+   "part": "২য় খণ্ড",
+   "chars": 1798
+  },
+  {
+   "id": "p129",
+   "pdfPage": 129,
+   "bookPage": 27,
+   "part": "২য় খণ্ড",
+   "chars": 1189
+  },
+  {
+   "id": "p130",
+   "pdfPage": 130,
+   "bookPage": 28,
+   "part": "২য় খণ্ড",
+   "chars": 1728
+  },
+  {
+   "id": "p131",
+   "pdfPage": 131,
+   "bookPage": 29,
+   "part": "২য় খণ্ড",
+   "chars": 502
+  },
+  {
+   "id": "p132",
+   "pdfPage": 132,
+   "bookPage": 30,
+   "part": "২য় খণ্ড",
+   "chars": 1184
+  },
+  {
+   "id": "p133",
+   "pdfPage": 133,
+   "bookPage": 31,
+   "part": "২য় খণ্ড",
+   "chars": 1505
+  },
+  {
+   "id": "p134",
+   "pdfPage": 134,
+   "bookPage": 32,
+   "part": "২য় খণ্ড",
+   "chars": 1711
+  },
+  {
+   "id": "p135",
+   "pdfPage": 135,
+   "bookPage": 33,
+   "part": "২য় খণ্ড",
+   "chars": 2117
+  },
+  {
+   "id": "p136",
+   "pdfPage": 136,
+   "bookPage": 34,
+   "part": "২য় খণ্ড",
+   "chars": 1291
+  },
+  {
+   "id": "p137",
+   "pdfPage": 137,
+   "bookPage": 35,
+   "part": "২য় খণ্ড",
+   "chars": 861
+  },
+  {
+   "id": "p138",
+   "pdfPage": 138,
+   "bookPage": 36,
+   "part": "২য় খণ্ড",
+   "chars": 1436
+  },
+  {
+   "id": "p139",
+   "pdfPage": 139,
+   "bookPage": 37,
+   "part": "২য় খণ্ড",
+   "chars": 1354
+  },
+  {
+   "id": "p140",
+   "pdfPage": 140,
+   "bookPage": 38,
+   "part": "২য় খণ্ড",
+   "chars": 793
+  },
+  {
+   "id": "p141",
+   "pdfPage": 141,
+   "bookPage": 39,
+   "part": "২য় খণ্ড",
+   "chars": 1235
+  },
+  {
+   "id": "p142",
+   "pdfPage": 142,
+   "bookPage": 40,
+   "part": "২য় খণ্ড",
+   "chars": 1599
+  },
+  {
+   "id": "p143",
+   "pdfPage": 143,
+   "bookPage": 41,
+   "part": "২য় খণ্ড",
+   "chars": 1528
+  },
+  {
+   "id": "p144",
+   "pdfPage": 144,
+   "bookPage": 42,
+   "part": "২য় খণ্ড",
+   "chars": 1311
+  },
+  {
+   "id": "p145",
+   "pdfPage": 145,
+   "bookPage": 43,
+   "part": "২য় খণ্ড",
+   "chars": 1259
+  },
+  {
+   "id": "p146",
+   "pdfPage": 146,
+   "bookPage": 44,
+   "part": "২য় খণ্ড",
+   "chars": 1050
+  },
+  {
+   "id": "p147",
+   "pdfPage": 147,
+   "bookPage": 45,
+   "part": "২য় খণ্ড",
+   "chars": 1583
+  },
+  {
+   "id": "p148",
+   "pdfPage": 148,
+   "bookPage": 46,
+   "part": "২য় খণ্ড",
+   "chars": 1788
+  },
+  {
+   "id": "p149",
+   "pdfPage": 149,
+   "bookPage": 47,
+   "part": "২য় খণ্ড",
+   "chars": 1240
+  },
+  {
+   "id": "p150",
+   "pdfPage": 150,
+   "bookPage": 48,
+   "part": "২য় খণ্ড",
+   "chars": 1459
+  },
+  {
+   "id": "p151",
+   "pdfPage": 151,
+   "bookPage": 49,
+   "part": "২য় খণ্ড",
+   "chars": 1495
+  },
+  {
+   "id": "p152",
+   "pdfPage": 152,
+   "bookPage": 50,
+   "part": "২য় খণ্ড",
+   "chars": 943
+  },
+  {
+   "id": "p153",
+   "pdfPage": 153,
+   "bookPage": 51,
+   "part": "২য় খণ্ড",
+   "chars": 418
+  },
+  {
+   "id": "p154",
+   "pdfPage": 154,
+   "bookPage": 52,
+   "part": "২য় খণ্ড",
+   "chars": 1847
+  },
+  {
+   "id": "p155",
+   "pdfPage": 155,
+   "bookPage": 53,
+   "part": "২য় খণ্ড",
+   "chars": 1811
+  },
+  {
+   "id": "p156",
+   "pdfPage": 156,
+   "bookPage": 54,
+   "part": "২য় খণ্ড",
+   "chars": 1463
+  },
+  {
+   "id": "p157",
+   "pdfPage": 157,
+   "bookPage": 55,
+   "part": "২য় খণ্ড",
+   "chars": 1106
+  },
+  {
+   "id": "p158",
+   "pdfPage": 158,
+   "bookPage": 56,
+   "part": "২য় খণ্ড",
+   "chars": 1147
+  },
+  {
+   "id": "p159",
+   "pdfPage": 159,
+   "bookPage": 57,
+   "part": "২য় খণ্ড",
+   "chars": 1679
+  },
+  {
+   "id": "p160",
+   "pdfPage": 160,
+   "bookPage": 58,
+   "part": "২য় খণ্ড",
+   "chars": 1439
+  },
+  {
+   "id": "p161",
+   "pdfPage": 161,
+   "bookPage": 59,
+   "part": "২য় খণ্ড",
+   "chars": 1079
+  },
+  {
+   "id": "p162",
+   "pdfPage": 162,
+   "bookPage": 60,
+   "part": "২য় খণ্ড",
+   "chars": 1413
+  },
+  {
+   "id": "p163",
+   "pdfPage": 163,
+   "bookPage": 61,
+   "part": "২য় খণ্ড",
+   "chars": 846
+  },
+  {
+   "id": "p164",
+   "pdfPage": 164,
+   "bookPage": 62,
+   "part": "২য় খণ্ড",
+   "chars": 827
+  },
+  {
+   "id": "p165",
+   "pdfPage": 165,
+   "bookPage": 63,
+   "part": "২য় খণ্ড",
+   "chars": 399
+  },
+  {
+   "id": "p166",
+   "pdfPage": 166,
+   "bookPage": 64,
+   "part": "২য় খণ্ড",
+   "chars": 1294
+  },
+  {
+   "id": "p167",
+   "pdfPage": 167,
+   "bookPage": 65,
+   "part": "২য় খণ্ড",
+   "chars": 1393
+  },
+  {
+   "id": "p168",
+   "pdfPage": 168,
+   "bookPage": 66,
+   "part": "২য় খণ্ড",
+   "chars": 1600
+  },
+  {
+   "id": "p169",
+   "pdfPage": 169,
+   "bookPage": 67,
+   "part": "২য় খণ্ড",
+   "chars": 678
+  },
+  {
+   "id": "p170",
+   "pdfPage": 170,
+   "bookPage": 68,
+   "part": "২য় খণ্ড",
+   "chars": 1274
+  },
+  {
+   "id": "p171",
+   "pdfPage": 171,
+   "bookPage": 69,
+   "part": "২য় খণ্ড",
+   "chars": 1768
+  },
+  {
+   "id": "p172",
+   "pdfPage": 172,
+   "bookPage": 70,
+   "part": "২য় খণ্ড",
+   "chars": 1171
+  },
+  {
+   "id": "p173",
+   "pdfPage": 173,
+   "bookPage": 71,
+   "part": "২য় খণ্ড",
+   "chars": 1296
+  },
+  {
+   "id": "p174",
+   "pdfPage": 174,
+   "bookPage": 72,
+   "part": "২য় খণ্ড",
+   "chars": 1299
+  },
+  {
+   "id": "p175",
+   "pdfPage": 175,
+   "bookPage": 73,
+   "part": "২য় খণ্ড",
+   "chars": 1224
+  },
+  {
+   "id": "p176",
+   "pdfPage": 176,
+   "bookPage": 74,
+   "part": "২য় খণ্ড",
+   "chars": 1637
+  },
+  {
+   "id": "p177",
+   "pdfPage": 177,
+   "bookPage": 75,
+   "part": "২য় খণ্ড",
+   "chars": 1386
+  },
+  {
+   "id": "p178",
+   "pdfPage": 178,
+   "bookPage": 76,
+   "part": "২য় খণ্ড",
+   "chars": 1624
+  },
+  {
+   "id": "p179",
+   "pdfPage": 179,
+   "bookPage": 77,
+   "part": "২য় খণ্ড",
+   "chars": 1613
+  },
+  {
+   "id": "p180",
+   "pdfPage": 180,
+   "bookPage": 78,
+   "part": "২য় খণ্ড",
+   "chars": 1429
+  },
+  {
+   "id": "p181",
+   "pdfPage": 181,
+   "bookPage": 79,
+   "part": "২য় খণ্ড",
+   "chars": 1447
+  },
+  {
+   "id": "p182",
+   "pdfPage": 182,
+   "bookPage": 80,
+   "part": "২য় খণ্ড",
+   "chars": 1070
+  },
+  {
+   "id": "p183",
+   "pdfPage": 183,
+   "bookPage": 81,
+   "part": "২য় খণ্ড",
+   "chars": 1638
+  },
+  {
+   "id": "p184",
+   "pdfPage": 184,
+   "bookPage": 82,
+   "part": "২য় খণ্ড",
+   "chars": 1747
+  },
+  {
+   "id": "p185",
+   "pdfPage": 185,
+   "bookPage": 83,
+   "part": "২য় খণ্ড",
+   "chars": 886
+  },
+  {
+   "id": "p186",
+   "pdfPage": 186,
+   "bookPage": 84,
+   "part": "২য় খণ্ড",
+   "chars": 1164
+  },
+  {
+   "id": "p187",
+   "pdfPage": 187,
+   "bookPage": 85,
+   "part": "২য় খণ্ড",
+   "chars": 1730
+  },
+  {
+   "id": "p188",
+   "pdfPage": 188,
+   "bookPage": 86,
+   "part": "২য় খণ্ড",
+   "chars": 1552
+  },
+  {
+   "id": "p189",
+   "pdfPage": 189,
+   "bookPage": 87,
+   "part": "২য় খণ্ড",
+   "chars": 891
+  },
+  {
+   "id": "p190",
+   "pdfPage": 190,
+   "bookPage": 88,
+   "part": "২য় খণ্ড",
+   "chars": 496
+  },
+  {
+   "id": "p191",
+   "pdfPage": 191,
+   "bookPage": 89,
+   "part": "২য় খণ্ড",
+   "chars": 1603
+  },
+  {
+   "id": "p192",
+   "pdfPage": 192,
+   "bookPage": 90,
+   "part": "২য় খণ্ড",
+   "chars": 982
+  },
+  {
+   "id": "p193",
+   "pdfPage": 193,
+   "bookPage": 91,
+   "part": "২য় খণ্ড",
+   "chars": 1512
+  },
+  {
+   "id": "p194",
+   "pdfPage": 194,
+   "bookPage": 92,
+   "part": "২য় খণ্ড",
+   "chars": 1775
+  },
+  {
+   "id": "p195",
+   "pdfPage": 195,
+   "bookPage": 93,
+   "part": "২য় খণ্ড",
+   "chars": 1517
+  },
+  {
+   "id": "p196",
+   "pdfPage": 196,
+   "bookPage": 94,
+   "part": "২য় খণ্ড",
+   "chars": 1853
+  },
+  {
+   "id": "p197",
+   "pdfPage": 197,
+   "bookPage": 95,
+   "part": "২য় খণ্ড",
+   "chars": 1938
+  },
+  {
+   "id": "p198",
+   "pdfPage": 198,
+   "bookPage": 96,
+   "part": "২য় খণ্ড",
+   "chars": 898
+  },
+  {
+   "id": "p199",
+   "pdfPage": 199,
+   "bookPage": 97,
+   "part": "২য় খণ্ড",
+   "chars": 1467
+  },
+  {
+   "id": "p200",
+   "pdfPage": 200,
+   "bookPage": 98,
+   "part": "২য় খণ্ড",
+   "chars": 1916
+  },
+  {
+   "id": "p201",
+   "pdfPage": 201,
+   "bookPage": 99,
+   "part": "২য় খণ্ড",
+   "chars": 1961
+  },
+  {
+   "id": "p202",
+   "pdfPage": 202,
+   "bookPage": 100,
+   "part": "২য় খণ্ড",
+   "chars": 1683
+  },
+  {
+   "id": "p203",
+   "pdfPage": 203,
+   "bookPage": 101,
+   "part": "২য় খণ্ড",
+   "chars": 1277
+  },
+  {
+   "id": "p204",
+   "pdfPage": 204,
+   "bookPage": 102,
+   "part": "২য় খণ্ড",
+   "chars": 1593
+  },
+  {
+   "id": "p205",
+   "pdfPage": 205,
+   "bookPage": 103,
+   "part": "২য় খণ্ড",
+   "chars": 1843
+  },
+  {
+   "id": "p206",
+   "pdfPage": 206,
+   "bookPage": 104,
+   "part": "২য় খণ্ড",
+   "chars": 1879
+  },
+  {
+   "id": "p207",
+   "pdfPage": 207,
+   "bookPage": 105,
+   "part": "২য় খণ্ড",
+   "chars": 1714
+  },
+  {
+   "id": "p208",
+   "pdfPage": 208,
+   "bookPage": 106,
+   "part": "২য় খণ্ড",
+   "chars": 2222
+  },
+  {
+   "id": "p209",
+   "pdfPage": 209,
+   "bookPage": 107,
+   "part": "২য় খণ্ড",
+   "chars": 1601
+  },
+  {
+   "id": "p210",
+   "pdfPage": 210,
+   "bookPage": 108,
+   "part": "২য় খণ্ড",
+   "chars": 1913
+  },
+  {
+   "id": "p211",
+   "pdfPage": 211,
+   "bookPage": 109,
+   "part": "২য় খণ্ড",
+   "chars": 1699
+  },
+  {
+   "id": "p212",
+   "pdfPage": 212,
+   "bookPage": 110,
+   "part": "২য় খণ্ড",
+   "chars": 2051
+  },
+  {
+   "id": "p213",
+   "pdfPage": 213,
+   "bookPage": 111,
+   "part": "২য় খণ্ড",
+   "chars": 2137
+  },
+  {
+   "id": "p214",
+   "pdfPage": 214,
+   "bookPage": 112,
+   "part": "২য় খণ্ড",
+   "chars": 1001
+  },
+  {
+   "id": "p215",
+   "pdfPage": 215,
+   "bookPage": 113,
+   "part": "২য় খণ্ড",
+   "chars": 1060
+  },
+  {
+   "id": "p216",
+   "pdfPage": 216,
+   "bookPage": 114,
+   "part": "২য় খণ্ড",
+   "chars": 1667
+  },
+  {
+   "id": "p217",
+   "pdfPage": 217,
+   "bookPage": 115,
+   "part": "২য় খণ্ড",
+   "chars": 1711
+  },
+  {
+   "id": "p218",
+   "pdfPage": 218,
+   "bookPage": 116,
+   "part": "২য় খণ্ড",
+   "chars": 1561
+  },
+  {
+   "id": "p219",
+   "pdfPage": 219,
+   "bookPage": 117,
+   "part": "২য় খণ্ড",
+   "chars": 1530
+  },
+  {
+   "id": "p220",
+   "pdfPage": 220,
+   "bookPage": 118,
+   "part": "২য় খণ্ড",
+   "chars": 1807
+  },
+  {
+   "id": "p221",
+   "pdfPage": 221,
+   "bookPage": 119,
+   "part": "২য় খণ্ড",
+   "chars": 1327
+  },
+  {
+   "id": "p222",
+   "pdfPage": 222,
+   "bookPage": 120,
+   "part": "২য় খণ্ড",
+   "chars": 1488
+  },
+  {
+   "id": "p223",
+   "pdfPage": 223,
+   "bookPage": 121,
+   "part": "২য় খণ্ড",
+   "chars": 2030
+  },
+  {
+   "id": "p224",
+   "pdfPage": 224,
+   "bookPage": 122,
+   "part": "২য় খণ্ড",
+   "chars": 1301
+  },
+  {
+   "id": "p225",
+   "pdfPage": 225,
+   "bookPage": 123,
+   "part": "২য় খণ্ড",
+   "chars": 1461
+  },
+  {
+   "id": "p226",
+   "pdfPage": 226,
+   "bookPage": 124,
+   "part": "২য় খণ্ড",
+   "chars": 2232
+  },
+  {
+   "id": "p227",
+   "pdfPage": 227,
+   "bookPage": 125,
+   "part": "২য় খণ্ড",
+   "chars": 1492
+  },
+  {
+   "id": "p228",
+   "pdfPage": 228,
+   "bookPage": 126,
+   "part": "২য় খণ্ড",
+   "chars": 1341
+  },
+  {
+   "id": "p229",
+   "pdfPage": 229,
+   "bookPage": 127,
+   "part": "২য় খণ্ড",
+   "chars": 2003
+  },
+  {
+   "id": "p230",
+   "pdfPage": 230,
+   "bookPage": 128,
+   "part": "২য় খণ্ড",
+   "chars": 1697
+  },
+  {
+   "id": "p231",
+   "pdfPage": 231,
+   "bookPage": 129,
+   "part": "২য় খণ্ড",
+   "chars": 980
+  },
+  {
+   "id": "p232",
+   "pdfPage": 232,
+   "bookPage": 130,
+   "part": "২য় খণ্ড",
+   "chars": 1194
+  },
+  {
+   "id": "p233",
+   "pdfPage": 233,
+   "bookPage": 131,
+   "part": "২য় খণ্ড",
+   "chars": 1856
+  },
+  {
+   "id": "p234",
+   "pdfPage": 234,
+   "bookPage": 132,
+   "part": "২য় খণ্ড",
+   "chars": 1241
+  },
+  {
+   "id": "p235",
+   "pdfPage": 235,
+   "bookPage": 133,
+   "part": "২য় খণ্ড",
+   "chars": 876
+  },
+  {
+   "id": "p236",
+   "pdfPage": 236,
+   "bookPage": 134,
+   "part": "২য় খণ্ড",
+   "chars": 915
+  },
+  {
+   "id": "p237",
+   "pdfPage": 237,
+   "bookPage": 135,
+   "part": "২য় খণ্ড",
+   "chars": 1396
+  },
+  {
+   "id": "p238",
+   "pdfPage": 238,
+   "bookPage": 136,
+   "part": "২য় খণ্ড",
+   "chars": 1759
+  },
+  {
+   "id": "p239",
+   "pdfPage": 239,
+   "bookPage": 137,
+   "part": "২য় খণ্ড",
+   "chars": 1744
+  },
+  {
+   "id": "p240",
+   "pdfPage": 240,
+   "bookPage": 138,
+   "part": "২য় খণ্ড",
+   "chars": 1953
+  },
+  {
+   "id": "p241",
+   "pdfPage": 241,
+   "bookPage": 139,
+   "part": "২য় খণ্ড",
+   "chars": 1736
+  },
+  {
+   "id": "p242",
+   "pdfPage": 242,
+   "bookPage": 140,
+   "part": "২য় খণ্ড",
+   "chars": 1246
+  },
+  {
+   "id": "p243",
+   "pdfPage": 243,
+   "bookPage": 141,
+   "part": "২য় খণ্ড",
+   "chars": 1274
+  },
+  {
+   "id": "p244",
+   "pdfPage": 244,
+   "bookPage": 142,
+   "part": "২য় খণ্ড",
+   "chars": 1496
+  },
+  {
+   "id": "p245",
+   "pdfPage": 245,
+   "bookPage": 143,
+   "part": "২য় খণ্ড",
+   "chars": 1916
+  },
+  {
+   "id": "p246",
+   "pdfPage": 246,
+   "bookPage": 144,
+   "part": "২য় খণ্ড",
+   "chars": 1892
+  },
+  {
+   "id": "p247",
+   "pdfPage": 247,
+   "bookPage": 145,
+   "part": "২য় খণ্ড",
+   "chars": 2056
+  },
+  {
+   "id": "p248",
+   "pdfPage": 248,
+   "bookPage": 146,
+   "part": "২য় খণ্ড",
+   "chars": 1916
+  },
+  {
+   "id": "p249",
+   "pdfPage": 249,
+   "bookPage": 147,
+   "part": "২য় খণ্ড",
+   "chars": 1199
+  },
+  {
+   "id": "p250",
+   "pdfPage": 250,
+   "bookPage": 148,
+   "part": "২য় খণ্ড",
+   "chars": 794
+  },
+  {
+   "id": "p251",
+   "pdfPage": 251,
+   "bookPage": 149,
+   "part": "২য় খণ্ড",
+   "chars": 1623
+  },
+  {
+   "id": "p252",
+   "pdfPage": 252,
+   "bookPage": 150,
+   "part": "২য় খণ্ড",
+   "chars": 1287
+  },
+  {
+   "id": "p253",
+   "pdfPage": 253,
+   "bookPage": 151,
+   "part": "২য় খণ্ড",
+   "chars": 932
+  },
+  {
+   "id": "p254",
+   "pdfPage": 254,
+   "bookPage": 152,
+   "part": "২য় খণ্ড",
+   "chars": 480
+  },
+  {
+   "id": "p256",
+   "pdfPage": 256,
+   "bookPage": 1,
+   "part": "৩য় খণ্ড",
+   "chars": 665
+  },
+  {
+   "id": "p257",
+   "pdfPage": 257,
+   "bookPage": 2,
+   "part": "৩য় খণ্ড",
+   "chars": 697
+  },
+  {
+   "id": "p259",
+   "pdfPage": 259,
+   "bookPage": 4,
+   "part": "৩য় খণ্ড",
+   "chars": 652
+  },
+  {
+   "id": "p260",
+   "pdfPage": 260,
+   "bookPage": 5,
+   "part": "৩য় খণ্ড",
+   "chars": 1420
+  },
+  {
+   "id": "p261",
+   "pdfPage": 261,
+   "bookPage": 6,
+   "part": "৩য় খণ্ড",
+   "chars": 463
+  },
+  {
+   "id": "p262",
+   "pdfPage": 262,
+   "bookPage": 7,
+   "part": "৩য় খণ্ড",
+   "chars": 1350
+  },
+  {
+   "id": "p263",
+   "pdfPage": 263,
+   "bookPage": 8,
+   "part": "৩য় খণ্ড",
+   "chars": 1532
+  },
+  {
+   "id": "p264",
+   "pdfPage": 264,
+   "bookPage": 9,
+   "part": "৩য় খণ্ড",
+   "chars": 1882
+  },
+  {
+   "id": "p265",
+   "pdfPage": 265,
+   "bookPage": 10,
+   "part": "৩য় খণ্ড",
+   "chars": 1481
+  },
+  {
+   "id": "p266",
+   "pdfPage": 266,
+   "bookPage": 11,
+   "part": "৩য় খণ্ড",
+   "chars": 1553
+  },
+  {
+   "id": "p267",
+   "pdfPage": 267,
+   "bookPage": 12,
+   "part": "৩য় খণ্ড",
+   "chars": 1695
+  },
+  {
+   "id": "p268",
+   "pdfPage": 268,
+   "bookPage": 13,
+   "part": "৩য় খণ্ড",
+   "chars": 1725
+  },
+  {
+   "id": "p269",
+   "pdfPage": 269,
+   "bookPage": 14,
+   "part": "৩য় খণ্ড",
+   "chars": 1800
+  },
+  {
+   "id": "p270",
+   "pdfPage": 270,
+   "bookPage": 15,
+   "part": "৩য় খণ্ড",
+   "chars": 1848
+  },
+  {
+   "id": "p271",
+   "pdfPage": 271,
+   "bookPage": 16,
+   "part": "৩য় খণ্ড",
+   "chars": 1446
+  },
+  {
+   "id": "p272",
+   "pdfPage": 272,
+   "bookPage": 17,
+   "part": "৩য় খণ্ড",
+   "chars": 1395
+  },
+  {
+   "id": "p273",
+   "pdfPage": 273,
+   "bookPage": 18,
+   "part": "৩য় খণ্ড",
+   "chars": 826
+  },
+  {
+   "id": "p274",
+   "pdfPage": 274,
+   "bookPage": 19,
+   "part": "৩য় খণ্ড",
+   "chars": 1170
+  },
+  {
+   "id": "p275",
+   "pdfPage": 275,
+   "bookPage": 20,
+   "part": "৩য় খণ্ড",
+   "chars": 1155
+  },
+  {
+   "id": "p276",
+   "pdfPage": 276,
+   "bookPage": 21,
+   "part": "৩য় খণ্ড",
+   "chars": 1345
+  },
+  {
+   "id": "p277",
+   "pdfPage": 277,
+   "bookPage": 22,
+   "part": "৩য় খণ্ড",
+   "chars": 2134
+  },
+  {
+   "id": "p278",
+   "pdfPage": 278,
+   "bookPage": 23,
+   "part": "৩য় খণ্ড",
+   "chars": 1535
+  },
+  {
+   "id": "p279",
+   "pdfPage": 279,
+   "bookPage": 24,
+   "part": "৩য় খণ্ড",
+   "chars": 1042
+  },
+  {
+   "id": "p280",
+   "pdfPage": 280,
+   "bookPage": 25,
+   "part": "৩য় খণ্ড",
+   "chars": 1452
+  },
+  {
+   "id": "p281",
+   "pdfPage": 281,
+   "bookPage": 26,
+   "part": "৩য় খণ্ড",
+   "chars": 1521
+  },
+  {
+   "id": "p282",
+   "pdfPage": 282,
+   "bookPage": 27,
+   "part": "৩য় খণ্ড",
+   "chars": 1619
+  },
+  {
+   "id": "p283",
+   "pdfPage": 283,
+   "bookPage": 28,
+   "part": "৩য় খণ্ড",
+   "chars": 1818
+  },
+  {
+   "id": "p284",
+   "pdfPage": 284,
+   "bookPage": 29,
+   "part": "৩য় খণ্ড",
+   "chars": 329
+  },
+  {
+   "id": "p285",
+   "pdfPage": 285,
+   "bookPage": 30,
+   "part": "৩য় খণ্ড",
+   "chars": 980
+  },
+  {
+   "id": "p286",
+   "pdfPage": 286,
+   "bookPage": 31,
+   "part": "৩য় খণ্ড",
+   "chars": 1678
+  },
+  {
+   "id": "p287",
+   "pdfPage": 287,
+   "bookPage": 32,
+   "part": "৩য় খণ্ড",
+   "chars": 1770
+  },
+  {
+   "id": "p288",
+   "pdfPage": 288,
+   "bookPage": 33,
+   "part": "৩য় খণ্ড",
+   "chars": 1605
+  },
+  {
+   "id": "p289",
+   "pdfPage": 289,
+   "bookPage": 34,
+   "part": "৩য় খণ্ড",
+   "chars": 1464
+  },
+  {
+   "id": "p290",
+   "pdfPage": 290,
+   "bookPage": 35,
+   "part": "৩য় খণ্ড",
+   "chars": 1000
+  },
+  {
+   "id": "p291",
+   "pdfPage": 291,
+   "bookPage": 36,
+   "part": "৩য় খণ্ড",
+   "chars": 975
+  },
+  {
+   "id": "p292",
+   "pdfPage": 292,
+   "bookPage": 37,
+   "part": "৩য় খণ্ড",
+   "chars": 1243
+  },
+  {
+   "id": "p293",
+   "pdfPage": 293,
+   "bookPage": 38,
+   "part": "৩য় খণ্ড",
+   "chars": 1694
+  },
+  {
+   "id": "p294",
+   "pdfPage": 294,
+   "bookPage": 39,
+   "part": "৩য় খণ্ড",
+   "chars": 1303
+  },
+  {
+   "id": "p295",
+   "pdfPage": 295,
+   "bookPage": 40,
+   "part": "৩য় খণ্ড",
+   "chars": 1472
+  },
+  {
+   "id": "p296",
+   "pdfPage": 296,
+   "bookPage": 41,
+   "part": "৩য় খণ্ড",
+   "chars": 946
+  },
+  {
+   "id": "p297",
+   "pdfPage": 297,
+   "bookPage": 42,
+   "part": "৩য় খণ্ড",
+   "chars": 705
+  },
+  {
+   "id": "p298",
+   "pdfPage": 298,
+   "bookPage": 43,
+   "part": "৩য় খণ্ড",
+   "chars": 1442
+  },
+  {
+   "id": "p299",
+   "pdfPage": 299,
+   "bookPage": 44,
+   "part": "৩য় খণ্ড",
+   "chars": 1409
+  },
+  {
+   "id": "p300",
+   "pdfPage": 300,
+   "bookPage": 45,
+   "part": "৩য় খণ্ড",
+   "chars": 1620
+  },
+  {
+   "id": "p301",
+   "pdfPage": 301,
+   "bookPage": 46,
+   "part": "৩য় খণ্ড",
+   "chars": 1018
+  },
+  {
+   "id": "p302",
+   "pdfPage": 302,
+   "bookPage": 47,
+   "part": "৩য় খণ্ড",
+   "chars": 1706
+  },
+  {
+   "id": "p303",
+   "pdfPage": 303,
+   "bookPage": 48,
+   "part": "৩য় খণ্ড",
+   "chars": 1986
+  },
+  {
+   "id": "p304",
+   "pdfPage": 304,
+   "bookPage": 49,
+   "part": "৩য় খণ্ড",
+   "chars": 1819
+  },
+  {
+   "id": "p305",
+   "pdfPage": 305,
+   "bookPage": 50,
+   "part": "৩য় খণ্ড",
+   "chars": 1627
+  },
+  {
+   "id": "p306",
+   "pdfPage": 306,
+   "bookPage": 51,
+   "part": "৩য় খণ্ড",
+   "chars": 1383
+  },
+  {
+   "id": "p307",
+   "pdfPage": 307,
+   "bookPage": 52,
+   "part": "৩য় খণ্ড",
+   "chars": 845
+  },
+  {
+   "id": "p308",
+   "pdfPage": 308,
+   "bookPage": 53,
+   "part": "৩য় খণ্ড",
+   "chars": 794
+  },
+  {
+   "id": "p309",
+   "pdfPage": 309,
+   "bookPage": 54,
+   "part": "৩য় খণ্ড",
+   "chars": 1140
+  },
+  {
+   "id": "p310",
+   "pdfPage": 310,
+   "bookPage": 55,
+   "part": "৩য় খণ্ড",
+   "chars": 971
+  },
+  {
+   "id": "p311",
+   "pdfPage": 311,
+   "bookPage": 56,
+   "part": "৩য় খণ্ড",
+   "chars": 1320
+  },
+  {
+   "id": "p312",
+   "pdfPage": 312,
+   "bookPage": 57,
+   "part": "৩য় খণ্ড",
+   "chars": 1209
+  },
+  {
+   "id": "p313",
+   "pdfPage": 313,
+   "bookPage": 58,
+   "part": "৩য় খণ্ড",
+   "chars": 1290
+  },
+  {
+   "id": "p314",
+   "pdfPage": 314,
+   "bookPage": 59,
+   "part": "৩য় খণ্ড",
+   "chars": 955
+  },
+  {
+   "id": "p315",
+   "pdfPage": 315,
+   "bookPage": 60,
+   "part": "৩য় খণ্ড",
+   "chars": 848
+  },
+  {
+   "id": "p317",
+   "pdfPage": 317,
+   "bookPage": 62,
+   "part": "৩য় খণ্ড",
+   "chars": 316
+  },
+  {
+   "id": "p318",
+   "pdfPage": 318,
+   "bookPage": 63,
+   "part": "৩য় খণ্ড",
+   "chars": 1184
+  },
+  {
+   "id": "p319",
+   "pdfPage": 319,
+   "bookPage": 64,
+   "part": "৩য় খণ্ড",
+   "chars": 782
+  },
+  {
+   "id": "p320",
+   "pdfPage": 320,
+   "bookPage": 65,
+   "part": "৩য় খণ্ড",
+   "chars": 1502
+  },
+  {
+   "id": "p321",
+   "pdfPage": 321,
+   "bookPage": 66,
+   "part": "৩য় খণ্ড",
+   "chars": 1820
+  },
+  {
+   "id": "p322",
+   "pdfPage": 322,
+   "bookPage": 67,
+   "part": "৩য় খণ্ড",
+   "chars": 1259
+  },
+  {
+   "id": "p323",
+   "pdfPage": 323,
+   "bookPage": 68,
+   "part": "৩য় খণ্ড",
+   "chars": 2081
+  },
+  {
+   "id": "p324",
+   "pdfPage": 324,
+   "bookPage": 69,
+   "part": "৩য় খণ্ড",
+   "chars": 1984
+  },
+  {
+   "id": "p325",
+   "pdfPage": 325,
+   "bookPage": 70,
+   "part": "৩য় খণ্ড",
+   "chars": 1069
+  },
+  {
+   "id": "p326",
+   "pdfPage": 326,
+   "bookPage": 71,
+   "part": "৩য় খণ্ড",
+   "chars": 1645
+  },
+  {
+   "id": "p327",
+   "pdfPage": 327,
+   "bookPage": 72,
+   "part": "৩য় খণ্ড",
+   "chars": 1127
+  },
+  {
+   "id": "p328",
+   "pdfPage": 328,
+   "bookPage": 73,
+   "part": "৩য় খণ্ড",
+   "chars": 1163
+  },
+  {
+   "id": "p329",
+   "pdfPage": 329,
+   "bookPage": 74,
+   "part": "৩য় খণ্ড",
+   "chars": 965
+  },
+  {
+   "id": "p330",
+   "pdfPage": 330,
+   "bookPage": 75,
+   "part": "৩য় খণ্ড",
+   "chars": 565
+  },
+  {
+   "id": "p331",
+   "pdfPage": 331,
+   "bookPage": 76,
+   "part": "৩য় খণ্ড",
+   "chars": 893
+  },
+  {
+   "id": "p332",
+   "pdfPage": 332,
+   "bookPage": 77,
+   "part": "৩য় খণ্ড",
+   "chars": 1419
+  },
+  {
+   "id": "p333",
+   "pdfPage": 333,
+   "bookPage": 78,
+   "part": "৩য় খণ্ড",
+   "chars": 1794
+  },
+  {
+   "id": "p334",
+   "pdfPage": 334,
+   "bookPage": 79,
+   "part": "৩য় খণ্ড",
+   "chars": 1563
+  },
+  {
+   "id": "p335",
+   "pdfPage": 335,
+   "bookPage": 80,
+   "part": "৩য় খণ্ড",
+   "chars": 1835
+  },
+  {
+   "id": "p336",
+   "pdfPage": 336,
+   "bookPage": 81,
+   "part": "৩য় খণ্ড",
+   "chars": 1562
+  },
+  {
+   "id": "p337",
+   "pdfPage": 337,
+   "bookPage": 82,
+   "part": "৩য় খণ্ড",
+   "chars": 1474
+  },
+  {
+   "id": "p338",
+   "pdfPage": 338,
+   "bookPage": 83,
+   "part": "৩য় খণ্ড",
+   "chars": 1318
+  },
+  {
+   "id": "p339",
+   "pdfPage": 339,
+   "bookPage": 84,
+   "part": "৩য় খণ্ড",
+   "chars": 1213
+  },
+  {
+   "id": "p340",
+   "pdfPage": 340,
+   "bookPage": 85,
+   "part": "৩য় খণ্ড",
+   "chars": 1288
+  },
+  {
+   "id": "p341",
+   "pdfPage": 341,
+   "bookPage": 86,
+   "part": "৩য় খণ্ড",
+   "chars": 948
+  },
+  {
+   "id": "p342",
+   "pdfPage": 342,
+   "bookPage": 87,
+   "part": "৩য় খণ্ড",
+   "chars": 1634
+  },
+  {
+   "id": "p343",
+   "pdfPage": 343,
+   "bookPage": 88,
+   "part": "৩য় খণ্ড",
+   "chars": 1434
+  },
+  {
+   "id": "p344",
+   "pdfPage": 344,
+   "bookPage": 89,
+   "part": "৩য় খণ্ড",
+   "chars": 1799
+  },
+  {
+   "id": "p345",
+   "pdfPage": 345,
+   "bookPage": 90,
+   "part": "৩য় খণ্ড",
+   "chars": 1855
+  },
+  {
+   "id": "p346",
+   "pdfPage": 346,
+   "bookPage": 91,
+   "part": "৩য় খণ্ড",
+   "chars": 1813
+  },
+  {
+   "id": "p347",
+   "pdfPage": 347,
+   "bookPage": 92,
+   "part": "৩য় খণ্ড",
+   "chars": 1241
+  },
+  {
+   "id": "p348",
+   "pdfPage": 348,
+   "bookPage": 93,
+   "part": "৩য় খণ্ড",
+   "chars": 810
+  },
+  {
+   "id": "p349",
+   "pdfPage": 349,
+   "bookPage": 94,
+   "part": "৩য় খণ্ড",
+   "chars": 611
+  },
+  {
+   "id": "p350",
+   "pdfPage": 350,
+   "bookPage": 95,
+   "part": "৩য় খণ্ড",
+   "chars": 819
+  },
+  {
+   "id": "p351",
+   "pdfPage": 351,
+   "bookPage": 96,
+   "part": "৩য় খণ্ড",
+   "chars": 1571
+  },
+  {
+   "id": "p352",
+   "pdfPage": 352,
+   "bookPage": 97,
+   "part": "৩য় খণ্ড",
+   "chars": 1924
+  },
+  {
+   "id": "p353",
+   "pdfPage": 353,
+   "bookPage": 98,
+   "part": "৩য় খণ্ড",
+   "chars": 1728
+  },
+  {
+   "id": "p354",
+   "pdfPage": 354,
+   "bookPage": 99,
+   "part": "৩য় খণ্ড",
+   "chars": 1532
+  },
+  {
+   "id": "p355",
+   "pdfPage": 355,
+   "bookPage": 100,
+   "part": "৩য় খণ্ড",
+   "chars": 1239
+  },
+  {
+   "id": "p356",
+   "pdfPage": 356,
+   "bookPage": 101,
+   "part": "৩য় খণ্ড",
+   "chars": 1657
+  },
+  {
+   "id": "p357",
+   "pdfPage": 357,
+   "bookPage": 102,
+   "part": "৩য় খণ্ড",
+   "chars": 1798
+  },
+  {
+   "id": "p358",
+   "pdfPage": 358,
+   "bookPage": 103,
+   "part": "৩য় খণ্ড",
+   "chars": 1544
+  },
+  {
+   "id": "p359",
+   "pdfPage": 359,
+   "bookPage": 104,
+   "part": "৩য় খণ্ড",
+   "chars": 1492
+  },
+  {
+   "id": "p360",
+   "pdfPage": 360,
+   "bookPage": 105,
+   "part": "৩য় খণ্ড",
+   "chars": 1089
+  },
+  {
+   "id": "p361",
+   "pdfPage": 361,
+   "bookPage": 106,
+   "part": "৩য় খণ্ড",
+   "chars": 1322
+  },
+  {
+   "id": "p362",
+   "pdfPage": 362,
+   "bookPage": 107,
+   "part": "৩য় খণ্ড",
+   "chars": 1006
+  },
+  {
+   "id": "p363",
+   "pdfPage": 363,
+   "bookPage": 108,
+   "part": "৩য় খণ্ড",
+   "chars": 852
+  },
+  {
+   "id": "p364",
+   "pdfPage": 364,
+   "bookPage": 109,
+   "part": "৩য় খণ্ড",
+   "chars": 1159
+  },
+  {
+   "id": "p365",
+   "pdfPage": 365,
+   "bookPage": 110,
+   "part": "৩য় খণ্ড",
+   "chars": 640
+  },
+  {
+   "id": "p366",
+   "pdfPage": 366,
+   "bookPage": 111,
+   "part": "৩য় খণ্ড",
+   "chars": 1265
+  },
+  {
+   "id": "p367",
+   "pdfPage": 367,
+   "bookPage": 112,
+   "part": "৩য় খণ্ড",
+   "chars": 1262
+  },
+  {
+   "id": "p368",
+   "pdfPage": 368,
+   "bookPage": 113,
+   "part": "৩য় খণ্ড",
+   "chars": 1078
+  },
+  {
+   "id": "p369",
+   "pdfPage": 369,
+   "bookPage": 114,
+   "part": "৩য় খণ্ড",
+   "chars": 1353
+  },
+  {
+   "id": "p370",
+   "pdfPage": 370,
+   "bookPage": 115,
+   "part": "৩য় খণ্ড",
+   "chars": 637
+  },
+  {
+   "id": "p371",
+   "pdfPage": 371,
+   "bookPage": 116,
+   "part": "৩য় খণ্ড",
+   "chars": 592
+  },
+  {
+   "id": "p372",
+   "pdfPage": 372,
+   "bookPage": 117,
+   "part": "৩য় খণ্ড",
+   "chars": 1419
+  },
+  {
+   "id": "p373",
+   "pdfPage": 373,
+   "bookPage": 118,
+   "part": "৩য় খণ্ড",
+   "chars": 801
+  },
+  {
+   "id": "p374",
+   "pdfPage": 374,
+   "bookPage": 119,
+   "part": "৩য় খণ্ড",
+   "chars": 900
+  },
+  {
+   "id": "p375",
+   "pdfPage": 375,
+   "bookPage": 120,
+   "part": "৩য় খণ্ড",
+   "chars": 722
+  },
+  {
+   "id": "p376",
+   "pdfPage": 376,
+   "bookPage": 121,
+   "part": "৩য় খণ্ড",
+   "chars": 1191
+  },
+  {
+   "id": "p377",
+   "pdfPage": 377,
+   "bookPage": 122,
+   "part": "৩য় খণ্ড",
+   "chars": 832
+  },
+  {
+   "id": "p378",
+   "pdfPage": 378,
+   "bookPage": 123,
+   "part": "৩য় খণ্ড",
+   "chars": 1156
+  },
+  {
+   "id": "p379",
+   "pdfPage": 379,
+   "bookPage": 124,
+   "part": "৩য় খণ্ড",
+   "chars": 982
+  },
+  {
+   "id": "p380",
+   "pdfPage": 380,
+   "bookPage": 125,
+   "part": "৩য় খণ্ড",
+   "chars": 1903
+  },
+  {
+   "id": "p381",
+   "pdfPage": 381,
+   "bookPage": 126,
+   "part": "৩য় খণ্ড",
+   "chars": 916
+  },
+  {
+   "id": "p382",
+   "pdfPage": 382,
+   "bookPage": 127,
+   "part": "৩য় খণ্ড",
+   "chars": 1746
+  },
+  {
+   "id": "p383",
+   "pdfPage": 383,
+   "bookPage": 128,
+   "part": "৩য় খণ্ড",
+   "chars": 1454
+  },
+  {
+   "id": "p384",
+   "pdfPage": 384,
+   "bookPage": 129,
+   "part": "৩য় খণ্ড",
+   "chars": 1682
+  },
+  {
+   "id": "p385",
+   "pdfPage": 385,
+   "bookPage": 130,
+   "part": "৩য় খণ্ড",
+   "chars": 1400
+  },
+  {
+   "id": "p386",
+   "pdfPage": 386,
+   "bookPage": 131,
+   "part": "৩য় খণ্ড",
+   "chars": 1456
+  },
+  {
+   "id": "p387",
+   "pdfPage": 387,
+   "bookPage": 132,
+   "part": "৩য় খণ্ড",
+   "chars": 472
+  },
+  {
+   "id": "p388",
+   "pdfPage": 388,
+   "bookPage": 133,
+   "part": "৩য় খণ্ড",
+   "chars": 844
+  },
+  {
+   "id": "p389",
+   "pdfPage": 389,
+   "bookPage": 134,
+   "part": "৩য় খণ্ড",
+   "chars": 1334
+  },
+  {
+   "id": "p390",
+   "pdfPage": 390,
+   "bookPage": 135,
+   "part": "৩য় খণ্ড",
+   "chars": 1264
+  },
+  {
+   "id": "p391",
+   "pdfPage": 391,
+   "bookPage": 136,
+   "part": "৩য় খণ্ড",
+   "chars": 1049
+  },
+  {
+   "id": "p392",
+   "pdfPage": 392,
+   "bookPage": 137,
+   "part": "৩য় খণ্ড",
+   "chars": 1097
+  },
+  {
+   "id": "p393",
+   "pdfPage": 393,
+   "bookPage": 138,
+   "part": "৩য় খণ্ড",
+   "chars": 1182
+  },
+  {
+   "id": "p394",
+   "pdfPage": 394,
+   "bookPage": 139,
+   "part": "৩য় খণ্ড",
+   "chars": 1446
+  },
+  {
+   "id": "p395",
+   "pdfPage": 395,
+   "bookPage": 140,
+   "part": "৩য় খণ্ড",
+   "chars": 1144
+  },
+  {
+   "id": "p396",
+   "pdfPage": 396,
+   "bookPage": 141,
+   "part": "৩য় খণ্ড",
+   "chars": 723
+  },
+  {
+   "id": "p397",
+   "pdfPage": 397,
+   "bookPage": 142,
+   "part": "৩য় খণ্ড",
+   "chars": 1405
+  },
+  {
+   "id": "p398",
+   "pdfPage": 398,
+   "bookPage": 143,
+   "part": "৩য় খণ্ড",
+   "chars": 1297
+  },
+  {
+   "id": "p399",
+   "pdfPage": 399,
+   "bookPage": 144,
+   "part": "৩য় খণ্ড",
+   "chars": 1274
+  },
+  {
+   "id": "p400",
+   "pdfPage": 400,
+   "bookPage": 145,
+   "part": "৩য় খণ্ড",
+   "chars": 1533
+  },
+  {
+   "id": "p401",
+   "pdfPage": 401,
+   "bookPage": 146,
+   "part": "৩য় খণ্ড",
+   "chars": 1340
+  },
+  {
+   "id": "p402",
+   "pdfPage": 402,
+   "bookPage": 147,
+   "part": "৩য় খণ্ড",
+   "chars": 1463
+  },
+  {
+   "id": "p403",
+   "pdfPage": 403,
+   "bookPage": 148,
+   "part": "৩য় খণ্ড",
+   "chars": 1286
+  },
+  {
+   "id": "p404",
+   "pdfPage": 404,
+   "bookPage": 149,
+   "part": "৩য় খণ্ড",
+   "chars": 1377
+  },
+  {
+   "id": "p405",
+   "pdfPage": 405,
+   "bookPage": 150,
+   "part": "৩য় খণ্ড",
+   "chars": 410
+  },
+  {
+   "id": "p406",
+   "pdfPage": 406,
+   "bookPage": 151,
+   "part": "৩য় খণ্ড",
+   "chars": 829
+  },
+  {
+   "id": "p407",
+   "pdfPage": 407,
+   "bookPage": 152,
+   "part": "৩য় খণ্ড",
+   "chars": 1072
+  },
+  {
+   "id": "p408",
+   "pdfPage": 408,
+   "bookPage": 153,
+   "part": "৩য় খণ্ড",
+   "chars": 825
+  },
+  {
+   "id": "p409",
+   "pdfPage": 409,
+   "bookPage": 154,
+   "part": "৩য় খণ্ড",
+   "chars": 1172
+  },
+  {
+   "id": "p410",
+   "pdfPage": 410,
+   "bookPage": 155,
+   "part": "৩য় খণ্ড",
+   "chars": 518
+  },
+  {
+   "id": "p411",
+   "pdfPage": 411,
+   "bookPage": 156,
+   "part": "৩য় খণ্ড",
+   "chars": 1243
+  },
+  {
+   "id": "p412",
+   "pdfPage": 412,
+   "bookPage": 157,
+   "part": "৩য় খণ্ড",
+   "chars": 1494
+  },
+  {
+   "id": "p413",
+   "pdfPage": 413,
+   "bookPage": 158,
+   "part": "৩য় খণ্ড",
+   "chars": 2247
+  },
+  {
+   "id": "p414",
+   "pdfPage": 414,
+   "bookPage": 159,
+   "part": "৩য় খণ্ড",
+   "chars": 2118
+  },
+  {
+   "id": "p415",
+   "pdfPage": 415,
+   "bookPage": 160,
+   "part": "৩য় খণ্ড",
+   "chars": 2099
+  },
+  {
+   "id": "p416",
+   "pdfPage": 416,
+   "bookPage": 161,
+   "part": "৩য় খণ্ড",
+   "chars": 1983
+  },
+  {
+   "id": "p417",
+   "pdfPage": 417,
+   "bookPage": 162,
+   "part": "৩য় খণ্ড",
+   "chars": 2176
+  },
+  {
+   "id": "p418",
+   "pdfPage": 418,
+   "bookPage": 163,
+   "part": "৩য় খণ্ড",
+   "chars": 1954
+  },
+  {
+   "id": "p419",
+   "pdfPage": 419,
+   "bookPage": 164,
+   "part": "৩য় খণ্ড",
+   "chars": 2220
+  },
+  {
+   "id": "p420",
+   "pdfPage": 420,
+   "bookPage": 165,
+   "part": "৩য় খণ্ড",
+   "chars": 1935
+  },
+  {
+   "id": "p421",
+   "pdfPage": 421,
+   "bookPage": 166,
+   "part": "৩য় খণ্ড",
+   "chars": 2021
+  },
+  {
+   "id": "p422",
+   "pdfPage": 422,
+   "bookPage": 167,
+   "part": "৩য় খণ্ড",
+   "chars": 1866
+  },
+  {
+   "id": "p423",
+   "pdfPage": 423,
+   "bookPage": 168,
+   "part": "৩য় খণ্ড",
+   "chars": 2062
+  },
+  {
+   "id": "p424",
+   "pdfPage": 424,
+   "bookPage": 169,
+   "part": "৩য় খণ্ড",
+   "chars": 2132
+  },
+  {
+   "id": "p425",
+   "pdfPage": 425,
+   "bookPage": 170,
+   "part": "৩য় খণ্ড",
+   "chars": 1923
+  },
+  {
+   "id": "p426",
+   "pdfPage": 426,
+   "bookPage": 171,
+   "part": "৩য় খণ্ড",
+   "chars": 228
+  },
+  {
+   "id": "p427",
+   "pdfPage": 427,
+   "bookPage": 172,
+   "part": "৩য় খণ্ড",
+   "chars": 1814
+  },
+  {
+   "id": "p428",
+   "pdfPage": 428,
+   "bookPage": 173,
+   "part": "৩য় খণ্ড",
+   "chars": 2244
+  },
+  {
+   "id": "p429",
+   "pdfPage": 429,
+   "bookPage": 174,
+   "part": "৩য় খণ্ড",
+   "chars": 2168
+  },
+  {
+   "id": "p430",
+   "pdfPage": 430,
+   "bookPage": 175,
+   "part": "৩য় খণ্ড",
+   "chars": 1871
+  },
+  {
+   "id": "p431",
+   "pdfPage": 431,
+   "bookPage": 176,
+   "part": "৩য় খণ্ড",
+   "chars": 2087
+  },
+  {
+   "id": "p432",
+   "pdfPage": 432,
+   "bookPage": 177,
+   "part": "৩য় খণ্ড",
+   "chars": 2277
+  },
+  {
+   "id": "p433",
+   "pdfPage": 433,
+   "bookPage": 178,
+   "part": "৩য় খণ্ড",
+   "chars": 2043
+  },
+  {
+   "id": "p434",
+   "pdfPage": 434,
+   "bookPage": 179,
+   "part": "৩য় খণ্ড",
+   "chars": 2189
+  },
+  {
+   "id": "p435",
+   "pdfPage": 435,
+   "bookPage": 180,
+   "part": "৩য় খণ্ড",
+   "chars": 1996
+  },
+  {
+   "id": "p436",
+   "pdfPage": 436,
+   "bookPage": 181,
+   "part": "৩য় খণ্ড",
+   "chars": 2201
+  },
+  {
+   "id": "p437",
+   "pdfPage": 437,
+   "bookPage": 182,
+   "part": "৩য় খণ্ড",
+   "chars": 2043
+  },
+  {
+   "id": "p438",
+   "pdfPage": 438,
+   "bookPage": 183,
+   "part": "৩য় খণ্ড",
+   "chars": 1930
+  },
+  {
+   "id": "p439",
+   "pdfPage": 439,
+   "bookPage": 184,
+   "part": "৩য় খণ্ড",
+   "chars": 2271
+  },
+  {
+   "id": "p440",
+   "pdfPage": 440,
+   "bookPage": 185,
+   "part": "৩য় খণ্ড",
+   "chars": 2032
+  },
+  {
+   "id": "p441",
+   "pdfPage": 441,
+   "bookPage": 186,
+   "part": "৩য় খণ্ড",
+   "chars": 1987
+  },
+  {
+   "id": "p442",
+   "pdfPage": 442,
+   "bookPage": 187,
+   "part": "৩য় খণ্ড",
+   "chars": 2342
+  },
+  {
+   "id": "p443",
+   "pdfPage": 443,
+   "bookPage": 188,
+   "part": "৩য় খণ্ড",
+   "chars": 2003
+  },
+  {
+   "id": "p444",
+   "pdfPage": 444,
+   "bookPage": 189,
+   "part": "৩য় খণ্ড",
+   "chars": 2311
+  },
+  {
+   "id": "p445",
+   "pdfPage": 445,
+   "bookPage": 190,
+   "part": "৩য় খণ্ড",
+   "chars": 1952
+  },
+  {
+   "id": "p446",
+   "pdfPage": 446,
+   "bookPage": 191,
+   "part": "৩য় খণ্ড",
+   "chars": 5
+  }
+ ]
+}
