@@ -7,3 +7,6 @@ node_modules/
 .env
 .env.local
 .vercel
+
+# OCR page images (large, regenerable from the PDF)
+book-scan/
