@@ -2,5 +2,7 @@
  "page": 255,
  "dpi": 300,
  "mixed": "",
- "arabic": ""
+ "arabic": "",
+ "mixedFixed": "",
+ "arabicFixed": ""
 }

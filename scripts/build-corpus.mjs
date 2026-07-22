@@ -38,8 +38,9 @@ const chunks = [];
 for (const f of files) {
   const j = JSON.parse(fs.readFileSync(path.join(PAGES, f), "utf8"));
   const meta = partOf(j.page);
-  const bn = cleanLines(j.mixed);
-  const ar = cleanLines(j.arabic);
+  // সংশোধিত রূপ থাকলে সেটিই ব্যবহার করো (fix-ocr.mjs তৈরি করে), নইলে কাঁচা OCR
+  const bn = cleanLines(j.mixedFixed ?? j.mixed);
+  const ar = cleanLines(j.arabicFixed ?? j.arabic);
   const text = bn.join("\n");
   if (!text && !ar.length) continue;
   chunks.push({

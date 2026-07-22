@@ -10,6 +10,7 @@
     "build:content": "node scripts/build-content.mjs",
     "check:content": "node scripts/build-content.mjs --check",
     "ocr:book": "node scripts/ocr-book.mjs",
+    "fix:ocr": "node scripts/fix-ocr.mjs",
     "build:corpus": "node scripts/build-corpus.mjs",
     "search": "node scripts/search-book.mjs",
     "test": "node scripts/check-icons.mjs && node scripts/build-content.mjs --check"
